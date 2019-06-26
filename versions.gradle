@@ -1,0 +1,131 @@
+ext.deps = [:]
+
+def versions = [:]
+    versions.gradle = '3.4.1'
+    versions.googleServices = '4.2.0'
+    versions.kotlin = '1.3.40'
+    versions.ktx = '1.0.2'
+    versions.supportLibrary = '1.0.2'
+    versions.gms = '17.0.0'
+    versions.fabric = '1.29.0'
+    versions.firebase = '17.0.0'
+    versions.firebaseMessaging = '19.0.1'
+    versions.crashlytics = '2.10.1'
+    versions.recyclerView = '1.0.0'
+    versions.constraintLayout = '2.0.0-beta2'
+    versions.materialComponents = '1.0.0'
+    versions.rxJava = '2.2.2'
+    versions.rxKotlin = '2.3.0'
+    versions.rxAndroid = '2.1.0'
+    versions.rxBinding = '2.2.0'
+    versions.rxPermissions = '0.10.2'
+    versions.rxPreferences = '2.0.0'
+    versions.jodaTimeAndroid = '2.9.9.4'
+    versions.jodaTime = '2.10.1'
+    versions.retrofit = '2.4.0'
+    versions.glide = '4.8.0'
+    versions.koin = '2.0.1'
+    versions.moshi = '1.8.0'
+    versions.room = '2.1.0'
+    versions.navigation = "2.1.0-alpha05"
+    versions.timber = '4.7.1'
+    versions.vk = '1.6.8'
+    versions.facebook = '4.20.0'
+    versions.rxRedux = '1.0.1'
+
+def deps = [:]
+    deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.gradle"
+    deps.google_service = "com.google.gms:google-services:$versions.googleServices"
+    deps.fabric = "io.fabric.tools:gradle:$versions.fabric"
+    deps.kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+ext.deps = deps
+
+def build_versions = [:]
+    build_versions.compileSdk = 29
+    build_versions.minSdk = 23
+    build_versions.targetSdk = 29
+ext.build_versions = build_versions
+
+def androidx = [:]
+    androidx.appcompat = "androidx.appcompat:appcompat:$versions.supportLibrary"
+    androidx.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerView"
+    androidx.constraintlayout = "androidx.constraintlayout:constraintlayout:$versions.constraintLayout"
+    androidx.core_ktx = "androidx.core:core-ktx:$versions.ktx"
+
+    def room = [:]
+        room.runtime = "androidx.room:room-runtime:$versions.room"
+        room.rxjava2 = "androidx.room:room-rxjava2:$versions.room"
+        room.compiler = "androidx.room:room-compiler:$versions.room"
+    androidx.room = room
+
+    def navigation = [:]
+        navigation.fragment = "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
+        navigation.ui = "androidx.navigation:navigation-ui-ktx:$versions.navigation"
+    androidx.navigation = navigation
+
+deps.androidx = androidx
+
+def gms = [:]
+    gms.location = "com.google.android.gms:play-services-location:$versions.gms"
+    gms.maps = "com.google.android.gms:play-services-maps:$versions.gms"
+deps.gms = gms
+
+def firebase = [:]
+    firebase.core = "com.google.firebase:firebase-core:$versions.firebase"
+    firebase.messaging = "com.google.firebase:firebase-messaging:$versions.firebaseMessaging"
+deps.firebase = firebase
+
+def rx = [:]
+    rx.java = "io.reactivex.rxjava2:rxjava:$versions.rxJava"
+    rx.kotlin = "io.reactivex.rxjava2:rxkotlin:$versions.rxKotlin"
+    rx.android = "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
+deps.rx = rx
+
+def retrofit = [:]
+    retrofit.core = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+    retrofit.adapter_rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
+    retrofit.converter_moshi = "com.squareup.retrofit2:converter-moshi:$versions.retrofit"
+deps.retrofit = retrofit
+
+def moshi = [:]
+    moshi.core = "com.squareup.moshi:moshi:$versions.moshi"
+    moshi.koltin_codegen = "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshi"
+    moshi.adapters = "com.squareup.moshi:moshi-adapters:$versions.moshi"
+deps.moshi = moshi
+
+def koin = [:]
+    koin.core = "org.koin:koin-core:$versions.koin"
+    koin.android = "org.koin:koin-android:$versions.koin"
+    koin.android_scope = "org.koin:koin-android-scope:$versions.koin"
+deps.koin = koin
+
+def rxbinding2 = [:]
+    rxbinding2.kotlin = "com.jakewharton.rxbinding2:rxbinding-kotlin:$versions.rxBinding"
+    rxbinding2.design_kotlin = "com.jakewharton.rxbinding2:rxbinding-design-kotlin:$versions.rxBinding"
+deps.rxbinding2 = rxbinding2
+
+def glide = [:]
+    glide.core = "com.github.bumptech.glide:glide:$versions.glide"
+    glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide"
+deps.glide = glide
+
+deps.material = "com.google.android.material:material:$versions.materialComponents"
+deps.crashlytics ="com.crashlytics.sdk.android:crashlytics:$versions.crashlytics"
+deps.rxpermissions = "com.github.tbruyelle:rxpermissions:$versions.rxPermissions"
+deps.rxpreferences = "com.f2prateek.rx.preferences2:rx-preferences:$versions.rxPreferences"
+deps.rxlocation = 'com.patloew.rxlocation:rxlocation:1.0.3'
+deps.jodatime = "net.danlew:android.joda:$versions.jodaTimeAndroid"
+deps.rxredux = "com.freeletics.rxredux:rxredux:$versions.rxRedux"
+deps.timber = "com.jakewharton.timber:timber:$versions.timber"
+deps.vksdk = "com.vk:androidsdk:$versions.vk"
+deps.facebooksdk = "com.facebook.android:facebook-android-sdk:$versions.facebook"
+
+
+def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.maven { url 'https://maven.fabric.io/public' }
+    handler.maven { url 'https://jitpack.io' }
+}
+
+ext.addRepos = this.&addRepos

@@ -8,86 +8,98 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'io.fabric'
 
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 0
+def versionBuild = 0 // bump for dogfood builds, public betas, etc.
+
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+
+def keystoreProperties = new Properties()
+
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
-    compileSdkVersion rootProject.compileSdk_version
+    compileSdkVersion build_versions.compileSdk
     defaultConfig {
-        applicationId "com.connect.android"
-        minSdkVersion rootProject.minSdk_version
-        targetSdkVersion rootProject.targetSdk_version
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        applicationId "com.connect.android.client"
+        minSdkVersion build_versions.minSdk
+        targetSdkVersion build_versions.targetSdk
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+        buildConfigField "String", "API_BASE_URL", "\"https://api.connectim.pro\""
+        buildConfigField "String", "SOCKET_URL", "\"wss://wsapi.connectim.pro/\""
+    }
+    androidExtensions {
+        experimental = true
+    }
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
-    }
-    androidExtensions {
-        experimental = true
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlin_version"
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.recyclerview
+    implementation deps.androidx.constraintlayout
+    implementation deps.androidx.core_ktx
 
-    implementation "androidx.appcompat:appcompat:$rootProject.supportLibrary_version"
-    implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerView_version"
-    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayout_version"
-    implementation "androidx.core:core-ktx:$rootProject.ktx_version"
-    implementation "androidx.room:room-runtime:$rootProject.room_version"
-    implementation "androidx.room:room-rxjava2:$rootProject.room_version"
-    kapt "androidx.room:room-compiler:$rootProject.room_version"
-    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigation_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigation_version"
+    implementation deps.androidx.room.runtime
+    implementation deps.androidx.room.rxjava2
+    kapt deps.androidx.room.compiler
 
-    implementation "com.google.android.material:material:$rootProject.materialComponents_version"
+    implementation deps.androidx.navigation.fragment
+    implementation deps.androidx.navigation.ui
 
-    implementation "com.google.android.gms:play-services-location:$rootProject.gms_version"
-    implementation "com.google.android.gms:play-services-maps:$rootProject.gms_version"
+    implementation deps.gms.location
+    implementation deps.gms.maps
 
-    implementation "com.google.firebase:firebase-core:$rootProject.firebase_version"
-    implementation "com.google.firebase:firebase-messaging:$rootProject.firebaseMessaging_version"
+    implementation deps.firebase.core
+    implementation deps.firebase.messaging
 
-    implementation "com.crashlytics.sdk.android:crashlytics:$rootProject.crashlytics_version"
+    implementation deps.rx.java
+    implementation deps.rx.kotlin
+    implementation deps.rx.android
 
-    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxJava_version"
-    implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.rxKotlin_version"
-    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxAndroid_version"
-    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$rootProject.rxBinding_version"
-    implementation "com.jakewharton.rxbinding2:rxbinding-design-kotlin:$rootProject.rxBinding_version"
-    implementation "com.github.tbruyelle:rxpermissions:$rootProject.rxPermissions_version"
-    implementation "com.f2prateek.rx.preferences2:rx-preferences:$rootProject.rxPreferences_version"
-    implementation 'com.patloew.rxlocation:rxlocation:1.0.3'
+    implementation deps.rxbinding2.kotlin
+    implementation deps.rxbinding2.design_kotlin
 
-    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit_version"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofit_version"
-    implementation "com.squareup.retrofit2:converter-moshi:$rootProject.retrofit_version"
+    implementation deps.retrofit.core
+    implementation deps.retrofit.adapter_rxjava2
+    implementation deps.retrofit.converter_moshi
 
-    implementation "com.squareup.moshi:moshi:$rootProject.moshi_version"
-    kapt "com.squareup.moshi:moshi-kotlin-codegen:$rootProject.moshi_version"
-    implementation "com.squareup.moshi:moshi-adapters:$rootProject.moshi_version"
+    implementation deps.moshi.core
+    implementation deps.moshi.adapters
+    kapt deps.moshi.koltin_codegen
 
-    implementation "net.danlew:android.joda:$rootProject.jodaTimeAndroid_version"
+    implementation deps.glide.core
+    kapt deps.glide.compiler
 
-    implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
-    kapt "com.github.bumptech.glide:compiler:$rootProject.glide_version"
+    implementation deps.koin.core
+    implementation deps.koin.android
+    implementation deps.koin.android_scope
 
-    implementation 'com.freeletics.rxredux:rxredux:1.0.1'
-
-    implementation "org.koin:koin-core:$rootProject.koin_version"
-    implementation "org.koin:koin-android:$rootProject.koin_version"
-    implementation "org.koin:koin-android-scope:$rootProject.koin_version"
-
-    implementation "com.jakewharton.timber:timber:$rootProject.timber_version"
-
-    implementation "com.vk:androidsdk:$rootProject.vk_version"
-
-    implementation "com.facebook.android:facebook-android-sdk:$rootProject.facebook_version"
+    implementation deps.kotlin
+    implementation deps.material
+    implementation deps.crashlytics
+    implementation deps.rxpermissions
+    implementation deps.rxpreferences
+    implementation deps.rxlocation
+    implementation deps.jodatime
+    implementation deps.rxredux
+    implementation deps.timber
+    implementation deps.vksdk
+    implementation deps.facebooksdk
 }
