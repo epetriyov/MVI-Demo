@@ -1,7 +1,7 @@
 ext.deps = [:]
 
 def versions = [:]
-    versions.gradle = '3.4.1'
+    versions.gradle = '3.4.2'
     versions.googleServices = '4.2.0'
     versions.kotlin = '1.3.40'
     versions.ktx = '1.0.2'
@@ -121,7 +121,7 @@ deps.vksdk = "com.vk:androidsdk:$versions.vk"
 deps.facebooksdk = "com.facebook.android:facebook-android-sdk:$versions.facebook"
 
 
-def addRepos(RepositoryHandler handler) {
+static def addRepos(RepositoryHandler handler) {
     handler.google()
     handler.jcenter()
     handler.maven { url 'https://maven.fabric.io/public' }
