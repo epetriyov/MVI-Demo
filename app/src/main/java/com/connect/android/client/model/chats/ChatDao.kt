@@ -2,7 +2,7 @@ package com.connect.android.client.model.chats
 
 import androidx.room.*
 import io.reactivex.Completable
-import io.reactivex.Maybe
+import io.reactivex.Flowable
 
 @Dao
 interface ChatDao {
@@ -16,5 +16,8 @@ interface ChatDao {
     fun deleteChats(items: List<Chat>): Completable
 
     @Query("SELECT * FROM chats")
-    fun getChats(): Maybe<List<Chat>>
+    fun getChats(): Flowable<List<Chat>>
+
+    @Query("SELECT * FROM chats where msg_text GLOB '*' || :query|| '*'")
+    fun findChats(query: String): Flowable<List<Chat>>
 }

@@ -1,7 +1,9 @@
 package com.connect.android.client.model.chats
 
 import androidx.room.*
+import com.connect.android.client.model.chat.Message
 import io.reactivex.Completable
+import io.reactivex.Flowable
 import io.reactivex.Maybe
 
 @Dao
@@ -16,5 +18,5 @@ interface MessageDao {
     fun deleteMessages(items: List<Message>): Completable
 
     @Query("SELECT * FROM messages")
-    fun getMessages(): Maybe<List<Message>>
+    fun getMessages(): Flowable<List<Message>>
 }
