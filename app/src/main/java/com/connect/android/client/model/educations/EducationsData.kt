@@ -1,6 +1,6 @@
 package com.connect.android.client.model.educations
 
-import com.connect.android.client.model.ProfileItem
+import com.connect.android.client.model.common.ProfileItem
 import com.google.gson.annotations.SerializedName
 
 /**

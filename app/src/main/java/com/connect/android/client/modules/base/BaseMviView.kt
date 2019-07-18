@@ -1,4 +1,4 @@
-package com.connect.android.client.mvi
+package com.connect.android.client.modules.base
 
 import android.os.Bundle
 import android.util.Log

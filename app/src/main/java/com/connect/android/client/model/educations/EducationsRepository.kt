@@ -10,3 +10,18 @@ interface EducationsRepository {
 
     fun removeEducation(educationId: String): Completable
 }
+
+class EducationsRepoImpl(private val educationsApi: EducationsApi) : EducationsRepository {
+    override fun addEducation(education: EducationData): Completable {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun updateEducation(education: EducationData): Completable {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun removeEducation(educationId: String): Completable {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+}

@@ -14,3 +14,22 @@ interface ProfileRepository {
 
     fun updateProfile(user: User): Completable
 }
+
+class ProfileRepoImpl(private val profileApi: ProfileApi, private val profileStore: ProfileStore) : ProfileRepository {
+    override fun fetchProfile(): Maybe<User> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun loadProfile(): Maybe<User> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun uploadAvatar(avatarUrl: String): Single<AvatarResponse> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun updateProfile(user: User): Completable {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+}

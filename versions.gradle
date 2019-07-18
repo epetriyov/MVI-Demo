@@ -97,7 +97,8 @@ deps.moshi = moshi
 def koin = [:]
     koin.core = "org.koin:koin-core:$versions.koin"
     koin.android = "org.koin:koin-android:$versions.koin"
-    koin.android_scope = "org.koin:koin-android-scope:$versions.koin"
+    koin.androidx_scope = "org.koin:koin-androidx-scope:$versions.koin"
+    koin.androidx_viewmodel = "org.koin:koin-androidx-viewmodel:$versions.koin"
 deps.koin = koin
 
 def rxbinding2 = [:]

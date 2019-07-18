@@ -1,4 +1,4 @@
-package com.connect.android.client.mvi
+package com.connect.android.client.modules.base
 
 import androidx.lifecycle.ViewModel
 import com.freeletics.rxredux.SideEffect

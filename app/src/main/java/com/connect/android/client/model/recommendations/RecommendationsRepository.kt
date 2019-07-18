@@ -12,3 +12,19 @@ interface RecommendationsRepository {
 
     fun getRecommendations(): Maybe<List<User>>
 }
+
+class RecommendationsRepoImpl(private val recommendationsApi: RecommendationsApi): RecommendationsRepository
+{
+    override fun connectUser(userId: String): Single<ConnectState> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun declineUser(userId: String): Single<ConnectState> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getRecommendations(): Maybe<List<User>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+}

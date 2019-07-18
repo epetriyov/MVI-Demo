@@ -1,4 +1,4 @@
-package com.connect.android.client.model
+package com.connect.android.client.model.common
 
 /**
  * Created by evgenii on 5/8/17.

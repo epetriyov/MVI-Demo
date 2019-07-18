@@ -9,3 +9,18 @@ interface WorksRepository {
 
     fun removeWork(workId: String): Completable
 }
+
+class WorksRepoImpl(private val worksApi: WorksApi) : WorksRepository {
+    override fun addWork(work: WorkData): Completable {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun updateWork(work: WorkData): Completable {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun removeWork(workId: String): Completable {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+}

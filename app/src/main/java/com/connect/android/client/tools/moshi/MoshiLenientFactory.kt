@@ -1,4 +1,4 @@
-package com.connect.android.client.moshi
+package com.connect.android.client.tools.moshi
 
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi

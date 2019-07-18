@@ -89,7 +89,8 @@ dependencies {
 
     implementation deps.koin.core
     implementation deps.koin.android
-    implementation deps.koin.android_scope
+    implementation deps.koin.androidx_scope
+    implementation deps.koin.androidx_viewmodel
 
     implementation deps.kotlin
     implementation deps.material

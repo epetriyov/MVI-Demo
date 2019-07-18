@@ -1,4 +1,4 @@
-package com.connect.android.client
+package com.connect.android.client.services
 
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage

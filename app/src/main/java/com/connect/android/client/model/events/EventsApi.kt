@@ -1,6 +1,6 @@
 package com.connect.android.client.model.events
 
-import com.connect.android.client.model.ListData
+import com.connect.android.client.model.common.ListData
 import com.connect.android.client.model.profile.User
 import io.reactivex.Completable
 import io.reactivex.Maybe

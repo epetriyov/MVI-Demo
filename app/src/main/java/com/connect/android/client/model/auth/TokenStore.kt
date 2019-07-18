@@ -1,12 +1,25 @@
 package com.connect.android.client.model.auth
 
-import io.reactivex.Single
+import android.content.SharedPreferences
 
-interface TokenStore {
-
-    fun loadToken(): Single<String>
+interface TokenStore : TokenProvider {
 
     fun saveToken(token: String)
 
     fun removeToken()
+}
+
+class SharedTokenStore(private val sharedPreferences: SharedPreferences): TokenStore{
+    override fun saveToken(token: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun removeToken() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getToken(): String? {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
 }

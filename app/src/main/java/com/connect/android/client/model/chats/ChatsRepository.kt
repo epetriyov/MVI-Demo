@@ -1,10 +1,8 @@
 package com.connect.android.client.model.chats
 
-import com.connect.android.client.model.chat.Message
+import com.connect.android.client.model.chat.ChatApi
 import com.connect.android.client.model.profile.User
-import io.reactivex.Completable
 import io.reactivex.Flowable
-import io.reactivex.Maybe
 import io.reactivex.Single
 
 interface ChatsRepository {
@@ -16,10 +14,23 @@ interface ChatsRepository {
     fun getChats(searchText: String): Flowable<List<Chat>>
 
     fun loadChats(offset: Int, limit: Int): Single<List<Chat>>
+}
 
-    fun sendMessage(chatId: String, message: Message): Completable
+class ChatRepoImpl(private val chatApi: ChatApi, private val chatDao: ChatDao) : ChatsRepository {
+    override fun createChat(user: User): Single<Chat> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
-    fun loadChatMessages(chatId: String, offset: Int, limit: Int): Maybe<List<Message>>
+    override fun getChats(): Flowable<List<Chat>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
-    fun getMessages(chatId: String): Flowable<List<Message>>
+    override fun getChats(searchText: String): Flowable<List<Chat>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun loadChats(offset: Int, limit: Int): Single<List<Chat>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
 }

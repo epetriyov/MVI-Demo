@@ -1,10 +1,8 @@
-package com.connect.android.client.model.chats
+package com.connect.android.client.model.messages
 
 import androidx.room.*
-import com.connect.android.client.model.chat.Message
 import io.reactivex.Completable
 import io.reactivex.Flowable
-import io.reactivex.Maybe
 
 @Dao
 interface MessageDao {

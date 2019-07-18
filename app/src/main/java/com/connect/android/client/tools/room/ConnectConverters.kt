@@ -1,8 +1,8 @@
-package com.connect.android.client.model
+package com.connect.android.client.tools.room
 
 import androidx.room.TypeConverter
-import com.connect.android.client.model.chats.Message
 import com.connect.android.client.model.educations.EducationData
+import com.connect.android.client.model.messages.Message
 import com.connect.android.client.model.profile.ConnectionType
 import com.connect.android.client.model.profile.Settings
 import com.connect.android.client.model.profile.User
@@ -11,7 +11,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 
 
-object Converters {
+object ConnectConverters {
 
     val moshi = Moshi.Builder().build()
 

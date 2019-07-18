@@ -4,7 +4,6 @@ import androidx.room.*
 import com.connect.android.client.model.profile.User
 import io.reactivex.Completable
 import io.reactivex.Flowable
-import io.reactivex.Maybe
 
 @Dao
 interface ContactsDao {
@@ -17,4 +16,7 @@ interface ContactsDao {
 
     @Query("SELECT * FROM contacts")
     fun getContacts(): Flowable<List<User>>
+
+    @Query("SELECT * FROM contacts WHERE name GLOB '*' || :query|| '*'")
+    fun getContacts(query: String): Flowable<List<User>>
 }
