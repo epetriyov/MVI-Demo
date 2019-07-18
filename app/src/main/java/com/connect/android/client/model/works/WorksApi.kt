@@ -16,5 +16,5 @@ interface WorksApi {
     fun updateWork(@Path("id") workId: String?, @Body work: WorkData): Completable
 
     @POST("/works")
-    fun addWork(@Body work: WorkData): Single<Response<WorkData>>
+    fun addWork(@Body work: WorkData): Completable
 }

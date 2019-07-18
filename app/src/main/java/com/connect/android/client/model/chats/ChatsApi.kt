@@ -1,6 +1,8 @@
 package com.connect.android.client.model.chats
 
 import com.connect.android.client.model.ListData
+import com.connect.android.client.model.chat.Message
+import io.reactivex.Maybe
 import io.reactivex.Single
 import retrofit2.Response
 import retrofit2.http.*
@@ -20,5 +22,5 @@ interface ChatsApi {
     fun createChat(@Body chatRequest: ChatRequest): Single<Chat>
 
     @GET("/users/me/chats/direct")
-    fun getChats(@Query("offset") offset: Int, @Query("limit") limit: Int): Single<Response<ListData<Chat>>>
+    fun getChats(@Query("offset") offset: Int, @Query("limit") limit: Int): Maybe<ListData<Chat>>
 }

@@ -2,6 +2,7 @@ package com.connect.android.client.model.events
 
 import androidx.room.*
 import io.reactivex.Completable
+import io.reactivex.Flowable
 import io.reactivex.Maybe
 
 @Dao
@@ -13,5 +14,5 @@ interface EventDao {
     fun deleteEvents(items: List<Event>): Completable
 
     @Query("SELECT * FROM messages")
-    fun getEvents(): Maybe<List<Event>>
+    fun getEvents(): Flowable<List<Event>>
 }

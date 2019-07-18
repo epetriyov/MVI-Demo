@@ -13,8 +13,6 @@ data class ConnectResponse(val status: String)
 
 data class FieldsResponse(val totalCount: Int?, val data: List<String>?)
 
-data class LocationData(val point: List<Double>)
-
 @Entity(tableName = "contacts")
 data class User(
     var name: String,

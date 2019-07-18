@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName
  * Created by evgenii on 5/8/17.
  */
 data class EducationData(
-    var id: String,
     var name: String,
     var faculty: String? = null,
     var description: String? = null,
@@ -23,11 +22,6 @@ data class EducationData(
             yearFrom = item.yearFrom
             yearTill = item.yearTill
         }
-    }
-
-
-    override fun getIdentifier(): String? {
-        return id
     }
 
     override fun getFirstText(): String? {
