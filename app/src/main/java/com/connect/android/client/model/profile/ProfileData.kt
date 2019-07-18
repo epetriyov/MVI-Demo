@@ -26,9 +26,6 @@ data class User(
     var skills: List<String>? = null,
     var goals: List<String>? = null,
     var fields: List<String>? = null,
-    var skillsStr: String? = null,
-    var goalsStr: String? = null,
-    var fieldsStr: String? = null,
     var avatar: String? = null,
     var avatarBig: String? = null,
     var works: List<WorkData>? = null,
@@ -39,11 +36,6 @@ data class User(
     var connectionType: ConnectionType? = null,
     var settings: Settings? = null
 ) {
-    fun processItem() {
-        fieldsStr = fields?.joinToString()
-        skillsStr = skills?.joinToString()
-        goalsStr = goals?.joinToString()
-    }
 
     fun getWorkInfo(): String? {
         val work = works?.let {
