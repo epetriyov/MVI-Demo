@@ -102,4 +102,5 @@ dependencies {
     implementation deps.timber
     implementation deps.vksdk
     implementation deps.facebooksdk
+    implementation deps.scarlet
 }
