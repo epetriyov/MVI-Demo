@@ -6,6 +6,8 @@ interface AuthRepository {
 
     fun updateNotificationToken()
 
+    fun pushNotificationToken(token: String)
+
     fun isAuthorized(): Boolean
 
     fun logout()
@@ -16,6 +18,10 @@ interface AuthRepository {
 }
 
 class AuthRepoImpl(private val authApi: AuthApi, private val tokenStore: TokenStore): AuthRepository {
+    override fun pushNotificationToken(token: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun updateNotificationToken() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
