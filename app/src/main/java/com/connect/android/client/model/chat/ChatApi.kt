@@ -1,5 +1,6 @@
 package com.connect.android.client.model.chat
 
+import com.connect.android.client.model.messages.Message
 import com.tinder.scarlet.Event
 import com.tinder.scarlet.ws.Receive
 import com.tinder.scarlet.ws.Send

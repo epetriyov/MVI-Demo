@@ -16,7 +16,7 @@ interface ChatsRepository {
     fun loadChats(offset: Int, limit: Int): Single<List<Chat>>
 }
 
-class ChatRepoImpl(private val chatApi: ChatApi, private val chatDao: ChatDao) : ChatsRepository {
+class ChatsRepoImpl(private val chatApi: ChatApi, private val chatDao: ChatDao) : ChatsRepository {
     override fun createChat(user: User): Single<Chat> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

@@ -92,6 +92,12 @@ dependencies {
     implementation deps.koin.androidx_scope
     implementation deps.koin.androidx_viewmodel
 
+    implementation deps.scarlet.core
+    implementation deps.scarlet.websocket
+    implementation deps.scarlet.moshi_adapter
+    implementation deps.scarlet.rxjava2_adapter
+    implementation deps.scarlet.android_lifecycle_adapter
+
     implementation deps.kotlin
     implementation deps.material
     implementation deps.crashlytics
@@ -103,5 +109,4 @@ dependencies {
     implementation deps.timber
     implementation deps.vksdk
     implementation deps.facebooksdk
-    implementation deps.scarlet
 }

@@ -1,4 +1,4 @@
-package com.connect.android.client.model.auth
+package com.connect.android.client.tools.okhttp
 
 import okhttp3.Interceptor
 import okhttp3.Response

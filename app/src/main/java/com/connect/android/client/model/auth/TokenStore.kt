@@ -1,6 +1,7 @@
 package com.connect.android.client.model.auth
 
 import android.content.SharedPreferences
+import com.connect.android.client.tools.okhttp.TokenProvider
 
 interface TokenStore : TokenProvider {
 

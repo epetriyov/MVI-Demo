@@ -32,7 +32,7 @@ def versions = [:]
     versions.vk = '1.6.8'
     versions.facebook = '4.20.0'
     versions.rxRedux = '1.0.1'
-    versions.scarlet = '0.2.4'
+    versions.scarlet = '0.1.9'
 
 def deps = [:]
     deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.gradle"
@@ -111,6 +111,14 @@ def glide = [:]
     glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide"
 deps.glide = glide
 
+def scarlet = [:]
+    scarlet.core = "com.tinder.scarlet:scarlet:$versions.scarlet"
+    scarlet.websocket = "com.tinder.scarlet:websocket-okhttp:$versions.scarlet"
+    scarlet.moshi_adapter = "com.tinder.scarlet:message-adapter-moshi:$versions.scarlet"
+    scarlet.rxjava2_adapter = "com.tinder.scarlet:stream-adapter-rxjava2:$versions.scarlet"
+    scarlet.android_lifecycle_adapter = "com.tinder.scarlet:lifecycle-android:$versions.scarlet"
+deps.scarlet = scarlet
+
 deps.material = "com.google.android.material:material:$versions.materialComponents"
 deps.crashlytics ="com.crashlytics.sdk.android:crashlytics:$versions.crashlytics"
 deps.rxpermissions = "com.github.tbruyelle:rxpermissions:$versions.rxPermissions"
@@ -121,8 +129,6 @@ deps.rxredux = "com.freeletics.rxredux:rxredux:$versions.rxRedux"
 deps.timber = "com.jakewharton.timber:timber:$versions.timber"
 deps.vksdk = "com.vk:androidsdk:$versions.vk"
 deps.facebooksdk = "com.facebook.android:facebook-android-sdk:$versions.facebook"
-deps.scarlet = "com.github.Tinder:Scarlet:$versions.scarlet"
-
 
 static def addRepos(RepositoryHandler handler) {
     handler.google()

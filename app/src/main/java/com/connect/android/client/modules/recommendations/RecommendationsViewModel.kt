@@ -10,13 +10,13 @@ import com.freeletics.rxredux.SideEffect
 class RecommendationsViewModel(
     private val recommendationsRepository: RecommendationsRepository,
     private val chatRepository: ChatRepository,
-    initialState: ProfileVS
-) : BaseMviViewModel<ProfileVIA, ProfileVS>(initialState) {
-    override fun reducer(state: ProfileVS, action: ProfileVIA): ProfileVS {
+    initialState: RecommendationsVS
+) : BaseMviViewModel<RecommendationsVIA, RecommendationsVS>(initialState) {
+    override fun reducer(state: RecommendationsVS, action: RecommendationsVIA): RecommendationsVS {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun sideEffects(): List<SideEffect<ProfileVS, ProfileVIA>> {
+    override fun sideEffects(): List<SideEffect<RecommendationsVS, RecommendationsVIA>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
