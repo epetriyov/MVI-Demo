@@ -2,14 +2,15 @@ package com.connect.android.client.model.messages
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import org.joda.time.DateTime
 
 @Entity(tableName = "messages")
-data class Message(
-    var text: String,
-    var type: String,
-    var creationDate: Long,
-    var userId: String,
+data class Message @JvmOverloads constructor(
+    val text: String,
+    val type: String,
+    val creationDate: DateTime? = null,
+    val userId: String,
     @PrimaryKey
-    var id: String,
-    var chatId: String
+    val id: String,
+    val chatId: String
 )

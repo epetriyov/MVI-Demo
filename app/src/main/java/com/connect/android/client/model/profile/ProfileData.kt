@@ -14,35 +14,35 @@ data class ConnectResponse(val status: String)
 data class FieldsResponse(val totalCount: Int?, val data: List<String>?)
 
 @Entity(tableName = "contacts")
-data class User(
-    var name: String,
-    var avatarMedium: String? = null,
+data class User @JvmOverloads constructor(
+    val name: String,
+    val avatarMedium: String? = null,
     @PrimaryKey
-    var id: String,
-    var gender: String? = null,
-    var about: String? = null,
-    var skills: List<String>? = null,
-    var goals: List<String>? = null,
-    var fields: List<String>? = null,
-    var avatar: String? = null,
-    var avatarBig: String? = null,
-    var works: List<WorkData>? = null,
-    var educations: List<EducationData>? = null,
-    var distance: Double? = null,
+    val id: String,
+    val gender: String? = null,
+    val about: String? = null,
+    val skills: List<String>? = null,
+    val goals: List<String>? = null,
+    val fields: List<String>? = null,
+    val avatar: String? = null,
+    val avatarBig: String? = null,
+    val works: List<WorkData>? = null,
+    val educations: List<EducationData>? = null,
+    val distance: Double? = null,
     @SerializedName("object")
-    var obj: String = "user",
-    var connectionType: ConnectionType? = null,
+    val obj: String = "user",
+    val connectionType: ConnectionType? = null,
     var settings: Settings? = null
 ) {
 
     fun getWorkInfo(): String? {
         val work = works?.let {
-            if (works!!.size > 0) {
-                (works!![0]?.company ?: "") +
-                        (if (!TextUtils.isEmpty(works!![0]?.company)
-                            && !TextUtils.isEmpty(works!![0]?.position)
+            if (works.isNotEmpty()) {
+                (works[0].company ?: "") +
+                        (if (!TextUtils.isEmpty(works[0].company)
+                            && !TextUtils.isEmpty(works[0].position)
                         ) ", " else "") +
-                        works!![0]?.position
+                        works[0].position
             } else {
                 ""
             }
@@ -53,17 +53,17 @@ data class User(
 
 data class Settings(
     @SerializedName("SHOW_DISTANCE")
-    var showDistance: String? = "Y",
+    val showDistance: String? = "Y",
     @SerializedName("SHOW_RATIING")
-    var showRating: String? = "Y",
+    val showRating: String? = "Y",
     @SerializedName("SHOW_AGE")
-    var showAge: String? = "Y",
+    val showAge: String? = "Y",
     @SerializedName("AGE_MIN")
-    var minAge: Int? = 18,
+    val minAge: Int? = 18,
     @SerializedName("AGE_MAX")
-    var maxAge: Int? = 100,
+    val maxAge: Int? = 100,
     @SerializedName("DISTANCE_MAX")
-    var maxDistance: Int? = 100
+    val maxDistance: Int? = 100
 ) {
 
     fun isShowDistance(): Boolean {
@@ -76,18 +76,6 @@ data class Settings(
 
     fun isShowAge(): Boolean {
         return showAge == "Y"
-    }
-
-    fun setShowDistance(checked: Boolean) {
-        showDistance = if (checked) "Y" else "N"
-    }
-
-    fun setShowRating(checked: Boolean) {
-        showRating = if (checked) "Y" else "N"
-    }
-
-    fun setShowAge(checked: Boolean) {
-        showAge = if (checked) "Y" else "N"
     }
 
 }

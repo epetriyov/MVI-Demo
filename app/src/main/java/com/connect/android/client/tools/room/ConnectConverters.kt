@@ -9,9 +9,10 @@ import com.connect.android.client.model.profile.User
 import com.connect.android.client.model.works.WorkData
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
+import org.joda.time.DateTime
 
 
-object ConnectConverters {
+class ConnectConverters {
 
     val moshi = Moshi.Builder().build()
 
@@ -31,6 +32,8 @@ object ConnectConverters {
 
     val messageTypeAdapter = moshi.adapter(Message::class.java)
 
+    val dateTimeTypeAdapter = moshi.adapter(DateTime::class.java)
+
     val userTypeAdapter = moshi.adapter(User::class.java)
 
     @TypeConverter
@@ -44,13 +47,13 @@ object ConnectConverters {
     }
 
     @TypeConverter
-    fun fromDoubleList(value: List<Double>?): String? {
-        return value?.let { listDoubleAdapter.toJson(value) }
+    fun fromDoubleList(value: List<Double>?): String {
+        return value.let { listDoubleAdapter.toJson(value) }
     }
 
     @TypeConverter
-    fun toDoubleList(value: String?): List<Double>? {
-        return value?.let { listDoubleAdapter.fromJson(value) }
+    fun toDoubleList(value: String): List<Double>? {
+        return listDoubleAdapter.fromJson(value)
     }
 
     @TypeConverter
@@ -83,7 +86,7 @@ object ConnectConverters {
         return value?.let {
             try {
                 ConnectionType.valueOf(value)
-            } catch (e: IllegalArgumentException) {
+            } catch (e: Throwable) {
                 null
             }
         }
@@ -117,5 +120,15 @@ object ConnectConverters {
     @TypeConverter
     fun toUser(value: String?): User? {
         return value?.let { userTypeAdapter.fromJson(it) }
+    }
+
+    @TypeConverter
+    fun fromDateTime(value: DateTime?): String? {
+        return value?.let { dateTimeTypeAdapter.toJson(it) }
+    }
+
+    @TypeConverter
+    fun toDateTime(value: String?): DateTime? {
+        return value?.let { dateTimeTypeAdapter.fromJson(it) }
     }
 }

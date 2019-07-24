@@ -13,6 +13,6 @@ interface EventDao {
     @Delete
     fun deleteEvents(items: List<Event>): Completable
 
-    @Query("SELECT * FROM messages")
+    @Query("SELECT * FROM events")
     fun getEvents(): Flowable<List<Event>>
 }

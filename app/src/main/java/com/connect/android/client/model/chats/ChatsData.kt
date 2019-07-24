@@ -6,16 +6,17 @@ import androidx.room.PrimaryKey
 import com.connect.android.client.model.messages.Message
 import com.connect.android.client.model.profile.User
 import com.google.gson.annotations.SerializedName
+import org.joda.time.DateTime
 
 @Entity(tableName = "chats")
-data class Chat(
+data class Chat @JvmOverloads constructor(
     @PrimaryKey
-    var id: String,
-    var user: User,
+    val id: String,
+    val user: User,
     @Embedded(prefix = "msg_")
-    var lastMessage: Message,
-    var creationDate: Long,
-    var lastActiveDate: Long
+    val lastMessage: Message? = null,
+    val creationDate: DateTime,
+    val lastActiveDate: DateTime
 )
 
 data class ChatRequest(@SerializedName("object") val obj: String = "directChat", val user: User)

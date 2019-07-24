@@ -1,10 +1,12 @@
 package com.connect.android.client.model.chats
 
 import com.connect.android.client.model.common.ListData
-import com.connect.android.client.model.chat.Message
 import io.reactivex.Maybe
 import io.reactivex.Single
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface ChatsApi {
 

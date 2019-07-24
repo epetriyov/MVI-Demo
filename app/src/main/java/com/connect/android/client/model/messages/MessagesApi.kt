@@ -1,7 +1,6 @@
 package com.connect.android.client.model.messages
 
 import com.connect.android.client.model.common.ListData
-import com.connect.android.client.model.chat.Message
 import io.reactivex.Single
 import retrofit2.Response
 import retrofit2.http.*

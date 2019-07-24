@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">ConnectAndroid</string>
+
+    <!-- login strings -->
+    <string name="login_description">Авторизуйтесь, используя\nсоциальную сеть</string>
+    <string name="login_agreement">Авторизуясь, вы соглашаетесь на\nобработку персональных данных</string>
+    <string name="facebook">Facebook</string>
+    <string name="vkontakte">vk</string>
+    <string name="recommendations_search">Ищем коннекты вокруг вас</string>
+    <string name="goals_title">Что ищет</string>
+    <string name="skills_title">Чем полезна</string>
 </resources>
