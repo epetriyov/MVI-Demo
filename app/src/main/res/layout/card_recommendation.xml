@@ -9,11 +9,11 @@
         android:id="@+id/img_avatar"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="22dp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
         android:src="@drawable/avatar"
-        app:layout_constraintBottom_toTopOf="@id/title_skills"
-        android:layout_marginBottom="22dp"
+        app:layout_constraintBottom_toTopOf="@id/about"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -55,55 +55,14 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:text="140 метров" />
 
-    <TextView
-        android:id="@+id/label_goals"
+    <include
+        android:id="@+id/about"
+        layout="@layout/view_about"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         android:layout_marginBottom="16dp"
-        android:gravity="start"
-        android:lines="3"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="Инвестиции для научной передачи обьясняющей квантовую теорию поля, формат для детей" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/title_goals"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="7dp"
-        android:text="@string/goals_title"
-        android:textColor="@color/colorTitle"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/label_goals"
-        app:layout_constraintStart_toStartOf="@id/label_goals" />
-
-    <TextView
-        android:id="@+id/label_skills"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="11dp"
-        android:gravity="start"
-        android:lines="3"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/title_goals"
-        app:layout_constraintEnd_toEndOf="@id/label_goals"
-        app:layout_constraintStart_toStartOf="@id/label_goals"
-        tools:text="Разрабатываем модуль анализа при помощи экспертных систем и программируемых нейроннок (Connect)" />
-
-    <TextView
-        android:id="@+id/title_skills"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="7dp"
-        android:text="@string/skills_title"
-        android:textColor="@color/colorTitle"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/label_skills"
-        app:layout_constraintStart_toStartOf="@id/label_skills" />
 </androidx.constraintlayout.widget.ConstraintLayout>

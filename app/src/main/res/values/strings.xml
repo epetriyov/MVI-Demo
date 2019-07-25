@@ -9,4 +9,6 @@
     <string name="recommendations_search">Ищем коннекты вокруг вас</string>
     <string name="goals_title">Что ищет</string>
     <string name="skills_title">Чем полезна</string>
+    <string name="btn_write">Написать сообщение</string>
+    <string name="connect_invite">предложила вам connect</string>
 </resources>
