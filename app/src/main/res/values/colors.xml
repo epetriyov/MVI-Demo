@@ -10,4 +10,10 @@
     <color name="vkontakte_color">#5181B8</color>
     <color name="colorBlue">#0077FF</color>
     <color name="colorDivider">#F1F1F1</color>
+    <color name="colorEditHint">#C6C6C6</color>
+    <color name="bgColorEdit">#FBFBFB</color>
+    <color name="colorGreyText2">#C0C0C0</color>
+    <color name="colorBrown">#555555</color>
+    <color name="colorBrown2">#666666</color>
+
 </resources>

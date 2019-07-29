@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/title_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@string/title_profile_aims"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+         />
+
+    <TextView
+        android:id="@+id/label_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/colorGreyText2"
+        app:layout_constraintBaseline_toBaselineOf="@id/title_info"
+        app:layout_constraintStart_toEndOf="@id/title_info"
+        tools:text="2 из 3" />
+
+    <Button
+        android:id="@+id/btn_add_info"
+        android:layout_width="wrap_content"
+        android:layout_height="26dp"
+        android:background="@drawable/btn_common"
+        android:backgroundTint="@color/colorBlue"
+        android:text="@string/label_add"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/title_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/title_info" />
+
+    <TextView
+        android:id="@+id/title_info_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        tools:text="@string/aims_description"
+        android:textColor="@color/colorBrown"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/title_info"
+        app:layout_constraintTop_toBottomOf="@id/title_info" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chips_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        app:layout_constraintEnd_toEndOf="@id/btn_add_info"
+        app:layout_constraintStart_toStartOf="@id/title_info"
+        app:layout_constraintTop_toBottomOf="@id/title_info_description"
+        app:singleLine="true" />
+</androidx.constraintlayout.widget.ConstraintLayout>

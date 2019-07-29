@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_back_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:src="@drawable/ic_options_button"
+        app:layout_constraintBottom_toBottomOf="@id/btn_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btn_back" />
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_back">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/label_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                app:layout_constraintStart_toEndOf="@id/img_avatar"
+                app:layout_constraintTop_toTopOf="@id/img_avatar"
+                tools:text="Anastasia\nStaroverova" />
+
+            <View
+                android:id="@+id/view_avatar_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+                android:background="@color/colorDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/img_avatar"
+                app:layout_constraintTop_toBottomOf="@id/img_avatar" />
+
+            <TextView
+                android:id="@+id/title_skills"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/title_profile_skills"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@id/img_avatar"
+                app:layout_constraintTop_toBottomOf="@id/view_avatar_divider" />
+
+            <EditText
+                android:id="@+id/edit_skills"
+                android:layout_width="0dp"
+                android:layout_height="68dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/bgColorEdit"
+                android:gravity="center_vertical"
+                android:hint="@string/hint"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp"
+                android:textColor="@color/colorEditHint"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_skills" />
+
+            <TextView
+                android:id="@+id/title_goals"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/title_profile_goals"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@id/img_avatar"
+                app:layout_constraintTop_toBottomOf="@id/edit_skills" />
+
+            <EditText
+                android:id="@+id/edit_goals"
+                android:layout_width="0dp"
+                android:layout_height="68dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/bgColorEdit"
+                android:gravity="center_vertical"
+                android:hint="@string/hint"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp"
+                android:textColor="@color/colorEditHint"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_goals" />
+
+            <include
+                android:id="@+id/aims_block"
+                layout="@layout/view_info_block"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/img_avatar"
+                app:layout_constraintTop_toBottomOf="@id/edit_goals" />
+
+            <View
+                android:id="@+id/view_goals_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="30dp"
+                android:background="@color/colorDivider"
+                app:layout_constraintEnd_toEndOf="@id/view_avatar_divider"
+                app:layout_constraintStart_toStartOf="@id/view_avatar_divider"
+                app:layout_constraintTop_toBottomOf="@id/aims_block" />
+
+            <include
+                android:id="@+id/skills_block"
+                layout="@layout/view_info_block"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/img_avatar"
+                app:layout_constraintTop_toBottomOf="@id/view_goals_divider" />
+
+            <View
+                android:id="@+id/view_skills_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="30dp"
+                android:background="@color/colorDivider"
+                app:layout_constraintEnd_toEndOf="@id/view_avatar_divider"
+                app:layout_constraintStart_toStartOf="@id/view_avatar_divider"
+                app:layout_constraintTop_toBottomOf="@id/skills_block" />
+
+            <include
+                android:id="@+id/jobs_block"
+                layout="@layout/view_list_block"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/img_avatar"
+                app:layout_constraintTop_toBottomOf="@id/view_skills_divider" />
+
+            <View
+                android:id="@+id/view_jobs_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="30dp"
+                android:background="@color/colorDivider"
+                app:layout_constraintEnd_toEndOf="@id/view_avatar_divider"
+                app:layout_constraintStart_toStartOf="@id/view_avatar_divider"
+                app:layout_constraintTop_toBottomOf="@id/jobs_block" />
+
+
+            <include
+                android:id="@+id/education_block"
+                layout="@layout/view_list_block"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/img_avatar"
+                app:layout_constraintTop_toBottomOf="@id/view_jobs_divider" />
+
+            <Space
+                android:id="@+id/bottom_space"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/education_block" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

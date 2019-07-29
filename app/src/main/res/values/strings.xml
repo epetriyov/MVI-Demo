@@ -11,4 +11,12 @@
     <string name="skills_title">Чем полезна</string>
     <string name="btn_write">Написать сообщение</string>
     <string name="connect_invite">предложила вам connect</string>
+    <string name="title_profile_skills">Чем вы полезны</string>
+    <string name="hint">Введите текст</string>
+    <string name="title_profile_goals">Что вы ищите</string>
+    <string name="title_profile_aims">Цели</string>
+    <string name="label_add">Добавить</string>
+    <string name="aims_description">Цели, которых вы планируете достигнуть.</string>
+    <string name="title_profile_spheres">Сферы</string>
+    <string name="spheres_description">Сферы, в которых вы являетесь профессионалом.</string>
 </resources>
