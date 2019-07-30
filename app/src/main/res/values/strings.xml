@@ -19,4 +19,9 @@
     <string name="aims_description">Цели, которых вы планируете достигнуть.</string>
     <string name="title_profile_spheres">Сферы</string>
     <string name="spheres_description">Сферы, в которых вы являетесь профессионалом.</string>
+    <string name="enter_chat">Войти в чат</string>
+    <string name="how_can_she_help">Чем полезна</string>
+    <string name="what_is_searching">Что ищет</string>
+    <string name="work">Карьера</string>
+    <string name="education">Образование</string>
 </resources>

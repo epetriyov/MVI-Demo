@@ -13,7 +13,10 @@
     <color name="colorEditHint">#C6C6C6</color>
     <color name="bgColorEdit">#FBFBFB</color>
     <color name="colorGreyText2">#C0C0C0</color>
+    <color name="colorGreyText3">#CDCDCD</color>
     <color name="colorBrown">#555555</color>
     <color name="colorBrown2">#666666</color>
-
+    <color name="colorBrown3">#505050</color>
+    <color name="colorGreyText4">#AAAAAA</color>
+    <color name="colorGreyText5">#8D8D8D</color>
 </resources>

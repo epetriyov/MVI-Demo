@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_back_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:src="@drawable/ic_options_button"
+        app:layout_constraintBottom_toBottomOf="@id/btn_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btn_back" />
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_back">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="118dp"
+                android:layout_height="118dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="26dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/userpic" />
+
+            <ImageView
+                android:id="@+id/connect_indicator"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="7dp"
+                android:elevation="14dp"
+                android:src="@drawable/ic_logo"
+                app:layout_constraintBottom_toBottomOf="@id/img_avatar"
+                app:layout_constraintEnd_toEndOf="@id/img_avatar" />
+
+            <Button
+                android:id="@+id/btn_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/btn_common"
+                android:backgroundTint="@color/colorBlue"
+                android:drawableStart="@drawable/ic_message"
+                android:drawablePadding="11dp"
+                android:padding="12dp"
+                android:text="@string/enter_chat"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/img_avatar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/img_avatar" />
+
+            <TextView
+                android:id="@+id/label_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColor="@android:color/black"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="@id/btn_chat"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@id/img_avatar"
+                app:layout_constraintTop_toBottomOf="@id/img_avatar"
+                tools:text="Anastasia Staroverova" />
+
+            <TextView
+                android:id="@+id/label_work"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/colorBrown3"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@id/btn_chat"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@id/label_name"
+                app:layout_constraintTop_toBottomOf="@id/label_name"
+                tools:text="Connect. CEO Founder." />
+
+            <TextView
+                android:id="@+id/label_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:drawableStart="@drawable/ic_pin_grey"
+                android:drawablePadding="6dp"
+                android:textColor="@color/colorGreyText3"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/label_work"
+                app:layout_constraintTop_toBottomOf="@id/label_work"
+                tools:text="140 метров" />
+
+            <View
+                android:id="@+id/divider_profile_top"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorDivider"
+                app:layout_constraintEnd_toEndOf="@id/btn_chat"
+                app:layout_constraintStart_toStartOf="@id/label_name"
+                app:layout_constraintTop_toBottomOf="@id/label_location" />
+
+            <TextView
+                android:id="@+id/title_skills"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                android:drawableStart="@drawable/ic_skills"
+                android:drawablePadding="11dp"
+                android:text="@string/how_can_she_help"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider_profile_top" />
+
+            <TextView
+                android:id="@+id/label_skills"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@id/title_skills"
+                app:layout_constraintStart_toStartOf="@id/title_skills"
+                app:layout_constraintTop_toBottomOf="@id/title_skills"
+                tools:text="Разрабатываем модуль анализа при помощи экспертных систем и программируемых нейроннок (Connect)" />
+
+            <TextView
+                android:id="@+id/title_goals"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="11dp"
+                android:text="@string/what_is_searching"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_skills" />
+
+            <TextView
+                android:id="@+id/label_goals"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@id/title_goals"
+                app:layout_constraintStart_toStartOf="@id/title_goals"
+                app:layout_constraintTop_toBottomOf="@id/title_goals"
+                tools:text="Инвестиции для научной передачи обьясняющей квантовую теорию поля, формат для детей" />
+
+            <View
+                android:id="@+id/divider_profile_goals"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorDivider"
+                app:layout_constraintEnd_toEndOf="@id/label_goals"
+                app:layout_constraintStart_toStartOf="@id/label_goals"
+                app:layout_constraintTop_toBottomOf="@id/label_goals" />
+
+            <TextView
+                android:id="@+id/title_aims"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:drawableStart="@drawable/ic_aims"
+                android:drawablePadding="11dp"
+                android:text="@string/title_profile_aims"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@id/divider_profile_goals"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@id/divider_profile_goals"
+                app:layout_constraintTop_toBottomOf="@id/divider_profile_goals" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chips_aims"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="@id/title_aims"
+                app:layout_constraintStart_toStartOf="@id/title_aims"
+                app:layout_constraintTop_toBottomOf="@id/title_aims"
+                app:singleLine="true" />
+
+            <TextView
+                android:id="@+id/title_spheres"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:drawableStart="@drawable/ic_sphere"
+                android:drawablePadding="11dp"
+                android:text="@string/title_profile_spheres"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@id/chips_aims"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@id/chips_aims"
+                app:layout_constraintTop_toBottomOf="@id/chips_aims" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chips_spheres"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="@id/title_spheres"
+                app:layout_constraintStart_toStartOf="@id/title_spheres"
+                app:layout_constraintTop_toBottomOf="@id/title_spheres"
+                app:singleLine="true" />
+
+            <View
+                android:id="@+id/divider_profile_aims"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorDivider"
+                app:layout_constraintEnd_toEndOf="@id/chips_spheres"
+                app:layout_constraintStart_toStartOf="@id/chips_spheres"
+                app:layout_constraintTop_toBottomOf="@id/chips_spheres" />
+
+            <TextView
+                android:id="@+id/title_work"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:drawableStart="@drawable/ic_work"
+                android:drawablePadding="11dp"
+                android:text="@string/work"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@id/divider_profile_aims"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@id/divider_profile_aims"
+                app:layout_constraintTop_toBottomOf="@id/divider_profile_aims" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/work_recycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                app:layout_constraintEnd_toEndOf="@id/title_work"
+                app:layout_constraintStart_toStartOf="@id/title_work"
+                app:layout_constraintTop_toBottomOf="@id/title_work" />
+
+            <View
+                android:id="@+id/divider_profile_work"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorDivider"
+                app:layout_constraintEnd_toEndOf="@id/work_recycler"
+                app:layout_constraintStart_toStartOf="@id/work_recycler"
+                app:layout_constraintTop_toBottomOf="@id/work_recycler" />
+
+            <TextView
+                android:id="@+id/title_education"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:drawableStart="@drawable/ic_education"
+                android:drawablePadding="11dp"
+                android:text="@string/education"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@id/divider_profile_work"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@id/divider_profile_work"
+                app:layout_constraintTop_toBottomOf="@id/divider_profile_work" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/education_recycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                app:layout_constraintEnd_toEndOf="@id/title_education"
+                app:layout_constraintStart_toStartOf="@id/title_education"
+                app:layout_constraintTop_toBottomOf="@id/title_education" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
