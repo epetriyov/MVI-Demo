@@ -24,4 +24,6 @@
     <string name="what_is_searching">Что ищет</string>
     <string name="work">Карьера</string>
     <string name="education">Образование</string>
+    <string name="title_contacts">Визитница</string>
+    <string name="search">Поиск</string>
 </resources>
