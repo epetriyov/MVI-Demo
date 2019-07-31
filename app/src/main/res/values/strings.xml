@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ConnectAndroid</string>
+    <string name="app_name">Connect+</string>
 
     <!-- login strings -->
     <string name="login_description">Авторизуйтесь, используя\nсоциальную сеть</string>
