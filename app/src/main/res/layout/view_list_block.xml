@@ -14,16 +14,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_add_info"
         android:layout_width="wrap_content"
-        android:layout_height="26dp"
-        android:background="@drawable/btn_common"
-        android:backgroundTint="@color/colorBlue"
-        android:text="@string/label_add"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="14sp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="@id/title_info"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/title_info" />

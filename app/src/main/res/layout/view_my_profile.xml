@@ -33,9 +33,9 @@
                 android:layout_height="96dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="20dp"
-                tools:src="@drawable/userpic"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/userpic" />
 
             <TextView
                 android:id="@+id/label_name"
@@ -70,17 +70,25 @@
                 app:layout_constraintStart_toStartOf="@id/img_avatar"
                 app:layout_constraintTop_toBottomOf="@id/view_avatar_divider" />
 
-            <EditText
-                android:id="@+id/edit_skills"
+            <ImageButton
+                android:id="@+id/btn_edit_skills"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:src="@drawable/ic_pencil"
+                app:layout_constraintBottom_toBottomOf="@id/title_skills"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/title_skills" />
+
+
+            <TextView
+                android:id="@+id/value_skills"
                 android:layout_width="0dp"
-                android:layout_height="68dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/bgColorEdit"
-                android:gravity="center_vertical"
-                android:hint="@string/hint"
-                android:paddingStart="30dp"
-                android:paddingEnd="30dp"
-                android:textColorHint="@color/colorEditHint"
+                android:layout_marginEnd="30dp"
+                android:textColor="@android:color/black"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -95,19 +103,26 @@
                 android:textColor="@android:color/black"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="@id/img_avatar"
-                app:layout_constraintTop_toBottomOf="@id/edit_skills" />
+                app:layout_constraintTop_toBottomOf="@id/value_skills" />
 
-            <EditText
-                android:id="@+id/edit_goals"
+            <ImageButton
+                android:id="@+id/btn_edit_goals"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:src="@drawable/ic_pencil"
+                app:layout_constraintBottom_toBottomOf="@id/title_goals"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/title_goals" />
+
+            <TextView
+                android:id="@+id/value_goals"
                 android:layout_width="0dp"
-                android:layout_height="68dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/bgColorEdit"
-                android:gravity="center_vertical"
-                android:hint="@string/hint"
-                android:paddingStart="30dp"
-                android:paddingEnd="30dp"
-                android:textColor="@color/colorEditHint"
+                android:layout_marginEnd="30dp"
+                android:textColor="@android:color/black"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -122,7 +137,7 @@
                 android:layout_marginEnd="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/img_avatar"
-                app:layout_constraintTop_toBottomOf="@id/edit_goals" />
+                app:layout_constraintTop_toBottomOf="@id/value_goals" />
 
             <View
                 android:id="@+id/view_goals_divider"
@@ -188,13 +203,30 @@
                 app:layout_constraintStart_toStartOf="@id/img_avatar"
                 app:layout_constraintTop_toBottomOf="@id/view_jobs_divider" />
 
+            <TextView
+                android:id="@+id/btn_exit"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+                android:drawableStart="@drawable/ic_exit"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="@string/exit"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/img_avatar"
+                app:layout_constraintTop_toBottomOf="@id/education_block" />
+
             <Space
                 android:id="@+id/bottom_space"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/education_block" />
+                app:layout_constraintTop_toBottomOf="@id/btn_exit" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

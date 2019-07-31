@@ -31,4 +31,7 @@
     <string name="all">все</string>
     <string name="my">мои</string>
     <string name="label_apply">Принять участие</string>
+    <string name="label_permission_apply">Открыть доступ</string>
+    <string name="label_permission_description">Чтобы начать поиск коннектов,\nпредоставьте нам доступ\nк вашему местоположению</string>
+    <string name="exit">Выйти</string>
 </resources>
