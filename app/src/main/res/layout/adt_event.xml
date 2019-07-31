@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_event"
+            android:layout_width="0dp"
+            android:layout_height="140dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/header" />
+
+        <TextView
+            android:id="@+id/label_event_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="15dp"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@id/img_event"
+            app:layout_constraintEnd_toEndOf="@id/img_event"
+            app:layout_constraintStart_toStartOf="@id/img_event"
+            tools:text="Хакатон Blockchain founder" />
+
+        <TextView
+            android:id="@+id/label_event_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_event"
+            tools:text="Кустарничек изящно связывает городской официальный язык." />
+
+        <View
+            android:id="@+id/top_divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorDivider"
+            app:layout_constraintEnd_toEndOf="@id/label_event_description"
+            app:layout_constraintStart_toStartOf="@id/label_event_description"
+            app:layout_constraintTop_toBottomOf="@id/label_event_description" />
+
+        <include
+            android:id="@+id/view_address"
+            layout="@layout/view_address_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="@id/top_divider"
+            app:layout_constraintStart_toStartOf="@id/top_divider"
+            app:layout_constraintTop_toBottomOf="@id/top_divider" />
+
+        <include
+            android:id="@+id/view_time"
+            layout="@layout/view_address_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="@id/top_divider"
+            app:layout_constraintStart_toStartOf="@id/top_divider"
+            app:layout_constraintTop_toBottomOf="@id/view_address" />
+
+        <View
+            android:id="@+id/bottom_divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorDivider"
+            app:layout_constraintEnd_toEndOf="@id/top_divider"
+            app:layout_constraintStart_toStartOf="@id/top_divider"
+            app:layout_constraintTop_toBottomOf="@id/view_time" />
+
+        <Button
+            android:id="@+id/btn_participants"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/btn_common"
+            android:backgroundTint="@color/colorBlue"
+            android:drawableStart="@drawable/ic_members"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/bottom_divider"
+            app:layout_constraintTop_toBottomOf="@id/bottom_divider"
+            tools:text="4" />
+
+        <Button
+            android:id="@+id/btn_apply"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/btn_common"
+            android:backgroundTint="@color/colorBlue"
+            android:text="@string/label_apply"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/bottom_divider"
+            app:layout_constraintTop_toBottomOf="@id/bottom_divider" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
