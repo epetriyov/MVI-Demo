@@ -34,4 +34,9 @@
     <string name="label_permission_apply">Открыть доступ</string>
     <string name="label_permission_description">Чтобы начать поиск коннектов,\nпредоставьте нам доступ\nк вашему местоположению</string>
     <string name="exit">Выйти</string>
+    <string name="save">Сохранить</string>
+    <string name="enter_tags">Введите тэги через запятую</string>
+    <string name="recommendations">Рекомендации</string>
+    <string name="chats">Сообщения</string>
+    <string name="profile">Профиль</string>
 </resources>

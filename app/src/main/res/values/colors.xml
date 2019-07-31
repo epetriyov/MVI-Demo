@@ -27,4 +27,5 @@
     <color name="colorOneMoreLightBlue">#DAEBFF</color>
     <color name="colorOneMoreGrey2">#8B95A1</color>
     <color name="colorOneMoreBrown">#6F6F6F</color>
+    <color name="colorBgEdit">#EEF6FF</color>
 </resources>
