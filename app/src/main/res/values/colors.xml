@@ -20,4 +20,10 @@
     <color name="colorGreyText4">#AAAAAA</color>
     <color name="colorGreyText5">#8D8D8D</color>
     <color name="bgColorSearchEdit">#F4F4F4</color>
+    <color name="bgRecyclerView">#F9F9F9</color>
+    <color name="colorOneMoreGrey">#F6F6F6</color>
+    <color name="colorEditOneMoreHint">#D2D2D2</color>
+    <color name="colorLightBlue">#E5F1FF</color>
+    <color name="colorOneMoreLightBlue">#DAEBFF</color>
+    <color name="colorOneMoreGrey2">#8B95A1</color>
 </resources>

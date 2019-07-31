@@ -80,7 +80,7 @@
                 android:hint="@string/hint"
                 android:paddingStart="30dp"
                 android:paddingEnd="30dp"
-                android:textColor="@color/colorEditHint"
+                android:textColorHint="@color/colorEditHint"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
