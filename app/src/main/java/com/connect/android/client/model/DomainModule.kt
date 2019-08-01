@@ -152,9 +152,7 @@ val profileModule = module {
         retrofit.create(ProfileApi::class.java)
     }
     factory<ProfileStore> {
-        SharedProfileStore(
-//            get()
-        )
+        SharedProfileStore(get())
     }
     factory<ProfileRepository> {
         ProfileRepoImpl(get(), get())

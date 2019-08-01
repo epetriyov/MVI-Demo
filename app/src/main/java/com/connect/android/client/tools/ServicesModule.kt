@@ -8,6 +8,7 @@ import com.connect.android.client.tools.Constants.DB_NAME
 import com.connect.android.client.tools.moshi.LENIENT_FACTORY
 import com.connect.android.client.tools.moshi.MoshiDateTimeConverter
 import com.connect.android.client.tools.room.ConnectDatabase
+import com.f2prateek.rx.preferences2.RxSharedPreferences
 import com.patloew.rxlocation.RxLocation
 import com.squareup.moshi.Moshi
 import com.tinder.scarlet.Scarlet
@@ -54,6 +55,7 @@ val servicesModule = module {
         ).build()
     }
     single { RxLocation(androidApplication()) }
+    single { RxSharedPreferences.create(get()) }
     single {
         Scarlet.Builder()
             .webSocketFactory(get())
