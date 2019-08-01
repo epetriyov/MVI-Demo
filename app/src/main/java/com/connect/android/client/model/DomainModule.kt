@@ -17,10 +17,7 @@ import com.connect.android.client.model.educations.EducationsRepository
 import com.connect.android.client.model.events.EventsApi
 import com.connect.android.client.model.events.EventsRepoImpl
 import com.connect.android.client.model.events.EventsRepository
-import com.connect.android.client.model.location.LocationApi
-import com.connect.android.client.model.location.LocationProvider
-import com.connect.android.client.model.location.LocationProviderImpl
-import com.connect.android.client.model.location.LocationRepoImpl
+import com.connect.android.client.model.location.*
 import com.connect.android.client.model.messages.MessagesApi
 import com.connect.android.client.model.messages.MessagesRepoImpl
 import com.connect.android.client.model.messages.MessagesRepository
@@ -127,7 +124,7 @@ val locationModule = module {
     factory<LocationProvider> {
         LocationProviderImpl(get())
     }
-    factory {
+    factory<LocationRepository> {
         LocationRepoImpl(get(), get())
     }
 }

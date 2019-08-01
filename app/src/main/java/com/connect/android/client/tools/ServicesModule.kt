@@ -30,7 +30,7 @@ object Constants {
 
 val servicesModule = module {
     single {
-        Moshi.Builder().add(MoshiDateTimeConverter()).add(LENIENT_FACTORY)
+        Moshi.Builder().add(MoshiDateTimeConverter()).add(LENIENT_FACTORY).build()
     }
     single { androidApplication().getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE) }
     single {
