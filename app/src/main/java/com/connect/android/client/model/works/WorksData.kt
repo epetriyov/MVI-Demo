@@ -1,7 +1,7 @@
 package com.connect.android.client.model.works
 
 import com.connect.android.client.model.common.ProfileItem
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 /**
  * Created by evgenii on 5/8/17.
@@ -13,7 +13,7 @@ data class WorkData(
     var description: String? = null,
     var yearTill: Int = 0,
     var yearFrom: Int = 0,
-    @SerializedName("object")
+    @Json(name = "object")
     var obj: String = "work",
     var isCurrent: Boolean = false
 ) : ProfileItem {

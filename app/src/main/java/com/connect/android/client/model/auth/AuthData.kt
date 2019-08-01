@@ -1,11 +1,15 @@
 package com.connect.android.client.model.auth
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
-data class AccessTokenRequest(@SerializedName("access_token") val accessToken: String)
+data class AccessTokenRequest(@Json(name = "access_token") val accessToken: String)
 
-data class LoginResponse(@SerializedName("X-AUTH-USER-ID") val userId: String,
-                         @SerializedName("X-AUTH-TOKEN") val token: String)
+data class LoginResponse(
+    @Json(name = "X-AUTH-USER-ID") val userId: String,
+    @Json(name = "X-AUTH-TOKEN") val token: String
+)
 
-data class TokenRequest(@SerializedName("object") val obj: String, val environment: String,
-                        val model: String, val deviceUid: String, val deviceToken: String, val appVersion: String)
+data class TokenRequest(
+    @Json(name = "object") val obj: String, val environment: String,
+    val model: String, val deviceUid: String, val deviceToken: String, val appVersion: String
+)

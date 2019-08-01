@@ -39,7 +39,8 @@ def deps = [:]
     deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.gradle"
     deps.google_service = "com.google.gms:google-services:$versions.googleServices"
     deps.fabric = "io.fabric.tools:gradle:$versions.fabric"
-    deps.kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+    deps.kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+    deps.kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
 ext.deps = deps
 
 def build_versions = [:]

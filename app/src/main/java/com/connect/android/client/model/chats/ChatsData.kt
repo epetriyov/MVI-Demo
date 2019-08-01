@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.connect.android.client.model.messages.Message
 import com.connect.android.client.model.profile.User
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 import org.joda.time.DateTime
 
 @Entity(tableName = "chats")
@@ -19,4 +19,4 @@ data class Chat @JvmOverloads constructor(
     val lastActiveDate: DateTime
 )
 
-data class ChatRequest(@SerializedName("object") val obj: String = "directChat", val user: User)
+data class ChatRequest(@Json(name = "object") val obj: String = "directChat", val user: User)

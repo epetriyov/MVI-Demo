@@ -1,6 +1,6 @@
 package com.connect.android.client.model.profile
 
-import com.f2prateek.rx.preferences2.RxSharedPreferences
+//import com.f2prateek.rx.preferences2.RxSharedPreferences
 import io.reactivex.Maybe
 
 interface ProfileStore {
@@ -12,7 +12,9 @@ interface ProfileStore {
     fun removeProfile()
 }
 
-class SharedProfileStore(private val rxSharedPreferences: RxSharedPreferences): ProfileStore{
+class SharedProfileStore(
+//    private val rxSharedPreferences: RxSharedPreferences
+): ProfileStore{
     override fun loadCurrentProfile(): Maybe<User> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

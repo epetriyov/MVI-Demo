@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.connect.android.client.model.educations.EducationData
 import com.connect.android.client.model.works.WorkData
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class AvatarResponse(val url: String)
 
@@ -29,7 +29,7 @@ data class User @JvmOverloads constructor(
     val works: List<WorkData>? = null,
     val educations: List<EducationData>? = null,
     val distance: Double? = null,
-    @SerializedName("object")
+    @Json(name = "object")
     val obj: String = "user",
     val connectionType: ConnectionType? = null,
     var settings: Settings? = null
@@ -52,17 +52,17 @@ data class User @JvmOverloads constructor(
 }
 
 data class Settings(
-    @SerializedName("SHOW_DISTANCE")
+    @Json(name = "SHOW_DISTANCE")
     val showDistance: String? = "Y",
-    @SerializedName("SHOW_RATIING")
+    @Json(name = "SHOW_RATIING")
     val showRating: String? = "Y",
-    @SerializedName("SHOW_AGE")
+    @Json(name = "SHOW_AGE")
     val showAge: String? = "Y",
-    @SerializedName("AGE_MIN")
+    @Json(name = "AGE_MIN")
     val minAge: Int? = 18,
-    @SerializedName("AGE_MAX")
+    @Json(name = "AGE_MAX")
     val maxAge: Int? = 100,
-    @SerializedName("DISTANCE_MAX")
+    @Json(name = "DISTANCE_MAX")
     val maxDistance: Int? = 100
 ) {
 

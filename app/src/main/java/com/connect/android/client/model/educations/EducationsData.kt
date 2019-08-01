@@ -1,7 +1,7 @@
 package com.connect.android.client.model.educations
 
 import com.connect.android.client.model.common.ProfileItem
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 /**
  * Created by evgenii on 5/8/17.
@@ -12,7 +12,7 @@ data class EducationData(
     var description: String? = null,
     var yearFrom: Int = 0,
     var yearTill: Int = 0,
-    @SerializedName("object") var obj: String = "education"
+    @Json(name = "object") var obj: String = "education"
 ) : ProfileItem {
     override fun copyFrom(item: ProfileItem) {
         if (item is EducationData) {

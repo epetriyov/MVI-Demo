@@ -29,9 +29,19 @@ android {
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         buildConfigField "String", "API_BASE_URL", "\"https://api.connectim.pro\""
         buildConfigField "String", "SOCKET_URL", "\"wss://wsapi.connectim.pro/\""
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
     androidExtensions {
         experimental = true
+    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
     }
     signingConfigs {
         release {
