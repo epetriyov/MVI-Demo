@@ -14,7 +14,7 @@ data class ConnectResponse(val status: String)
 data class FieldsResponse(val totalCount: Int?, val data: List<String>?)
 
 @Entity(tableName = "contacts")
-data class User @JvmOverloads constructor(
+open class User @JvmOverloads constructor(
     val name: String,
     val avatarMedium: String? = null,
     @PrimaryKey
@@ -31,18 +31,17 @@ data class User @JvmOverloads constructor(
     val distance: Double? = null,
     @Json(name = "object")
     val obj: String = "user",
-    val connectionType: ConnectionType? = null,
-    var settings: Settings? = null
+    val connectionType: ConnectionType? = null
 ) {
 
     fun getWorkInfo(): String? {
         val work = works?.let {
-            if (works.isNotEmpty()) {
-                (works[0].company ?: "") +
-                        (if (!TextUtils.isEmpty(works[0].company)
-                            && !TextUtils.isEmpty(works[0].position)
+            if (it.isNotEmpty()) {
+                (it[0].company ?: "") +
+                        (if (!TextUtils.isEmpty(it[0].company)
+                            && !TextUtils.isEmpty(it[0].position)
                         ) ", " else "") +
-                        works[0].position
+                        it[0].position
             } else {
                 ""
             }
@@ -50,6 +49,31 @@ data class User @JvmOverloads constructor(
         return work
     }
 }
+
+@Entity(tableName = "user")
+class Me @JvmOverloads constructor(
+    name: String,
+    avatarMedium: String? = null,
+    id: String,
+    gender: String? = null,
+    about: String? = null,
+    skills: List<String>? = null,
+    goals: List<String>? = null,
+    fields: List<String>? = null,
+    avatar: String? = null,
+    avatarBig: String? = null,
+    works: List<WorkData>? = null,
+    educations: List<EducationData>? = null,
+    distance: Double? = null,
+    @Json(name = "object")
+    obj: String = "user",
+    connectionType: ConnectionType? = null,
+    val settings: Settings? = null
+) : User(
+    name, avatarMedium, id, gender, about,
+    skills, goals, fields, avatar, avatarBig, works,
+    educations, distance, obj, connectionType
+)
 
 data class Settings(
     @Json(name = "SHOW_DISTANCE")

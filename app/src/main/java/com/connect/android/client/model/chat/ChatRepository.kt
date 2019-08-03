@@ -9,7 +9,7 @@ interface ChatRepository {
 
 class ChatRepoImpl(private val chatApi: ChatApi) : ChatRepository {
     override fun observeMessages(): Flowable<Message> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return chatApi.observeMessages()
     }
 
 }

@@ -6,22 +6,22 @@ interface EducationsRepository {
 
     fun addEducation(education: EducationData): Completable
 
-    fun updateEducation(education: EducationData): Completable
+    fun updateEducation(educationId: String, education: EducationData): Completable
 
     fun removeEducation(educationId: String): Completable
 }
 
 class EducationsRepoImpl(private val educationsApi: EducationsApi) : EducationsRepository {
     override fun addEducation(education: EducationData): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return educationsApi.addEducation(education)
     }
 
-    override fun updateEducation(education: EducationData): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun updateEducation(educationId: String, education: EducationData): Completable {
+        return educationsApi.updateEducation(educationId, education)
     }
 
     override fun removeEducation(educationId: String): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return educationsApi.removeEducation(educationId)
     }
 
 }

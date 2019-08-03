@@ -19,5 +19,5 @@ interface ChatDao {
     fun getChats(): Flowable<List<Chat>>
 
     @Query("SELECT * FROM chats where msg_text GLOB '*' || :query|| '*'")
-    fun findChats(query: String): Flowable<List<Chat>>
+    fun findChats(query: String): List<Chat>
 }

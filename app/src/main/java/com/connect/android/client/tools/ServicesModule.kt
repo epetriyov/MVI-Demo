@@ -3,12 +3,12 @@ package com.connect.android.client.tools
 import android.content.Context
 import androidx.room.Room
 import com.connect.android.client.BuildConfig
-import com.connect.android.client.tools.okhttp.AuthInterceptor
 import com.connect.android.client.tools.Constants.DB_NAME
 import com.connect.android.client.tools.moshi.LENIENT_FACTORY
 import com.connect.android.client.tools.moshi.MoshiDateTimeConverter
+import com.connect.android.client.tools.okhttp.AuthInterceptor
 import com.connect.android.client.tools.room.ConnectDatabase
-import com.f2prateek.rx.preferences2.RxSharedPreferences
+import com.google.firebase.iid.FirebaseInstanceId
 import com.patloew.rxlocation.RxLocation
 import com.squareup.moshi.Moshi
 import com.tinder.scarlet.Scarlet
@@ -36,6 +36,7 @@ val servicesModule = module {
     single {
         OkHttpClient.Builder().addInterceptor(get()).build()
     }
+    single { FirebaseInstanceId.getInstance() }
     single {
         OkHttpClient.Builder().build().newWebSocketFactory(BuildConfig.SOCKET_URL)
     }
@@ -55,7 +56,6 @@ val servicesModule = module {
         ).build()
     }
     single { RxLocation(androidApplication()) }
-    single { RxSharedPreferences.create(get()) }
     single {
         Scarlet.Builder()
             .webSocketFactory(get())

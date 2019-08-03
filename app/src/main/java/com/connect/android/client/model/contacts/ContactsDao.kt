@@ -18,5 +18,5 @@ interface ContactsDao {
     fun getContacts(): Flowable<List<User>>
 
     @Query("SELECT * FROM contacts WHERE name GLOB '*' || :query|| '*'")
-    fun getContacts(query: String): Flowable<List<User>>
+    fun getContacts(query: String): List<User>
 }

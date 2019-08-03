@@ -10,17 +10,21 @@ interface TokenStore : TokenProvider {
     fun removeToken()
 }
 
-class SharedTokenStore(private val sharedPreferences: SharedPreferences): TokenStore{
+class SharedTokenStore(private val sharedPreferences: SharedPreferences) : TokenStore {
+    companion object {
+        private const val EXTRA_TOKEN = "token"
+    }
+
     override fun saveToken(token: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        sharedPreferences.edit().putString(EXTRA_TOKEN, token).apply()
     }
 
     override fun removeToken() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        sharedPreferences.edit().remove(EXTRA_TOKEN).apply()
     }
 
     override fun getToken(): String? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return sharedPreferences.getString(EXTRA_TOKEN, null)
     }
 
 }

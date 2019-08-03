@@ -13,24 +13,30 @@ interface EventsRepository {
 
     fun getEventMembers(eventId: String): Maybe<List<User>>
 
-    fun fetchEvents(): Flowable<List<Event>>
+    fun loadEvents(): Flowable<List<Event>>
+
+    fun updateEvents(): Completable
 }
 
 class EventsRepoImpl(private val eventDao: EventDao, private val eventsApi: EventsApi) : EventsRepository {
+    override fun updateEvents(): Completable {
+        return eventsApi.getEvents().flatMapCompletable { eventDao.insertEvents(it.data) }
+    }
+
     override fun declineEvent(eventId: String): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return eventsApi.declineEvent(eventId)
     }
 
     override fun approveEvent(eventId: String): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return eventsApi.approveEvent(eventId)
     }
 
     override fun getEventMembers(eventId: String): Maybe<List<User>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return eventsApi.getEventMembers(eventId).map { it.data }
     }
 
-    override fun fetchEvents(): Flowable<List<Event>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun loadEvents(): Flowable<List<Event>> {
+        return eventDao.getEvents()
     }
 
 }

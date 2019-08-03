@@ -1,23 +1,30 @@
 package com.connect.android.client.model.contacts
 
 import com.connect.android.client.model.profile.User
+import io.reactivex.Completable
 import io.reactivex.Flowable
 
 interface ContactsRepository {
 
-    fun fetchContacts(): Flowable<List<User>>
+    fun loadContacts(): Flowable<List<User>>
 
-    fun getContactsByName(): Flowable<List<User>>
+    fun updateContacts(): Completable
+
+    fun getContactsByName(searchText: String): List<User>
 }
 
 class ContactsRepoImpl(private val contactsApi: ContactsApi, private val contactsDao: ContactsDao) :
     ContactsRepository {
-    override fun getContactsByName(): Flowable<List<User>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun updateContacts(): Completable {
+        return contactsApi.getContacts().map { it.data }.flatMapCompletable { contactsDao.insertContacts(it) }
     }
 
-    override fun fetchContacts(): Flowable<List<User>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getContactsByName(searchText: String): List<User> {
+        return contactsDao.getContacts(searchText)
+    }
+
+    override fun loadContacts(): Flowable<List<User>> {
+        return contactsDao.getContacts()
     }
 
 }

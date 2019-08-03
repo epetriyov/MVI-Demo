@@ -5,22 +5,22 @@ import io.reactivex.Completable
 interface WorksRepository {
     fun addWork(work: WorkData): Completable
 
-    fun updateWork(work: WorkData): Completable
+    fun updateWork(workId: String, work: WorkData): Completable
 
     fun removeWork(workId: String): Completable
 }
 
 class WorksRepoImpl(private val worksApi: WorksApi) : WorksRepository {
     override fun addWork(work: WorkData): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return worksApi.addWork(work)
     }
 
-    override fun updateWork(work: WorkData): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun updateWork(workId: String, work: WorkData): Completable {
+        return worksApi.updateWork(workId, work)
     }
 
     override fun removeWork(workId: String): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return worksApi.removeWork(workId)
     }
 
 }

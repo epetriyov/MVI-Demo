@@ -1,12 +1,19 @@
 package com.connect.android.client.model.auth
 
+import android.os.Build
+import com.connect.android.client.BuildConfig
+import com.connect.android.client.tools.room.ConnectDatabase
+import com.google.firebase.iid.FirebaseInstanceId
 import io.reactivex.Completable
+import io.reactivex.Emitter
+import io.reactivex.Observable
+import timber.log.Timber
 
 interface AuthRepository {
 
-    fun updateNotificationToken()
+    fun updateNotificationToken(): Completable
 
-    fun pushNotificationToken(token: String)
+    fun pushNotificationToken(token: String): Completable
 
     fun isAuthorized(): Boolean
 
@@ -17,29 +24,55 @@ interface AuthRepository {
     fun authFb(token: String): Completable
 }
 
-class AuthRepoImpl(private val authApi: AuthApi, private val tokenStore: TokenStore): AuthRepository {
-    override fun pushNotificationToken(token: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+class AuthRepoImpl(
+    private val authApi: AuthApi,
+    private val tokenStore: TokenStore,
+    private val database: ConnectDatabase,
+    private val firebaseInstanceId: FirebaseInstanceId
+) : AuthRepository {
+    override fun pushNotificationToken(token: String): Completable {
+        return authApi.sendToken(
+            TokenRequest(
+                "device", "ANDROID", Build.MODEL,
+                firebaseInstanceId.id, token, BuildConfig.VERSION_NAME
+            )
+        )
     }
 
-    override fun updateNotificationToken() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun updateNotificationToken(): Completable {
+        return Observable.create { emitter: Emitter<String> ->
+            run {
+                firebaseInstanceId.instanceId
+                    .addOnCompleteListener { task ->
+                        if (!task.isSuccessful) {
+                            Timber.e(task.exception, "getInstanceId failed")
+                            emitter.onComplete()
+                        }
+                        task.result?.token?.let {
+                            emitter.onNext(it)
+                        }
+                    }
+            }
+        }.flatMapCompletable {
+            pushNotificationToken(it)
+        }
     }
 
     override fun isAuthorized(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return tokenStore.getToken() != null
     }
 
     override fun logout() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        tokenStore.removeToken()
+        database.clearAllTables()
     }
 
     override fun authVk(token: String): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return authApi.authVk(AccessTokenRequest(token)).doOnSuccess { tokenStore.saveToken(it.token) }.ignoreElement()
     }
 
     override fun authFb(token: String): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return authApi.authFb(AccessTokenRequest(token)).doOnSuccess { tokenStore.saveToken(it.token) }.ignoreElement()
     }
 
 }

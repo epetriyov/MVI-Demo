@@ -112,7 +112,6 @@ dependencies {
     implementation deps.material
     implementation deps.crashlytics
     implementation deps.rxpermissions
-    implementation deps.rxpreferences
     implementation deps.rxlocation
     implementation deps.jodatime
     implementation deps.rxredux

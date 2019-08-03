@@ -1,14 +1,18 @@
 package com.connect.android.client.model.location
 
+import io.reactivex.Completable
+
 interface LocationRepository {
 
-    fun updateCurrentLocation()
+    fun updateCurrentLocation(): Completable
 }
 
 class LocationRepoImpl(private val locationProvider: LocationProvider, private val locationApi: LocationApi) :
     LocationRepository {
-    override fun updateCurrentLocation() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun updateCurrentLocation(): Completable {
+        return locationProvider.provideLastLocation().flatMapCompletable {
+            locationApi.sendLocation(LocationData(listOf(it.latitude, it.longitude)))
+        }
     }
 
 }

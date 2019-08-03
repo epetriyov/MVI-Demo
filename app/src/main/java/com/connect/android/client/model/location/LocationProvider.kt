@@ -1,17 +1,19 @@
 package com.connect.android.client.model.location
 
+import android.annotation.SuppressLint
 import android.location.Location
 import com.patloew.rxlocation.RxLocation
-import io.reactivex.Observable
+import io.reactivex.Maybe
 
 interface LocationProvider {
 
-    fun provideLastLocation(): Observable<Location>
+    fun provideLastLocation(): Maybe<Location>
 }
 
 class LocationProviderImpl(private val rxLocation: RxLocation) : LocationProvider {
-    override fun provideLastLocation(): Observable<Location> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    @SuppressLint("MissingPermission")
+    override fun provideLastLocation(): Maybe<Location> {
+        return rxLocation.location().lastLocation()
     }
 
 }

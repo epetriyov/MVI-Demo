@@ -7,6 +7,7 @@ import com.squareup.moshi.Json
  * Created by evgenii on 5/8/17.
  */
 data class EducationData(
+    var id: String? = null,
     var name: String,
     var faculty: String? = null,
     var description: String? = null,

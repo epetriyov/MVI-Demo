@@ -1,7 +1,7 @@
 package com.connect.android.client.model.chats
 
-import com.connect.android.client.model.chat.ChatApi
 import com.connect.android.client.model.profile.User
+import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
 
@@ -11,26 +11,28 @@ interface ChatsRepository {
 
     fun getChats(): Flowable<List<Chat>>
 
-    fun getChats(searchText: String): Flowable<List<Chat>>
+    fun getChatsByText(searchText: String): List<Chat>
 
-    fun loadChats(offset: Int, limit: Int): Single<List<Chat>>
+    fun updateChats(offset: Int, limit: Int): Completable
 }
 
-class ChatsRepoImpl(private val chatApi: ChatApi, private val chatDao: ChatDao) : ChatsRepository {
+class ChatsRepoImpl(private val chatsApi: ChatsApi, private val chatDao: ChatDao) : ChatsRepository {
     override fun createChat(user: User): Single<Chat> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return chatsApi.createChat(ChatRequest(user = user))
     }
 
     override fun getChats(): Flowable<List<Chat>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return chatDao.getChats()
     }
 
-    override fun getChats(searchText: String): Flowable<List<Chat>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getChatsByText(searchText: String): List<Chat> {
+        return chatDao.findChats(searchText)
     }
 
-    override fun loadChats(offset: Int, limit: Int): Single<List<Chat>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun updateChats(offset: Int, limit: Int): Completable {
+        return chatsApi.getChats(offset, limit)
+            .map { it.data }
+            .flatMapCompletable { chatDao.insertChats(it) }
     }
 
 }

@@ -15,6 +15,6 @@ interface MessageDao {
     @Delete
     fun deleteMessages(items: List<Message>): Completable
 
-    @Query("SELECT * FROM messages")
-    fun getMessages(): Flowable<List<Message>>
+    @Query("SELECT * FROM messages WHERE chatId = :chatId")
+    fun getMessages(chatId: String): Flowable<List<Message>>
 }

@@ -1,28 +1,33 @@
 package com.connect.android.client.model.profile
 
-import com.f2prateek.rx.preferences2.RxSharedPreferences
-import io.reactivex.Maybe
+import android.content.SharedPreferences
 
 interface ProfileStore {
 
-    fun loadCurrentProfile(): Maybe<User>
+    fun getUserId(): String?
 
-    fun saveCurrentProfile(user: User)
+    fun saveUserId(userId: String)
 
-    fun removeProfile()
+    fun removeUserId()
 }
 
-class SharedProfileStore(private val rxSharedPreferences: RxSharedPreferences): ProfileStore{
-    override fun loadCurrentProfile(): Maybe<User> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+class SharedProfileStore(private val sharedPreferences: SharedPreferences) :
+    ProfileStore {
+
+    companion object {
+        private const val KEY_USER_ID = "user_id"
     }
 
-    override fun saveCurrentProfile(user: User) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getUserId(): String? {
+        return sharedPreferences.getString(KEY_USER_ID, null)
     }
 
-    override fun removeProfile() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun saveUserId(userId: String) {
+        sharedPreferences.edit().putString(KEY_USER_ID, userId).apply()
+    }
+
+    override fun removeUserId() {
+        sharedPreferences.edit().remove(KEY_USER_ID).apply()
     }
 
 }

@@ -14,8 +14,8 @@ interface RecommendationsApi {
     fun getRecommendations(): Maybe<ListData<User>>
 
     @POST("/users/{user_id}/connect")
-    fun connectUser(@Path("user_id") userId: String?): Single<ConnectResponse>
+    fun connectUser(@Path("user_id") userId: String): Single<ConnectResponse>
 
     @POST("/users/{user_id}/decline")
-    fun declineUser(@Path("user_id") userId: String?): Single<ConnectResponse>
+    fun declineUser(@Path("user_id") userId: String): Single<ConnectResponse>
 }
