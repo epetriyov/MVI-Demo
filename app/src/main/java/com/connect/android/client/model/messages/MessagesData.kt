@@ -3,6 +3,7 @@ package com.connect.android.client.model.messages
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import org.joda.time.DateTime
+import java.io.Serializable
 
 @Entity(tableName = "messages")
 data class Message @JvmOverloads constructor(
@@ -13,4 +14,4 @@ data class Message @JvmOverloads constructor(
     @PrimaryKey
     val id: String,
     val chatId: String
-)
+): Serializable

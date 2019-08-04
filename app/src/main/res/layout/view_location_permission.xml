@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_open"
+        android:id="@+id/btn_open_permission"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginBottom="81dp"
@@ -48,7 +48,7 @@
         android:text="@string/label_permission_description"
         android:textColor="@color/colorOneMoreBrown"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/btn_open"
+        app:layout_constraintBottom_toTopOf="@id/btn_open_permission"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

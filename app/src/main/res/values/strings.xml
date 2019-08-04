@@ -39,4 +39,5 @@
     <string name="recommendations">Рекомендации</string>
     <string name="chats">Сообщения</string>
     <string name="profile">Профиль</string>
+    <string name="distance">%.02f км</string>
 </resources>

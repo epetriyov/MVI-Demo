@@ -2,6 +2,7 @@ package com.connect.android.client.model.works
 
 import com.connect.android.client.model.common.ProfileItem
 import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * Created by evgenii on 5/8/17.

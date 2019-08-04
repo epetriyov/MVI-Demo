@@ -6,7 +6,9 @@ import androidx.room.PrimaryKey
 import com.connect.android.client.model.messages.Message
 import com.connect.android.client.model.profile.User
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 import org.joda.time.DateTime
+import java.io.Serializable
 
 @Entity(tableName = "chats")
 data class Chat @JvmOverloads constructor(
@@ -17,6 +19,6 @@ data class Chat @JvmOverloads constructor(
     val lastMessage: Message? = null,
     val creationDate: DateTime,
     val lastActiveDate: DateTime
-)
+): Serializable
 
 data class ChatRequest(@Json(name = "object") val obj: String = "directChat", val user: User)

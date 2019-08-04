@@ -70,8 +70,7 @@ dependencies {
     implementation deps.androidx.room.rxjava2
     kapt deps.androidx.room.compiler
 
-    implementation deps.androidx.navigation.fragment
-    implementation deps.androidx.navigation.ui
+    implementation deps.conductor
 
     implementation deps.gms.location
     implementation deps.gms.maps
@@ -113,8 +112,8 @@ dependencies {
     implementation deps.crashlytics
     implementation deps.rxpermissions
     implementation deps.rxlocation
-    implementation deps.jodatime
     implementation deps.rxredux
+    implementation deps.jodatime
     implementation deps.timber
     implementation deps.vksdk
     implementation deps.facebooksdk

@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 import com.connect.android.client.model.educations.EducationData
 import com.connect.android.client.model.works.WorkData
 import com.squareup.moshi.Json
+import java.io.Serializable
 
 data class AvatarResponse(val url: String)
 
@@ -32,7 +33,7 @@ open class User @JvmOverloads constructor(
     @Json(name = "object")
     val obj: String = "user",
     val connectionType: ConnectionType? = null
-) {
+): Serializable {
 
     fun getWorkInfo(): String? {
         val work = works?.let {

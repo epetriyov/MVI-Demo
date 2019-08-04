@@ -31,12 +31,12 @@ abstract class BaseMviViewModel<VIA : ViewInputAction, VS : ViewState>(private v
                                     reducer(vs, via)
                                 })
                         .doOnNext { _state.onNext(it) }
-                        .filter { lastAction == null || !filterActions().contains(lastAction!!::class) }
+                        .filter { lastAction == null || filterActions().contains(lastAction!!::class) }
                         .distinctUntilChanged()
                         .observeOn(AndroidSchedulers.mainThread())
             }
 
-    open fun filterActions(): List<KClass<out VIA>> = emptyList()
+    protected abstract fun filterActions(): List<KClass<out VIA>>
 
     protected abstract fun reducer(state: VS, action: VIA): VS
 
@@ -47,14 +47,4 @@ abstract class BaseMviViewModel<VIA : ViewInputAction, VS : ViewState>(private v
     }
 
     open fun stateToSave(): VS = state
-}
-
-class DefaultViewModel<VIA : ViewInputAction, VS : ViewState>(initialState: VS) : BaseMviViewModel<VIA, VS>(initialState) {
-    override fun reducer(state: VS, action: VIA): VS {
-        return state
-    }
-
-    override fun sideEffects(): List<SideEffect<VS, VIA>> {
-        return emptyList()
-    }
 }

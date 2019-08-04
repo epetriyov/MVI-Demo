@@ -1,13 +1,13 @@
-package com.connect.android.client.modules.menu
+package com.connect.android.client.modules.events
 
 import com.connect.android.client.modules.base.ViewInputAction
 import com.connect.android.client.modules.base.ViewOutputAction
 import com.connect.android.client.modules.base.ViewState
 import kotlinx.android.parcel.Parcelize
 
-sealed class MenuVIA : ViewInputAction()
+sealed class EventsVIA : ViewInputAction()
 
-sealed class MenuVOA : ViewOutputAction()
+sealed class EventsVOA : ViewOutputAction()
 
 @Parcelize
-class MenuVS : ViewState()
+class EventsVS : ViewState()
