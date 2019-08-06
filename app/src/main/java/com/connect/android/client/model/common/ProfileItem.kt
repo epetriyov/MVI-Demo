@@ -8,5 +8,7 @@ import java.io.Serializable
 interface ProfileItem : Serializable {
     fun getFirstText(): String?
     fun getSecondText(): String?
+    fun getDates(): String
     fun copyFrom(item: ProfileItem)
+    fun getIdentifier(): String?
 }

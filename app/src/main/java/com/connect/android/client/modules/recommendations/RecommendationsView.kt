@@ -88,7 +88,7 @@ class RecommendationsView(context: Context, initialState: RecommendationsVS) :
             }
             connected.bind { user ->
                 card_connected.isVisible = true
-                RecommendationViewHolder(card_connected).bindView(user)
+                RecommendationsBinder.bindRecommendation(card_connected, user)
             }
         }
 

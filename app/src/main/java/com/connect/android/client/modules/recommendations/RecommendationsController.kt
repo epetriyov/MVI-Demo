@@ -14,7 +14,7 @@ class RecommendationsController(bundle: Bundle? = null) :
     override fun handleViewEvents(action: RecommendationsVOA) {
         Do exhaustive when (action) {
             is RecommendationsVOA.OpenProfile -> {
-                router.pushController(ProfileController().buildRouterTransaction())
+                router.pushController(ProfileController.newInstance(action.user).buildRouterTransaction())
             }
             is RecommendationsVOA.OpenChat -> targetController
         }

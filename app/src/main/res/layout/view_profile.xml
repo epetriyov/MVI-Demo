@@ -142,7 +142,7 @@
                 app:layout_constraintTop_toBottomOf="@id/divider_profile_top" />
 
             <TextView
-                android:id="@+id/label_skills"
+                android:id="@+id/value_skills"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -168,10 +168,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/label_skills" />
+                app:layout_constraintTop_toBottomOf="@id/value_skills" />
 
             <TextView
-                android:id="@+id/label_goals"
+                android:id="@+id/value_goals"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -188,59 +188,29 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/colorDivider"
-                app:layout_constraintEnd_toEndOf="@id/label_goals"
-                app:layout_constraintStart_toStartOf="@id/label_goals"
-                app:layout_constraintTop_toBottomOf="@id/label_goals" />
+                app:layout_constraintEnd_toEndOf="@id/value_goals"
+                app:layout_constraintStart_toStartOf="@id/value_goals"
+                app:layout_constraintTop_toBottomOf="@id/value_goals" />
 
-            <TextView
-                android:id="@+id/title_aims"
+            <include
+                android:id="@+id/aims_block"
+                layout="@layout/view_info_block"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:drawableStart="@drawable/ic_aims"
-                android:drawablePadding="11dp"
-                android:text="@string/title_profile_aims"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@id/divider_profile_goals"
-                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="@id/divider_profile_goals"
                 app:layout_constraintTop_toBottomOf="@id/divider_profile_goals" />
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chips_aims"
+            <include
+                android:id="@+id/skills_block"
+                layout="@layout/view_info_block"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="@id/title_aims"
-                app:layout_constraintStart_toStartOf="@id/title_aims"
-                app:layout_constraintTop_toBottomOf="@id/title_aims"
-                app:singleLine="true" />
-
-            <TextView
-                android:id="@+id/title_spheres"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:drawableStart="@drawable/ic_sphere"
-                android:drawablePadding="11dp"
-                android:text="@string/title_profile_spheres"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@id/chips_aims"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toStartOf="@id/chips_aims"
-                app:layout_constraintTop_toBottomOf="@id/chips_aims" />
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chips_spheres"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="@id/title_spheres"
-                app:layout_constraintStart_toStartOf="@id/title_spheres"
-                app:layout_constraintTop_toBottomOf="@id/title_spheres"
-                app:singleLine="true" />
+                app:layout_constraintEnd_toEndOf="@id/divider_profile_goals"
+                app:layout_constraintStart_toStartOf="@id/divider_profile_goals"
+                app:layout_constraintTop_toBottomOf="@id/aims_block" />
 
             <View
                 android:id="@+id/divider_profile_aims"
@@ -248,33 +218,19 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/colorDivider"
-                app:layout_constraintEnd_toEndOf="@id/chips_spheres"
-                app:layout_constraintStart_toStartOf="@id/chips_spheres"
-                app:layout_constraintTop_toBottomOf="@id/chips_spheres" />
+                app:layout_constraintEnd_toEndOf="@id/skills_block"
+                app:layout_constraintStart_toStartOf="@id/skills_block"
+                app:layout_constraintTop_toBottomOf="@id/skills_block" />
 
-            <TextView
-                android:id="@+id/title_work"
+            <include
+                android:id="@+id/jobs_block"
+                layout="@layout/view_list_block"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:drawableStart="@drawable/ic_work"
-                android:drawablePadding="11dp"
-                android:text="@string/work"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@id/divider_profile_aims"
-                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="@id/divider_profile_aims"
                 app:layout_constraintTop_toBottomOf="@id/divider_profile_aims" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/work_recycler"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                app:layout_constraintEnd_toEndOf="@id/title_work"
-                app:layout_constraintStart_toStartOf="@id/title_work"
-                app:layout_constraintTop_toBottomOf="@id/title_work" />
 
             <View
                 android:id="@+id/divider_profile_work"
@@ -282,33 +238,20 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/colorDivider"
-                app:layout_constraintEnd_toEndOf="@id/work_recycler"
-                app:layout_constraintStart_toStartOf="@id/work_recycler"
-                app:layout_constraintTop_toBottomOf="@id/work_recycler" />
+                app:layout_constraintEnd_toEndOf="@id/jobs_block"
+                app:layout_constraintStart_toStartOf="@id/jobs_block"
+                app:layout_constraintTop_toBottomOf="@id/jobs_block" />
 
-            <TextView
-                android:id="@+id/title_education"
+
+            <include
+                android:id="@+id/education_block"
+                layout="@layout/view_list_block"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:drawableStart="@drawable/ic_education"
-                android:drawablePadding="11dp"
-                android:text="@string/education"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@id/divider_profile_work"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toStartOf="@id/divider_profile_work"
+                app:layout_constraintEnd_toEndOf="@id/divider_profile_aims"
+                app:layout_constraintStart_toStartOf="@id/divider_profile_aims"
                 app:layout_constraintTop_toBottomOf="@id/divider_profile_work" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/education_recycler"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                app:layout_constraintEnd_toEndOf="@id/title_education"
-                app:layout_constraintStart_toStartOf="@id/title_education"
-                app:layout_constraintTop_toBottomOf="@id/title_education" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

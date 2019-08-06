@@ -2,12 +2,12 @@ package com.connect.android.client.model.works
 
 import com.connect.android.client.model.common.ProfileItem
 import com.squareup.moshi.Json
-import java.io.Serializable
 
 /**
  * Created by evgenii on 5/8/17.
  */
 data class WorkData(
+    var id: String? = null,
     var company: String? = null,
     var position: String? = null,
     var city: String? = null,
@@ -18,6 +18,14 @@ data class WorkData(
     var obj: String = "work",
     var isCurrent: Boolean = false
 ) : ProfileItem {
+    override fun getIdentifier(): String? {
+        return id
+    }
+
+    override fun getDates(): String {
+        return "$yearFrom - $yearTill"
+    }
+
     override fun copyFrom(item: ProfileItem) {
         if (item is WorkData) {
             company = item.company

@@ -17,7 +17,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/label_skills"
+        android:id="@+id/value_skills"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -40,7 +40,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/label_goals"
+        android:id="@+id/value_goals"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"

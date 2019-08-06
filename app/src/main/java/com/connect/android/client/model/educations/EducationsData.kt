@@ -15,6 +15,14 @@ data class EducationData(
     var yearTill: Int = 0,
     @Json(name = "object") var obj: String = "education"
 ) : ProfileItem {
+    override fun getIdentifier(): String? {
+        return id
+    }
+
+    override fun getDates(): String {
+        return "$yearFrom - $yearTill"
+    }
+
     override fun copyFrom(item: ProfileItem) {
         if (item is EducationData) {
             name = item.name

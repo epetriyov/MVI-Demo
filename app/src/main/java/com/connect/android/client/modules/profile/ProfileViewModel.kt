@@ -3,23 +3,48 @@ package com.connect.android.client.modules.profile
 import com.connect.android.client.model.chats.ChatsRepository
 import com.connect.android.client.model.recommendations.RecommendationsRepository
 import com.connect.android.client.modules.base.BaseMviViewModel
+import com.connect.android.client.modules.base.withUpdate
 import com.freeletics.rxredux.SideEffect
+import io.reactivex.rxkotlin.ofType
 import kotlin.reflect.KClass
+
+typealias ProfileSideEffect = SideEffect<ProfileVS, ProfileVIA>
 
 class ProfileViewModel(
     private val recommendationsRepository: RecommendationsRepository,
     private val chatsRepository: ChatsRepository,
     initialState: ProfileVS
 ) : BaseMviViewModel<ProfileVIA, ProfileVS>(initialState) {
-    override fun filterActions(): List<KClass<out ProfileVIA>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+    private val createChat: ProfileSideEffect = { actions, viewState ->
+        actions.ofType<ProfileVIA.Chat>()
+            .flatMap {
+                chatsRepository.createChat(viewState().user.peekContent()!!)
+                    .toObservable()
+                    .map { ProfileVIA.ChatCreated(it) as ProfileVIA }
+                    .onErrorReturn { t -> ProfileVIA.ChatCreateError(t.localizedMessage) }
+                    .startWith(ProfileVIA.ChatCreateProgress)
+            }
     }
+
+
+    override fun filterActions(): List<KClass<out ProfileVIA>> =
+        listOf(
+            ProfileVIA.Init::class, ProfileVIA.ChatCreated::class,
+            ProfileVIA.ChatCreateError::class, ProfileVIA.ChatCreateProgress::class
+        )
 
     override fun reducer(state: ProfileVS, action: ProfileVIA): ProfileVS {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return when (action) {
+            is ProfileVIA.ChatCreated -> state.copy(chatCreateProgress = false, chat = action.chat.withUpdate())
+            is ProfileVIA.ChatCreateError -> state.copy(
+                error = action.errorMessage.withUpdate(),
+                chatCreateProgress = false
+            )
+            ProfileVIA.ChatCreateProgress -> state.copy(chatCreateProgress = true)
+            else -> state
+        }
     }
 
-    override fun sideEffects(): List<SideEffect<ProfileVS, ProfileVIA>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun sideEffects(): List<SideEffect<ProfileVS, ProfileVIA>> = listOf(createChat)
 }

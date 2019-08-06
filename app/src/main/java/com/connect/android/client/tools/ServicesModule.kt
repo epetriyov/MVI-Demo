@@ -34,19 +34,23 @@ object Constants {
 }
 
 val servicesModule = module {
-    single {
-        Moshi.Builder().add(MoshiDateTimeConverter()).add(LENIENT_FACTORY).build()
-    }
     single { androidApplication().getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE) }
+    single {
+        Room.databaseBuilder(
+            androidApplication(),
+            ConnectDatabase::class.java, DB_NAME
+        ).build()
+    }
+    single { RxLocation(androidApplication()) }
+    single { FirebaseInstanceId.getInstance() }
+    single { SharedTokenStore(get()) } binds arrayOf(TokenStore::class, TokenProvider::class)
+    single<Interceptor> { AuthInterceptor(get()) }
     single {
         OkHttpClient.Builder().addInterceptor(get()).build()
     }
-    single { FirebaseInstanceId.getInstance() }
     single {
-        OkHttpClient.Builder().build().newWebSocketFactory(BuildConfig.SOCKET_URL)
+        Moshi.Builder().add(MoshiDateTimeConverter()).add(LENIENT_FACTORY).build()
     }
-    single { SharedTokenStore(get()) } binds arrayOf(TokenStore::class, TokenProvider::class)
-    single<Interceptor> { AuthInterceptor(get()) }
     single {
         Retrofit.Builder()
             .baseUrl(BuildConfig.API_BASE_URL)
@@ -56,12 +60,11 @@ val servicesModule = module {
             .build()
     }
     single {
-        Room.databaseBuilder(
-            androidApplication(),
-            ConnectDatabase::class.java, DB_NAME
-        ).build()
+        val tokenProvider: TokenProvider = get()
+        OkHttpClient.Builder().build().newWebSocketFactory(
+            "${BuildConfig.SOCKET_URL}connect?authToken=${tokenProvider.getToken()}"
+        )
     }
-    single { RxLocation(androidApplication()) }
     single {
         Scarlet.Builder()
             .webSocketFactory(get())

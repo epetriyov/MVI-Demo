@@ -7,10 +7,10 @@ import retrofit2.http.*
 
 interface ProfileApi {
     @GET("/users/me")
-    fun getProfile(): Single<User>
+    fun getProfile(): Single<Me>
 
     @POST("/users/me")
-    fun updateUserInfo(@Body profile: User): Completable
+    fun updateUserInfo(@Body profile: Me): Completable
 
     @Multipart
     @POST("/users/me/avatar")

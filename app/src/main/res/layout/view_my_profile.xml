@@ -130,7 +130,7 @@
 
             <include
                 android:id="@+id/aims_block"
-                layout="@layout/view_info_block"
+                layout="@layout/view_my_info_block"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -151,7 +151,7 @@
 
             <include
                 android:id="@+id/skills_block"
-                layout="@layout/view_info_block"
+                layout="@layout/view_my_info_block"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -172,7 +172,7 @@
 
             <include
                 android:id="@+id/jobs_block"
-                layout="@layout/view_list_block"
+                layout="@layout/view_my_list_block"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -194,7 +194,7 @@
 
             <include
                 android:id="@+id/education_block"
-                layout="@layout/view_list_block"
+                layout="@layout/view_my_list_block"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"

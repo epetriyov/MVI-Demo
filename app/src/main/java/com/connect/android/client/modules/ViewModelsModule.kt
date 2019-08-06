@@ -22,6 +22,7 @@ import com.connect.android.client.modules.messages.MessagesVS
 import com.connect.android.client.modules.messages.MessagesViewModel
 import com.connect.android.client.modules.myprofile.MyProfileVS
 import com.connect.android.client.modules.myprofile.MyProfileViewModel
+import com.connect.android.client.modules.profile.ProfileItemAdapter
 import com.connect.android.client.modules.profile.ProfileVS
 import com.connect.android.client.modules.profile.ProfileViewModel
 import com.connect.android.client.modules.recommendations.*
@@ -89,4 +90,9 @@ val messagesView = module {
             stackFromEnd = true
         }
     }
+}
+
+val profileView = module {
+    factory { (context: Context) -> ProfileItemAdapter(get(parameters = { parametersOf(context) })) }
+    factory { (context: Context) -> LinearLayoutManager(context) }
 }
