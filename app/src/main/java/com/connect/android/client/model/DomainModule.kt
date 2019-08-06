@@ -36,7 +36,6 @@ val authModule = module {
         val retrofit: Retrofit = get()
         retrofit.create(AuthApi::class.java)
     }
-    factory<TokenStore> { SharedTokenStore(get()) }
     factory<AuthRepository> { AuthRepoImpl(get(), get(), get(), get(), get()) }
 }
 

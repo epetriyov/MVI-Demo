@@ -10,6 +10,7 @@ import com.connect.android.client.tools.servicesModule
 import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
 import net.danlew.android.joda.JodaTimeAndroid
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber
 import timber.log.Timber.DebugTree
@@ -24,6 +25,7 @@ class ConnectApplication : Application() {
         Fabric.with(this, Crashlytics())
         JodaTimeAndroid.init(this)
         startKoin {
+            androidContext(this@ConnectApplication)
             modules(
                 listOf(
                     servicesModule,

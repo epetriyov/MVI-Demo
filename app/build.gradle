@@ -121,3 +121,5 @@ dependencies {
     implementation deps.facebooksdk
     implementation deps.card_stack_view
 }
+
+apply plugin: 'com.google.gms.google-services'
