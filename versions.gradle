@@ -8,8 +8,9 @@ def versions = [:]
     versions.supportLibrary = '1.0.2'
     versions.gms = '17.0.0'
     versions.fabric = '1.29.0'
-    versions.firebase = '17.0.0'
+    versions.firebase = '17.0.1'
     versions.firebaseMessaging = '19.0.1'
+    versions.firebaseCrashlytics = '2.10.1'
     versions.crashlytics = '2.10.1'
     versions.recyclerView = '1.0.0'
     versions.constraintLayout = '2.0.0-beta2'
@@ -75,7 +76,9 @@ deps.gms = gms
 
 def firebase = [:]
     firebase.core = "com.google.firebase:firebase-core:$versions.firebase"
+    firebase.analytics = "com.google.firebase:firebase-analytics:$versions.firebase"
     firebase.messaging = "com.google.firebase:firebase-messaging:$versions.firebaseMessaging"
+    firebase.crashlytics = "com.crashlytics.sdk.android:crashlytics:$versions.firebaseCrashlytics"
 deps.firebase = firebase
 
 def rx = [:]
