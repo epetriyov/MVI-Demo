@@ -4,12 +4,14 @@ import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.connect.android.client.modules.auth.AuthVS
 import com.connect.android.client.modules.auth.AuthViewModel
 import com.connect.android.client.modules.auth.SocialHelper
 import com.connect.android.client.modules.auth.SocialHelperImpl
 import com.connect.android.client.modules.chat.ChatVS
 import com.connect.android.client.modules.chat.ChatViewModel
+import com.connect.android.client.modules.chat.MessagesAdapter
 import com.connect.android.client.modules.contacts.ContactsVS
 import com.connect.android.client.modules.contacts.ContactsViewModel
 import com.connect.android.client.modules.events.EventsVS
@@ -49,7 +51,7 @@ val viewModelsModule = module {
             initialState
         )
     }
-    factory { (initialState: ChatVS) -> ChatViewModel(get(), get(), initialState) }
+    factory { (initialState: ChatVS) -> ChatViewModel(get(), get(), get(), initialState) }
     factory { (initialState: ContactsVS) -> ContactsViewModel(get(), get(), initialState) }
     factory { (initialState: MainVS) -> MainViewModel(get(), get(), initialState) }
     factory { (initialState: MessagesVS) -> MessagesViewModel(get(), initialState) }
@@ -76,4 +78,15 @@ val recommendationsView = module {
         )
     }
     factory { (context: Context) -> CardStackLayoutManager(context, get()) }
+}
+
+
+val messagesView = module {
+    factory { (context: Context) -> MessagesAdapter(get(parameters = { parametersOf(context) })) }
+    factory { (context: Context) ->
+        LinearLayoutManager(context).apply {
+            reverseLayout = true
+            stackFromEnd = true
+        }
+    }
 }

@@ -15,7 +15,7 @@ import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 
 class RecommendationsAdapter(private val layoutInflater: LayoutInflater) :
-    ListAdapter<User, ViewHolder>(
+    ListAdapter<User, RecommendationViewHolder>(
         object : DiffUtil.ItemCallback<User>() {
             override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
                 return oldItem.id == newItem.id
@@ -31,13 +31,13 @@ class RecommendationsAdapter(private val layoutInflater: LayoutInflater) :
 
     private val clickSubject = PublishSubject.create<User>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(layoutInflater.inflate(R.layout.card_recommendation, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecommendationViewHolder {
+        return RecommendationViewHolder(layoutInflater.inflate(R.layout.card_recommendation, parent, false))
             .apply { itemClicks().map { items[it] }.subscribeWith(clickSubject) }
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindView(items[position])
+    override fun onBindViewHolder(holderRecommendation: RecommendationViewHolder, position: Int) {
+        holderRecommendation.bindView(items[position])
     }
 
     fun addItems(items: List<User>) {
@@ -52,7 +52,7 @@ class RecommendationsAdapter(private val layoutInflater: LayoutInflater) :
     }
 }
 
-class ViewHolder(private val containerView: View) : RecyclerView.ViewHolder(containerView) {
+class RecommendationViewHolder(private val containerView: View) : RecyclerView.ViewHolder(containerView) {
     fun bindView(item: User) {
         containerView.findViewById<TextView>(R.id.label_name).text = item.name
         GlideApp.with(containerView)

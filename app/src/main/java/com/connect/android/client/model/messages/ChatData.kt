@@ -1,4 +1,4 @@
-package com.connect.android.client.model.chat
+package com.connect.android.client.model.messages
 
 import java.io.Serializable
 

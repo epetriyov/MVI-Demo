@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "cc6de537d1e779182499119d56616986",
+    "identityHash": "088880a54578470a611ea79003301d55",
     "entities": [
       {
         "tableName": "chats",
@@ -276,98 +276,8 @@
       },
       {
         "tableName": "user",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `avatarMedium` TEXT, `id` TEXT NOT NULL, `gender` TEXT, `about` TEXT, `skills` TEXT, `goals` TEXT, `fields` TEXT, `avatar` TEXT, `avatarBig` TEXT, `works` TEXT, `educations` TEXT, `distance` REAL, `obj` TEXT NOT NULL, `connectionType` TEXT, `settings` TEXT, `name` TEXT NOT NULL, `avatarMedium` TEXT, `id` TEXT NOT NULL, `gender` TEXT, `about` TEXT, `skills` TEXT, `goals` TEXT, `fields` TEXT, `avatar` TEXT, `avatarBig` TEXT, `works` TEXT, `educations` TEXT, `distance` REAL, `obj` TEXT NOT NULL, `connectionType` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`settings` TEXT, `name` TEXT NOT NULL, `avatarMedium` TEXT, `id` TEXT NOT NULL, `gender` TEXT, `about` TEXT, `skills` TEXT, `goals` TEXT, `fields` TEXT, `avatar` TEXT, `avatarBig` TEXT, `works` TEXT, `educations` TEXT, `distance` REAL, `obj` TEXT NOT NULL, `connectionType` TEXT, PRIMARY KEY(`id`))",
         "fields": [
-          {
-            "fieldPath": "name",
-            "columnName": "name",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "avatarMedium",
-            "columnName": "avatarMedium",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "gender",
-            "columnName": "gender",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "about",
-            "columnName": "about",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "skills",
-            "columnName": "skills",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "goals",
-            "columnName": "goals",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "fields",
-            "columnName": "fields",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "avatar",
-            "columnName": "avatar",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "avatarBig",
-            "columnName": "avatarBig",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "works",
-            "columnName": "works",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "educations",
-            "columnName": "educations",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "distance",
-            "columnName": "distance",
-            "affinity": "REAL",
-            "notNull": false
-          },
-          {
-            "fieldPath": "obj",
-            "columnName": "obj",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "connectionType",
-            "columnName": "connectionType",
-            "affinity": "TEXT",
-            "notNull": false
-          },
           {
             "fieldPath": "settings",
             "columnName": "settings",
@@ -476,7 +386,7 @@
       },
       {
         "tableName": "messages",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`text` TEXT NOT NULL, `type` TEXT NOT NULL, `creationDate` TEXT, `userId` TEXT NOT NULL, `id` TEXT NOT NULL, `chatId` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`text` TEXT NOT NULL, `type` TEXT NOT NULL, `creationDate` TEXT NOT NULL, `userId` TEXT NOT NULL, `id` TEXT NOT NULL, `chatId` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "text",
@@ -494,7 +404,7 @@
             "fieldPath": "creationDate",
             "columnName": "creationDate",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "userId",
@@ -528,7 +438,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cc6de537d1e779182499119d56616986')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '088880a54578470a611ea79003301d55')"
     ]
   }
 }

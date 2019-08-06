@@ -2,6 +2,7 @@ package com.connect.android.client
 
 import android.app.Application
 import com.connect.android.client.model.*
+import com.connect.android.client.modules.messagesView
 import com.connect.android.client.modules.recommendationsView
 import com.connect.android.client.modules.viewModelsModule
 import com.connect.android.client.modules.viewModule
@@ -27,7 +28,6 @@ class ConnectApplication : Application() {
                 listOf(
                     servicesModule,
                     authModule,
-                    chatModule,
                     chatsModule,
                     commonModule,
                     contactsModule,
@@ -40,7 +40,8 @@ class ConnectApplication : Application() {
                     worksModule,
                     viewModelsModule,
                     viewModule,
-                    recommendationsView
+                    recommendationsView,
+                    messagesView
                 )
             )
         }

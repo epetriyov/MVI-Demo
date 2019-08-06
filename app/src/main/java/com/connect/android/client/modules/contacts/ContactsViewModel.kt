@@ -1,6 +1,6 @@
 package com.connect.android.client.modules.contacts
 
-import com.connect.android.client.model.chat.ChatRepository
+import com.connect.android.client.model.chats.ChatsRepository
 import com.connect.android.client.model.contacts.ContactsRepository
 import com.connect.android.client.modules.base.BaseMviViewModel
 import com.freeletics.rxredux.SideEffect
@@ -8,7 +8,7 @@ import kotlin.reflect.KClass
 
 class ContactsViewModel(
     private val contactsRepository: ContactsRepository,
-    private val chatRepository: ChatRepository,
+    private val chatRepository: ChatsRepository,
     initialState: ContactsVS
 ) :
     BaseMviViewModel<ContactsVIA, ContactsVS>(initialState) {

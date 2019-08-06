@@ -6,12 +6,14 @@ import org.joda.time.DateTime
 import java.io.Serializable
 
 @Entity(tableName = "messages")
-data class Message @JvmOverloads constructor(
+data class Message constructor(
     val text: String,
     val type: String,
-    val creationDate: DateTime? = null,
+    val creationDate: DateTime,
     val userId: String,
     @PrimaryKey
     val id: String,
     val chatId: String
-): Serializable
+) : Serializable
+
+data class MessageToSend(val text: String)

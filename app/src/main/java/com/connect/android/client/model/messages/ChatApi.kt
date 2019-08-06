@@ -1,4 +1,4 @@
-package com.connect.android.client.model.chat
+package com.connect.android.client.model.messages
 
 import com.connect.android.client.model.messages.Message
 import com.tinder.scarlet.Event
