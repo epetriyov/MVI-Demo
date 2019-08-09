@@ -20,6 +20,7 @@ import com.connect.android.client.modules.main.MainVS
 import com.connect.android.client.modules.main.MainViewModel
 import com.connect.android.client.modules.messages.MessagesVS
 import com.connect.android.client.modules.messages.MessagesViewModel
+import com.connect.android.client.modules.myprofile.MyProfileItemAdapter
 import com.connect.android.client.modules.myprofile.MyProfileVS
 import com.connect.android.client.modules.myprofile.MyProfileViewModel
 import com.connect.android.client.modules.profile.ProfileItemAdapter
@@ -56,7 +57,7 @@ val viewModelsModule = module {
     factory { (initialState: ContactsVS) -> ContactsViewModel(get(), get(), initialState) }
     factory { (initialState: MainVS) -> MainViewModel(get(), get(), initialState) }
     factory { (initialState: MessagesVS) -> MessagesViewModel(get(), initialState) }
-    factory { (initialState: MyProfileVS) -> MyProfileViewModel(get(), initialState) }
+    factory { (initialState: MyProfileVS) -> MyProfileViewModel(get(), get(), get(), get(), initialState) }
     factory { (initialState: ProfileVS) -> ProfileViewModel(get(), get(), initialState) }
     factory { (initialState: SettingsVS) -> SettingsViewModel(get(), get(), initialState) }
     factory { (initialState: StartVS) -> StartViewModel(get(), initialState) }
@@ -93,6 +94,19 @@ val messagesView = module {
 }
 
 val profileView = module {
-    factory { (context: Context) -> ProfileItemAdapter(get(parameters = { parametersOf(context) })) }
+    factory { (context: Context) ->
+        ProfileItemAdapter(
+            get(parameters = { parametersOf(context) })
+        )
+    }
+    factory { (context: Context) -> LinearLayoutManager(context) }
+}
+
+val myProfileView = module {
+    factory { (context: Context) ->
+        MyProfileItemAdapter(
+            get(parameters = { parametersOf(context) })
+        )
+    }
     factory { (context: Context) -> LinearLayoutManager(context) }
 }

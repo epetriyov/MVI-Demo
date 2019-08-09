@@ -6,11 +6,13 @@ import androidx.room.PrimaryKey
 import com.connect.android.client.model.messages.Message
 import com.connect.android.client.model.profile.User
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
 import org.joda.time.DateTime
 import java.io.Serializable
 
 @Entity(tableName = "chats")
+@JsonClass(generateAdapter = true)
 data class Chat @JvmOverloads constructor(
     @PrimaryKey
     val id: String,

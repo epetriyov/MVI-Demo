@@ -2,19 +2,29 @@ package com.connect.android.client.model.educations
 
 import com.connect.android.client.model.common.ProfileItem
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
 /**
  * Created by evgenii on 5/8/17.
  */
+@JsonClass(generateAdapter = true)
 data class EducationData(
     var id: String? = null,
     var name: String,
-    var faculty: String? = null,
+    var faculty: String,
     var description: String? = null,
     var yearFrom: Int = 0,
     var yearTill: Int = 0,
     @Json(name = "object") var obj: String = "education"
 ) : ProfileItem {
+    override fun getFromDate(): String {
+        return yearFrom.toString()
+    }
+
+    override fun getTillDate(): String {
+        return yearTill.toString()
+    }
+
     override fun getIdentifier(): String? {
         return id
     }

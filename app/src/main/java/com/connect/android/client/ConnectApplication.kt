@@ -2,10 +2,7 @@ package com.connect.android.client
 
 import android.app.Application
 import com.connect.android.client.model.*
-import com.connect.android.client.modules.messagesView
-import com.connect.android.client.modules.recommendationsView
-import com.connect.android.client.modules.viewModelsModule
-import com.connect.android.client.modules.viewModule
+import com.connect.android.client.modules.*
 import com.connect.android.client.tools.servicesModule
 import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
@@ -43,7 +40,9 @@ class ConnectApplication : Application() {
                     viewModelsModule,
                     viewModule,
                     recommendationsView,
-                    messagesView
+                    messagesView,
+                    profileView,
+                    myProfileView
                 )
             )
         }

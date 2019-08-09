@@ -40,4 +40,13 @@
     <string name="chats">Сообщения</string>
     <string name="profile">Профиль</string>
     <string name="distance">%.02f км</string>
+    <string name="education_name">Название учреждения *</string>
+    <string name="education_spec">Специальность *</string>
+    <string name="education_start">Год начала обучения *</string>
+    <string name="education_end">Год окончания обучения *</string>
+    <string name="work_name">Название компании *</string>
+    <string name="work_position">Должность *</string>
+    <string name="work_start">Год начала работы *</string>
+    <string name="work_end">Год окончания работы *</string>
+    <string name="hint_tags">Введите тэги через запятую</string>
 </resources>
