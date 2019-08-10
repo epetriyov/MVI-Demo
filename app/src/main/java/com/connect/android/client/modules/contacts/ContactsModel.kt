@@ -21,6 +21,7 @@ sealed class ContactsVIA : ViewInputAction() {
 }
 
 sealed class ContactsVOA : ViewOutputAction() {
+    object Back : ContactsVOA()
     data class UserSelect(val user: User) : ContactsVOA()
     data class ChatCreate(val chat: Chat) : ContactsVOA()
 }

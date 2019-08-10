@@ -21,7 +21,14 @@ class MessagesRepoImpl(
 
     override fun loadChatMessages(chatId: String, offset: Int, limit: Int): Completable {
         return messagesApi.getChatMessages(chatId, offset, limit).map { it.data }
-            .flatMapCompletable { messageDao.insertMessages(it) }
+            .flatMapCompletable {
+                if (offset == 0) {
+                    messageDao.deleteMessages(messageDao.getAllMessages(chatId))
+                        .andThen(messageDao.insertMessages(it))
+                } else {
+                    messageDao.insertMessages(it)
+                }
+            }
     }
 
     override fun getMessages(chatId: String): Flowable<List<Message>> {

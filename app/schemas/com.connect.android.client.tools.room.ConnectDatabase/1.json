@@ -2,21 +2,15 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "088880a54578470a611ea79003301d55",
+    "identityHash": "ae94db7352a704dd6be5a311e9df7531",
     "entities": [
       {
         "tableName": "chats",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `user` TEXT NOT NULL, `creationDate` TEXT NOT NULL, `lastActiveDate` TEXT NOT NULL, `msg_text` TEXT, `msg_type` TEXT, `msg_creationDate` TEXT, `msg_userId` TEXT, `msg_id` TEXT, `msg_chatId` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `creationDate` TEXT NOT NULL, `lastActiveDate` TEXT NOT NULL, `usr_name` TEXT NOT NULL, `usr_avatarMedium` TEXT, `usr_id` TEXT NOT NULL, `usr_gender` TEXT, `usr_about` TEXT, `usr_skills` TEXT, `usr_goals` TEXT, `usr_fields` TEXT, `usr_avatar` TEXT, `usr_avatarBig` TEXT, `usr_works` TEXT, `usr_educations` TEXT, `usr_distance` REAL, `usr_obj` TEXT NOT NULL, `usr_connectionType` TEXT, `msg_text` TEXT, `msg_type` TEXT, `msg_creationDate` TEXT, `msg_userId` TEXT, `msg_id` TEXT, `msg_chatId` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "user",
-            "columnName": "user",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -31,6 +25,96 @@
             "columnName": "lastActiveDate",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "user.name",
+            "columnName": "usr_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user.avatarMedium",
+            "columnName": "usr_avatarMedium",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "user.id",
+            "columnName": "usr_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user.gender",
+            "columnName": "usr_gender",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "user.about",
+            "columnName": "usr_about",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "user.skills",
+            "columnName": "usr_skills",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "user.goals",
+            "columnName": "usr_goals",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "user.fields",
+            "columnName": "usr_fields",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "user.avatar",
+            "columnName": "usr_avatar",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "user.avatarBig",
+            "columnName": "usr_avatarBig",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "user.works",
+            "columnName": "usr_works",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "user.educations",
+            "columnName": "usr_educations",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "user.distance",
+            "columnName": "usr_distance",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "user.obj",
+            "columnName": "usr_obj",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user.connectionType",
+            "columnName": "usr_connectionType",
+            "affinity": "TEXT",
+            "notNull": false
           },
           {
             "fieldPath": "lastMessage.text",
@@ -438,7 +522,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '088880a54578470a611ea79003301d55')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ae94db7352a704dd6be5a311e9df7531')"
     ]
   }
 }

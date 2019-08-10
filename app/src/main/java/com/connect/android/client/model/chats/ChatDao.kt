@@ -1,6 +1,7 @@
 package com.connect.android.client.model.chats
 
 import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteQuery
 import io.reactivex.Completable
 import io.reactivex.Flowable
 
@@ -16,8 +17,8 @@ interface ChatDao {
     fun deleteChats(items: List<Chat>): Completable
 
     @Query("SELECT * FROM chats")
-    fun getChats(): Flowable<List<Chat>>
+    fun getAllChats(): List<Chat>
 
-    @Query("SELECT * FROM chats where msg_text GLOB '*' || :query|| '*'")
-    fun findChats(query: String): List<Chat>
+    @RawQuery(observedEntities = [Chat::class])
+    fun getChats(query: SupportSQLiteQuery): Flowable<List<Chat>>
 }

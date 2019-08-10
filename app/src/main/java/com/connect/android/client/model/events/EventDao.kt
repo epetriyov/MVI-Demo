@@ -15,4 +15,7 @@ interface EventDao {
 
     @RawQuery(observedEntities = [Event::class])
     fun getEvents(query: SupportSQLiteQuery): Flowable<List<Event>>
+
+    @Query("SELECT * FROM events")
+    fun getAllEvents(): List<Event>
 }

@@ -12,6 +12,7 @@ import com.connect.android.client.modules.auth.SocialHelperImpl
 import com.connect.android.client.modules.chat.ChatVS
 import com.connect.android.client.modules.chat.ChatViewModel
 import com.connect.android.client.modules.chat.MessagesAdapter
+import com.connect.android.client.modules.contacts.ContactsAdapter
 import com.connect.android.client.modules.contacts.ContactsVS
 import com.connect.android.client.modules.contacts.ContactsViewModel
 import com.connect.android.client.modules.events.EventsAdapter
@@ -19,6 +20,7 @@ import com.connect.android.client.modules.events.EventsVS
 import com.connect.android.client.modules.events.EventsViewModel
 import com.connect.android.client.modules.main.MainVS
 import com.connect.android.client.modules.main.MainViewModel
+import com.connect.android.client.modules.messages.ChatsAdapter
 import com.connect.android.client.modules.messages.MessagesVS
 import com.connect.android.client.modules.messages.MessagesViewModel
 import com.connect.android.client.modules.myprofile.MyProfileItemAdapter
@@ -112,10 +114,28 @@ val myProfileView = module {
     factory { (context: Context) -> LinearLayoutManager(context) }
 }
 
-
 val eventsView = module {
     factory { (context: Context) ->
         EventsAdapter(
+            get(parameters = { parametersOf(context) })
+        )
+    }
+    factory { (context: Context) -> LinearLayoutManager(context) }
+}
+
+val contactsView = module {
+    factory { (context: Context) ->
+        ContactsAdapter(
+            get(parameters = { parametersOf(context) })
+        )
+    }
+    factory { (context: Context) -> LinearLayoutManager(context) }
+}
+
+
+val chatsView = module {
+    factory { (context: Context) ->
+        ChatsAdapter(
             get(parameters = { parametersOf(context) })
         )
     }

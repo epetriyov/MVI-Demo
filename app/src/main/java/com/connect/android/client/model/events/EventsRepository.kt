@@ -31,9 +31,9 @@ class EventsRepoImpl(
         val sql = "SELECT * FROM events" + (query?.let { " WHERE name GLOB '*' || :query|| '*'" }
             ?: "") + (accepted?.let { if (query == null) " WHERE accepted = 1" else " AND accepted = 1" })
         val args = when {
-            query != null && accepted != null -> arrayOf(query, accepted)
-            query != null && accepted == null -> arrayOf(query)
-            query == null && accepted != null -> arrayOf(accepted)
+            !query.isNullOrEmpty() && accepted != null -> arrayOf(query, accepted)
+            !query.isNullOrEmpty() && accepted == null -> arrayOf(query)
+            query.isNullOrEmpty() && accepted != null -> arrayOf(accepted)
             else -> emptyArray()
         }
         val sqlLiteQuery = SimpleSQLiteQuery(sql, args)
@@ -41,7 +41,10 @@ class EventsRepoImpl(
     }
 
     override fun updateEvents(): Completable {
-        return eventsApi.getEvents().flatMapCompletable { eventDao.insertEvents(it.data) }
+        return eventsApi.getEvents().flatMapCompletable {
+            eventDao.deleteEvents(eventDao.getAllEvents())
+                .andThen(eventDao.insertEvents(it.data))
+        }
     }
 
     override fun declineEvent(eventId: String): Completable {

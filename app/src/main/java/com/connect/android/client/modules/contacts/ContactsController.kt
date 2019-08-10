@@ -4,7 +4,11 @@ import android.content.Context
 import android.os.Bundle
 import com.bluelinelabs.conductor.Controller
 import com.connect.android.client.extensions.BundleBuilder
+import com.connect.android.client.extensions.Do
+import com.connect.android.client.extensions.buildRouterTransaction
 import com.connect.android.client.modules.base.BaseMviController
+import com.connect.android.client.modules.chat.ChatController
+import com.connect.android.client.modules.profile.ProfileController
 
 class ContactsController(bundle: Bundle? = null) : BaseMviController<ContactsView, ContactsVIA, ContactsVOA>(bundle) {
 
@@ -27,6 +31,10 @@ class ContactsController(bundle: Bundle? = null) : BaseMviController<ContactsVie
     )
 
     override fun handleViewEvents(action: ContactsVOA) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Do exhaustive when (action) {
+            ContactsVOA.Back -> router.handleBack()
+            is ContactsVOA.UserSelect -> router.pushController(ProfileController.newInstance(action.user).buildRouterTransaction())
+            is ContactsVOA.ChatCreate -> router.pushController(ChatController.newInstance(action.chat).buildRouterTransaction())
+        }
     }
 }

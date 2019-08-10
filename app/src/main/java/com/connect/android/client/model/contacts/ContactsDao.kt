@@ -15,6 +15,9 @@ interface ContactsDao {
     @Delete
     fun deleteContacts(items: List<User>): Completable
 
+    @Query("SELECT * FROM user")
+    fun getAllContacts(): List<User>
+
     @RawQuery(observedEntities = [User::class])
     fun getContacts(query: SupportSQLiteQuery): Flowable<List<User>>
 }

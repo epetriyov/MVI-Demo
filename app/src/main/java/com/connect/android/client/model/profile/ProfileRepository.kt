@@ -21,11 +21,14 @@ interface ProfileRepository {
 
 class ProfileRepoImpl(private val profileApi: ProfileApi, private val profileDao: ProfileDao) : ProfileRepository {
     override fun fetchProfile(): Completable {
-        return profileApi.getProfile().flatMapCompletable { profileDao.saveUser(it) }
+        return profileApi.getProfile().flatMapCompletable {
+            profileDao.deleteUser(profileDao.getUserEntity())
+                .andThen(profileDao.saveUser(it))
+        }
     }
 
     override fun loadProfile(): Flowable<Me> {
-        return profileDao.getUser().filter { it.isNotEmpty() }.map { it[0] }
+        return profileDao.getUser()
     }
 
     override fun uploadAvatar(avatarUrl: String): Single<AvatarResponse> {

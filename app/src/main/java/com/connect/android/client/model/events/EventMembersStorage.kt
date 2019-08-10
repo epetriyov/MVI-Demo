@@ -10,7 +10,7 @@ interface EventMembersStorage {
     fun updateEventMembers(it: List<User>): Completable
 }
 
-class RamEventsMembersStorage() : EventMembersStorage {
+class RamEventsMembersStorage : EventMembersStorage {
 
     private val eventMembers = BehaviorSubject.create<List<User>>()
 

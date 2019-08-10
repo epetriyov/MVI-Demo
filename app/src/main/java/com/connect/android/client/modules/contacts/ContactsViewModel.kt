@@ -66,6 +66,7 @@ class ContactsViewModel(
     }
 
     override fun filterActions() = listOf(
+        ContactsVIA.Init::class,
         ContactsVIA.LoadProgress::class,
         ContactsVIA.LoadSuccess::class,
         ContactsVIA.ChatCreated::class,

@@ -16,6 +16,7 @@ import java.io.Serializable
 data class Chat @JvmOverloads constructor(
     @PrimaryKey
     val id: String,
+    @Embedded(prefix = "usr_")
     val user: User,
     @Embedded(prefix = "msg_")
     val lastMessage: Message? = null,

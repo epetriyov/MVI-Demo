@@ -43,7 +43,9 @@ class ConnectApplication : Application() {
                     messagesView,
                     profileView,
                     myProfileView,
-                    eventsView
+                    eventsView,
+                    contactsView,
+                    chatsView
                 )
             )
         }
