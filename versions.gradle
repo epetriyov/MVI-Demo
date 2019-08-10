@@ -27,7 +27,6 @@ def versions = [:]
     versions.koin = '2.0.1'
     versions.moshi = '1.8.0'
     versions.room = '2.1.0'
-    versions.navigation = "2.1.0-alpha05"
     versions.timber = '4.7.1'
     versions.vk = '1.6.8'
     versions.facebook = '4.20.0'
@@ -61,11 +60,6 @@ def androidx = [:]
         room.rxjava2 = "androidx.room:room-rxjava2:$versions.room"
         room.compiler = "androidx.room:room-compiler:$versions.room"
     androidx.room = room
-
-    def navigation = [:]
-        navigation.fragment = "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
-        navigation.ui = "androidx.navigation:navigation-ui-ktx:$versions.navigation"
-    androidx.navigation = navigation
 
 deps.androidx = androidx
 
