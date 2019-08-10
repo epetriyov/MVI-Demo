@@ -1,4 +1,4 @@
-package com.connect.android.client.modules.profile_edit
+package com.connect.android.client.modules.myprofile.edit
 
 import com.connect.android.client.model.profile.ProfileRepository
 import com.connect.android.client.modules.base.BaseMviViewModel
@@ -31,7 +31,11 @@ class ProfileEditViewModel(
                     .andThen(profileRepository.fetchProfile())
                     .andThen(Observable.just(Unit))
                     .map { ProfileEditVIA.ProfileUpdated as ProfileEditVIA }
-                    .onErrorReturn { t -> ProfileEditVIA.ProfileError(t.localizedMessage) }
+                    .onErrorReturn { t ->
+                        ProfileEditVIA.ProfileError(
+                            t.localizedMessage
+                        )
+                    }
                     .startWith(ProfileEditVIA.ProfileProgress)
             }
     }

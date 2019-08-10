@@ -1,4 +1,4 @@
-package com.connect.android.client.modules.profile_form
+package com.connect.android.client.modules.myprofile.form
 
 import com.connect.android.client.model.educations.EducationData
 import com.connect.android.client.model.educations.EducationsRepository

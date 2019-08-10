@@ -1,4 +1,4 @@
-package com.connect.android.client.modules.profile_edit
+package com.connect.android.client.modules.myprofile.edit
 
 import android.content.Context
 import android.os.Bundle
@@ -20,8 +20,14 @@ class ProfileEditController(bundle: Bundle? = null) :
         fun newInstance(me: Me, field: Field): ProfileEditController {
             return ProfileEditController(
                 BundleBuilder(Bundle())
-                    .putSerializable(EXTRA_USER, me)
-                    .putSerializable(EXTRA_FIELD, field)
+                    .putSerializable(
+                        EXTRA_USER,
+                        me
+                    )
+                    .putSerializable(
+                        EXTRA_FIELD,
+                        field
+                    )
                     .build()
             )
         }

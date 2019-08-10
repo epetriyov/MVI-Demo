@@ -1,4 +1,4 @@
-package com.connect.android.client.modules.profile_edit
+package com.connect.android.client.modules.myprofile.edit
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -8,7 +8,7 @@ import com.connect.android.client.R
 import com.connect.android.client.extensions.showSnackbar
 import com.connect.android.client.modules.base.BaseMviView
 import com.connect.android.client.modules.common.Field.*
-import com.connect.android.client.modules.profile_edit.Constants.TAGS_SEPARATOR
+import com.connect.android.client.modules.myprofile.edit.Constants.TAGS_SEPARATOR
 import com.jakewharton.rxbinding2.view.clicks
 import kotlinx.android.synthetic.main.view_edit_text.view.*
 import org.koin.core.inject
@@ -27,7 +27,11 @@ class ProfileEditView(context: Context, initialState: ProfileEditVS) :
     override fun initView(savedViewState: Bundle?) {
     }
 
-    override fun inputActions() = listOf(btn_save.clicks().map { ProfileEditVIA.Save(edit_text.text.toString()) })
+    override fun inputActions() = listOf(btn_save.clicks().map {
+        ProfileEditVIA.Save(
+            edit_text.text.toString()
+        )
+    })
 
     override fun outputActions() = listOf(btn_back.clicks().map { ProfileEditVOA.Back })
 

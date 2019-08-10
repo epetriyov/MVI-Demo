@@ -42,7 +42,8 @@ class ConnectApplication : Application() {
                     recommendationsView,
                     messagesView,
                     profileView,
-                    myProfileView
+                    myProfileView,
+                    eventsView
                 )
             )
         }

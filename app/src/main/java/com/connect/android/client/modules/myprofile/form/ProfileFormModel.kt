@@ -1,7 +1,6 @@
-package com.connect.android.client.modules.profile_form
+package com.connect.android.client.modules.myprofile.form
 
 import com.connect.android.client.model.common.ProfileItem
-import com.connect.android.client.model.profile.User
 import com.connect.android.client.modules.base.ORField
 import com.connect.android.client.modules.base.ViewInputAction
 import com.connect.android.client.modules.base.ViewOutputAction

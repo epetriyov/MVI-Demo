@@ -1,101 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/img_event"
-        android:layout_width="0dp"
-        android:layout_height="222dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/header" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/label_event_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="15dp"
-        android:textColor="@android:color/white"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="@id/img_event"
-        app:layout_constraintEnd_toEndOf="@id/img_event"
-        app:layout_constraintStart_toStartOf="@id/img_event"
-        tools:text="Хакатон Blockchain founder" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btn_participants"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/btn_common"
-        android:backgroundTint="@color/colorBlue"
-        android:drawableStart="@drawable/ic_members"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img_event"
-        tools:text="4" />
+            <ImageView
+                android:id="@+id/img_event"
+                android:layout_width="0dp"
+                android:layout_height="222dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/header" />
+
+            <TextView
+                android:id="@+id/label_event_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="15dp"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="@id/img_event"
+                app:layout_constraintEnd_toEndOf="@id/img_event"
+                app:layout_constraintStart_toStartOf="@id/img_event"
+                tools:text="Хакатон Blockchain founder" />
+
+            <Button
+                android:id="@+id/btn_participants"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_common"
+                android:backgroundTint="@color/colorBlue"
+                android:drawableStart="@drawable/ic_members"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_event"
+                tools:text="4" />
+
+            <ImageButton
+                android:id="@+id/btn_apply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/btn_accept"
+                app:layout_constraintBottom_toBottomOf="@id/btn_participants"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/btn_participants" />
+
+            <View
+                android:id="@+id/top_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/colorDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_participants" />
+
+            <include
+                android:id="@+id/view_address"
+                layout="@layout/view_address_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="@id/top_divider"
+                app:layout_constraintStart_toStartOf="@id/top_divider"
+                app:layout_constraintTop_toBottomOf="@id/top_divider" />
+
+            <include
+                android:id="@+id/view_time"
+                layout="@layout/view_address_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:layout_constraintEnd_toEndOf="@id/top_divider"
+                app:layout_constraintStart_toStartOf="@id/top_divider"
+                app:layout_constraintTop_toBottomOf="@id/view_address" />
+
+            <View
+                android:id="@+id/bottom_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorDivider"
+                app:layout_constraintEnd_toEndOf="@id/top_divider"
+                app:layout_constraintStart_toStartOf="@id/top_divider"
+                app:layout_constraintTop_toBottomOf="@id/view_time" />
+
+            <TextView
+                android:id="@+id/label_event_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bottom_divider"
+                tools:text="Кустарничек изящно связывает городской официальный язык." />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
     <ImageButton
-        android:id="@+id/btn_manage"
+        android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/btn_accept"
-        app:layout_constraintBottom_toBottomOf="@id/btn_participants"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/btn_participants" />
-
-    <View
-        android:id="@+id/top_divider"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@color/colorDivider"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_back_button_white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_participants" />
-
-    <include
-        android:id="@+id/view_address"
-        layout="@layout/view_address_info"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="@id/top_divider"
-        app:layout_constraintStart_toStartOf="@id/top_divider"
-        app:layout_constraintTop_toBottomOf="@id/top_divider" />
-
-    <include
-        android:id="@+id/view_time"
-        layout="@layout/view_address_info"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="@id/top_divider"
-        app:layout_constraintStart_toStartOf="@id/top_divider"
-        app:layout_constraintTop_toBottomOf="@id/view_address" />
-
-    <View
-        android:id="@+id/bottom_divider"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorDivider"
-        app:layout_constraintEnd_toEndOf="@id/top_divider"
-        app:layout_constraintStart_toStartOf="@id/top_divider"
-        app:layout_constraintTop_toBottomOf="@id/view_time" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toTopOf="parent" />
+</FrameLayout>

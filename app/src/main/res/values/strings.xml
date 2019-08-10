@@ -1,11 +1,6 @@
 <resources>
-    <string name="app_name">Connect+</string>
-
-    <!-- login strings -->
     <string name="login_description">Авторизуйтесь, используя\nсоциальную сеть</string>
     <string name="login_agreement">Авторизуясь, вы соглашаетесь на\nобработку персональных данных</string>
-    <string name="facebook">Facebook</string>
-    <string name="vkontakte">vk</string>
     <string name="recommendations_search">Ищем коннекты вокруг вас</string>
     <string name="goals_title">Что ищет</string>
     <string name="skills_title">Чем полезна</string>
@@ -49,4 +44,5 @@
     <string name="work_start">Год начала работы *</string>
     <string name="work_end">Год окончания работы *</string>
     <string name="hint_tags">Введите тэги через запятую</string>
+    <string name="dates_format">c %1$s до %2$s</string>
 </resources>

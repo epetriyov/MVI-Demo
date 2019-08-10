@@ -1,4 +1,4 @@
-package com.connect.android.client.modules.profile_edit
+package com.connect.android.client.modules.myprofile.edit
 
 import com.connect.android.client.model.profile.Me
 import com.connect.android.client.modules.base.ORField

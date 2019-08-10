@@ -1,4 +1,4 @@
-package com.connect.android.client.modules.profile_form
+package com.connect.android.client.modules.myprofile.form
 
 import android.content.Context
 import android.os.Bundle
@@ -20,10 +20,21 @@ class ProfileFormController(bundle: Bundle? = null) :
         fun newInstance(profileItem: ProfileItem?, field: Field, id: String?): ProfileFormController {
             return ProfileFormController(
                 BundleBuilder(Bundle())
-                    .putSerializable(EXTRA_FIELD, field)
-                    .putString(EXTRA_ID, id)
+                    .putSerializable(
+                        EXTRA_FIELD,
+                        field
+                    )
+                    .putString(
+                        EXTRA_ID,
+                        id
+                    )
                     .apply {
-                        profileItem?.let { putSerializable(EXTRA_PROFILE_ITEM, it) }
+                        profileItem?.let {
+                            putSerializable(
+                                EXTRA_PROFILE_ITEM,
+                                it
+                            )
+                        }
                     }
                     .build()
             )

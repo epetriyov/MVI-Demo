@@ -1,9 +1,9 @@
 package com.connect.android.client.model.events
 
 import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteQuery
 import io.reactivex.Completable
 import io.reactivex.Flowable
-import io.reactivex.Maybe
 
 @Dao
 interface EventDao {
@@ -13,6 +13,6 @@ interface EventDao {
     @Delete
     fun deleteEvents(items: List<Event>): Completable
 
-    @Query("SELECT * FROM events")
-    fun getEvents(): Flowable<List<Event>>
+    @RawQuery(observedEntities = [Event::class])
+    fun getEvents(query: SupportSQLiteQuery): Flowable<List<Event>>
 }

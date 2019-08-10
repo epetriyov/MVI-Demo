@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.ListAdapter
 import com.connect.android.client.R
 import com.connect.android.client.modules.base.BaseViewHolder
 import org.joda.time.format.DateTimeFormat
-import org.joda.time.format.DateTimeFormatter
 
 class MessagesAdapter(private val layoutInflater: LayoutInflater) :
     ListAdapter<DisplayableMessage, MessageViewHolder>(
@@ -29,15 +28,13 @@ class MessagesAdapter(private val layoutInflater: LayoutInflater) :
         private const val OTHER_MESSAGE = 1
     }
 
-    private val timeFormat = DateTimeFormat.forPattern("HH:mm")
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         val layoutId = when (viewType) {
             MY_MESSAGE -> R.layout.adt_my_message
             OTHER_MESSAGE -> R.layout.adt_others_message
             else -> throw IllegalStateException("wrong viewType: $viewType")
         }
-        return MessageViewHolder(layoutInflater.inflate(layoutId, parent, false), timeFormat)
+        return MessageViewHolder(layoutInflater.inflate(layoutId, parent, false))
     }
 
     override fun onBindViewHolder(viewHolder: MessageViewHolder, position: Int) {
@@ -49,7 +46,11 @@ class MessagesAdapter(private val layoutInflater: LayoutInflater) :
     }
 }
 
-class MessageViewHolder(itemView: View, private val timeFormatter: DateTimeFormatter) : BaseViewHolder(itemView) {
+class MessageViewHolder(itemView: View) : BaseViewHolder(itemView) {
+
+    companion object {
+        private val timeFormatter = DateTimeFormat.forPattern("HH:mm")
+    }
 
     fun bindView(item: DisplayableMessage) {
         itemView.findViewById<TextView>(R.id.label_message).text = item.text

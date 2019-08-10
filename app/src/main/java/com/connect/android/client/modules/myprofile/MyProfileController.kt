@@ -5,8 +5,8 @@ import android.os.Bundle
 import com.connect.android.client.extensions.Do
 import com.connect.android.client.extensions.buildRouterTransaction
 import com.connect.android.client.modules.base.BaseMviController
-import com.connect.android.client.modules.profile_edit.ProfileEditController
-import com.connect.android.client.modules.profile_form.ProfileFormController
+import com.connect.android.client.modules.myprofile.edit.ProfileEditController
+import com.connect.android.client.modules.myprofile.form.ProfileFormController
 
 class MyProfileController(bundle: Bundle? = null) :
     BaseMviController<MyProfileView, MyProfileVIA, MyProfileVOA>(bundle) {
