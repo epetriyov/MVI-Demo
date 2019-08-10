@@ -55,7 +55,7 @@ val viewModelsModule = module {
         )
     }
     factory { (initialState: ChatVS) -> ChatViewModel(get(), get(), get(), initialState) }
-    factory { (initialState: ContactsVS) -> ContactsViewModel(get(), get(), initialState) }
+    factory { (initialState: ContactsVS) -> ContactsViewModel(get(), get(), get(), initialState) }
     factory { (initialState: MainVS) -> MainViewModel(get(), get(), initialState) }
     factory { (initialState: MessagesVS) -> MessagesViewModel(get(), initialState) }
     factory { (initialState: MyProfileVS) -> MyProfileViewModel(get(), get(), get(), get(), initialState) }

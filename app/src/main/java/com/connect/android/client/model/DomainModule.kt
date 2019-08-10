@@ -11,9 +11,7 @@ import com.connect.android.client.model.contacts.ContactsRepository
 import com.connect.android.client.model.educations.EducationsApi
 import com.connect.android.client.model.educations.EducationsRepoImpl
 import com.connect.android.client.model.educations.EducationsRepository
-import com.connect.android.client.model.events.EventsApi
-import com.connect.android.client.model.events.EventsRepoImpl
-import com.connect.android.client.model.events.EventsRepository
+import com.connect.android.client.model.events.*
 import com.connect.android.client.model.location.*
 import com.connect.android.client.model.messages.*
 import com.connect.android.client.model.profile.ProfileApi
@@ -99,8 +97,9 @@ val eventsModule = module {
         val db: ConnectDatabase = get()
         db.eventDao()
     }
+    factory<EventMembersStorage> { RamEventsMembersStorage() }
     factory<EventsRepository> {
-        EventsRepoImpl(get(), get())
+        EventsRepoImpl(get(), get(), get())
     }
 }
 

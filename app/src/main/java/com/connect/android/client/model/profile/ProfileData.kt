@@ -1,6 +1,5 @@
 package com.connect.android.client.model.profile
 
-import android.text.TextUtils
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.connect.android.client.model.educations.EducationData
@@ -60,9 +59,9 @@ open class User @JvmOverloads constructor(
     fun getWorkInfo(): String? {
         val work = works?.let {
             if (it.isNotEmpty()) {
-                (it[0].company ?: "") +
-                        (if (!TextUtils.isEmpty(it[0].company)
-                            && !TextUtils.isEmpty(it[0].position)
+                it[0].company +
+                        (if (it[0].company.isNotEmpty()
+                            && !it[0].position.isNullOrEmpty()
                         ) ", " else "") +
                         it[0].position
             } else {

@@ -1,6 +1,5 @@
 package com.connect.android.client.modules.events
 
-import android.text.TextUtils
 import com.connect.android.client.model.events.EventsRepository
 import com.connect.android.client.modules.base.BaseMviViewModel
 import com.connect.android.client.modules.base.withUpdate
@@ -15,9 +14,9 @@ class EventsViewModel(private val eventsRepository: EventsRepository, initialSta
 
     private val loadEvents: EventsSideEffect = { actions, _ ->
         actions.ofType<EventsVIA.LoadRequest>()
-            .flatMap {
+            .switchMap {
                 eventsRepository.loadEvents(
-                    if (!TextUtils.isEmpty(it.query)) it.query else null,
+                    if (!it.query.isNullOrEmpty()) it.query else null,
                     if (it.selectedTabPosition == 0) null else true
                 )
                     .toObservable()

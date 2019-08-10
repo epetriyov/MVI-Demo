@@ -3,9 +3,10 @@ package com.connect.android.client.tools
 import android.content.Context
 import androidx.room.Room
 import com.connect.android.client.BuildConfig
+import com.connect.android.client.Constants.DB_NAME
+import com.connect.android.client.Constants.PREF_NAME
 import com.connect.android.client.model.auth.SharedTokenStore
 import com.connect.android.client.model.auth.TokenStore
-import com.connect.android.client.tools.Constants.DB_NAME
 import com.connect.android.client.tools.moshi.LENIENT_FACTORY
 import com.connect.android.client.tools.moshi.MoshiDateTimeConverter
 import com.connect.android.client.tools.okhttp.AuthInterceptor
@@ -28,13 +29,8 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-object Constants {
-    const val PREF_NAME = "connect_prefs"
-    const val DB_NAME = "connect_db"
-}
-
 val servicesModule = module {
-    single { androidApplication().getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE) }
+    single { androidApplication().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE) }
     single {
         Room.databaseBuilder(
             androidApplication(),

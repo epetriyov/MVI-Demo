@@ -5,10 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.connect.android.client.R
 import com.connect.android.client.model.profile.User
-import com.jakewharton.rxbinding2.view.clicks
+import com.connect.android.client.modules.base.BaseViewHolder
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 
@@ -50,13 +49,8 @@ class RecommendationsAdapter(private val layoutInflater: LayoutInflater) :
     }
 }
 
-class RecommendationViewHolder(private val containerView: View) : RecyclerView.ViewHolder(containerView) {
+class RecommendationViewHolder(containerView: View) : BaseViewHolder(containerView) {
     fun bindView(item: User) {
         RecommendationsBinder.bindRecommendation(containerView, item)
     }
-
-    fun itemClicks(): Observable<Int> {
-        return containerView.clicks().map { adapterPosition }.publish().autoConnect()
-    }
-
 }

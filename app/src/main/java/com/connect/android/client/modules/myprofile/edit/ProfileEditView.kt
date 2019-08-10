@@ -8,7 +8,6 @@ import com.connect.android.client.R
 import com.connect.android.client.extensions.showSnackbar
 import com.connect.android.client.modules.base.BaseMviView
 import com.connect.android.client.modules.common.Field.*
-import com.connect.android.client.modules.myprofile.edit.Constants.TAGS_SEPARATOR
 import com.jakewharton.rxbinding2.view.clicks
 import kotlinx.android.synthetic.main.view_edit_text.view.*
 import org.koin.core.inject

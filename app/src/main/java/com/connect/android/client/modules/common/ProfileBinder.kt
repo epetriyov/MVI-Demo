@@ -45,7 +45,7 @@ object ProfileBinder {
         educationsAdapter.submitList(user.educations)
     }
 
-    private fun buildChip(context: Context, it: String): View? {
+    fun buildChip(context: Context, it: String): View? {
         return Chip(context).apply {
             text = it
             chipBackgroundColor = resources.getColorStateList(R.color.colorBgChip, null)

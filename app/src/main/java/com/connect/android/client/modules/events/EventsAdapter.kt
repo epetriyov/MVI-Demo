@@ -44,7 +44,7 @@ class EventsAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         EventViewHolder(layoutInflater.inflate(R.layout.adt_event, parent, false))
             .apply {
-                clicks().map { getItem(it) }.subscribeWith(selectionsSubject)
+                itemClicks().map { getItem(it) }.subscribeWith(selectionsSubject)
                 participants().map { getItem(it) }.subscribeWith(participantsSubject)
                 actions().map { getItem(it) }.subscribeWith(actionSubject)
             }
@@ -55,8 +55,6 @@ class EventsAdapter(
 }
 
 class EventViewHolder(containerView: View) : BaseViewHolder(containerView) {
-
-    fun clicks(): Observable<Int> = itemView.clicks().map { adapterPosition }
 
     fun participants(): Observable<Int> = btn_participants.clicks().map { adapterPosition }
 

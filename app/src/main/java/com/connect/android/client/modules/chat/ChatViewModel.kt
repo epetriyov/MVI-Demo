@@ -1,6 +1,5 @@
 package com.connect.android.client.modules.chat
 
-import android.text.TextUtils
 import com.connect.android.client.model.auth.AuthRepository
 import com.connect.android.client.model.messages.ChatEngine
 import com.connect.android.client.model.messages.MessagesRepository
@@ -99,7 +98,7 @@ class ChatViewModel(
             is ChatVIA.NextLoadError -> state.copy(nextLoadError = action.error.withUpdate())
             ChatVIA.NextLoaded -> state.copy(isLoadingNext = false)
             is ChatVIA.MessagesLoaded -> state.copy(messages = action.messages.withUpdate())
-            is ChatVIA.TextChanged -> state.copy(buttonEnabled = !TextUtils.isEmpty(action.text))
+            is ChatVIA.TextChanged -> state.copy(buttonEnabled = action.text.isNotEmpty())
             else -> state
         }
     }

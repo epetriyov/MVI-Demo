@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.connect.android.client.Constants.SEARCH_THROTTLE_DELAY
 import com.connect.android.client.R
 import com.connect.android.client.extensions.showSnackbar
 import com.connect.android.client.modules.base.BaseMviView
@@ -19,10 +20,6 @@ import java.util.concurrent.TimeUnit
 @SuppressLint("ViewConstructor")
 class EventsView(context: Context, initialState: EventsVS) :
     BaseMviView<EventsVIA, EventsVOA, EventsVS>(context, initialState) {
-
-    companion object {
-        private const val SEARCH_THROTTLE_DELAY = 3L
-    }
 
     val eventsViewModel: EventsViewModel by inject { parametersOf(initialState) }
 

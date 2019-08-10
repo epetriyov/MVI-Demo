@@ -19,10 +19,10 @@ class ProfileEditViewModel(
         actions.ofType<ProfileEditVIA.Save>()
             .map {
                 when (viewState().field) {
-                    SKILLS -> viewState().profile.peekContent()!!.copyMe(skills = it.text.split(Constants.TAGS_SEPARATOR))
-                    GOALS -> viewState().profile.peekContent()!!.copyMe(goals = it.text.split(Constants.TAGS_SEPARATOR))
+                    SKILLS -> viewState().profile.peekContent()!!.copyMe(skills = it.text.split(TAGS_SEPARATOR))
+                    GOALS -> viewState().profile.peekContent()!!.copyMe(goals = it.text.split(TAGS_SEPARATOR))
                     AIMS -> viewState().profile.peekContent()!!.copyMe(about = it.text)
-                    SPHERES -> viewState().profile.peekContent()!!.copyMe(fields = it.text.split(Constants.TAGS_SEPARATOR))
+                    SPHERES -> viewState().profile.peekContent()!!.copyMe(fields = it.text.split(TAGS_SEPARATOR))
                     else -> viewState().profile.peekContent()!!
                 }
             }

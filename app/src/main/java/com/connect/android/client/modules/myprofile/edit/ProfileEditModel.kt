@@ -8,9 +8,7 @@ import com.connect.android.client.modules.base.ViewState
 import com.connect.android.client.modules.common.Field
 import kotlinx.android.parcel.Parcelize
 
-object Constants{
-    const val TAGS_SEPARATOR = ","
-}
+const val TAGS_SEPARATOR = ","
 
 sealed class ProfileEditVIA : ViewInputAction() {
     data class Save(val text: String) : ProfileEditVIA()
@@ -22,7 +20,7 @@ sealed class ProfileEditVIA : ViewInputAction() {
 
 sealed class ProfileEditVOA : ViewOutputAction() {
     object Back : ProfileEditVOA()
-    object Saved: ProfileEditVOA()
+    object Saved : ProfileEditVOA()
 }
 
 @Parcelize

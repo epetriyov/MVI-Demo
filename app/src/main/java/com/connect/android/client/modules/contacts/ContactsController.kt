@@ -21,9 +21,10 @@ class ContactsController(bundle: Bundle? = null) : BaseMviController<ContactsVie
         }
     }
 
-    override fun buildView(context: Context): ContactsView {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun buildView(context: Context) = ContactsView(
+        context,
+        ContactsVS(args.getString(EXTRA_EVENT_ID))
+    )
 
     override fun handleViewEvents(action: ContactsVOA) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

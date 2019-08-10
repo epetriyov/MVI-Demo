@@ -26,10 +26,10 @@ class ProfileFormViewModel(
         it.flatMap {
             profileRepository.fetchProfile()
                 .andThen(Observable.just(Unit))
-                .map { ProfileFormVIA.ProfileUpdated as ProfileFormVIA }
-                .onErrorReturn { t -> ProfileFormVIA.ProfileError(t.localizedMessage) }
-                .startWith(ProfileFormVIA.ProfileProgress)
         }
+            .map { ProfileFormVIA.ProfileUpdated as ProfileFormVIA }
+            .onErrorReturn { t -> ProfileFormVIA.ProfileError(t.localizedMessage) }
+            .startWith(ProfileFormVIA.ProfileProgress)
     }
 
     private val editWork: ProfileFormSideEffect = { actions, viewState ->
@@ -72,7 +72,7 @@ class ProfileFormViewModel(
 
     private val editEducation: ProfileFormSideEffect = { actions, viewState ->
         actions.ofType<ProfileFormVIA.Save>()
-            .filter { viewState().id != null && viewState().profileItem != null}
+            .filter { viewState().id != null && viewState().profileItem != null }
             .filter { viewState().field == Field.EDUCATION }
             .map {
                 (viewState().profileItem!!.peekContent()!! as EducationData).copy(
