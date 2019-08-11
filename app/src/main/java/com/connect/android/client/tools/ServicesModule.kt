@@ -65,7 +65,7 @@ val servicesModule = module {
         Scarlet.Builder()
             .webSocketFactory(get())
             .lifecycle(AndroidLifecycle.ofApplicationForeground(androidApplication()))
-            .addMessageAdapterFactory(MoshiMessageAdapter.Factory())
+            .addMessageAdapterFactory(MoshiMessageAdapter.Factory(get()))
             .addStreamAdapterFactory(RxJava2StreamAdapterFactory())
             .build()
     }

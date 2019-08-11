@@ -22,7 +22,7 @@ class ChatsRepoImpl(private val chatsApi: ChatsApi, private val chatDao: ChatDao
     }
 
     override fun createChat(user: User): Single<Chat> {
-        return chatsApi.createChat(ChatRequest(user = user))
+        return chatsApi.createChat(ChatRequest(user = User(id = user.id, name = user.name)))
     }
 
     override fun getChats(searchText: String?): Flowable<List<Chat>> {

@@ -130,7 +130,7 @@ data class Settings(
     val maxAge: Int? = 100,
     @Json(name = "DISTANCE_MAX")
     val maxDistance: Int? = 100
-) {
+) : Serializable {
 
     fun isShowDistance(): Boolean {
         return showDistance == "Y"

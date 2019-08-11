@@ -10,7 +10,7 @@ import java.io.Serializable
 @JsonClass(generateAdapter = true)
 data class Message constructor(
     val text: String,
-    val type: String,
+    val type: String? = null,
     val creationDate: DateTime,
     val userId: String,
     @PrimaryKey

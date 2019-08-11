@@ -22,8 +22,7 @@ interface ProfileRepository {
 class ProfileRepoImpl(private val profileApi: ProfileApi, private val profileDao: ProfileDao) : ProfileRepository {
     override fun fetchProfile(): Completable {
         return profileApi.getProfile().flatMapCompletable {
-            profileDao.deleteUser(profileDao.getUserEntity())
-                .andThen(profileDao.saveUser(it))
+            profileDao.saveUser(it)
         }
     }
 

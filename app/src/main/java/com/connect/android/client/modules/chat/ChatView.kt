@@ -25,7 +25,7 @@ class ChatView(context: Context, initialState: ChatVS) : BaseMviView<ChatVIA, Ch
 
     val chatViewModel: ChatViewModel by inject { parametersOf(initialState) }
 
-    val layoutManager: LinearLayoutManager by inject(named("reversed")) { parametersOf(context) }
+    val chatLayoutManager: LinearLayoutManager by inject(named("reversed")) { parametersOf(context) }
 
     val messagesAdapter: MessagesAdapter by inject { parametersOf(context) }
 
@@ -35,7 +35,7 @@ class ChatView(context: Context, initialState: ChatVS) : BaseMviView<ChatVIA, Ch
 
     override fun initView(savedViewState: Bundle?) {
         with(chat_recyclerview) {
-            layoutManager = layoutManager
+            layoutManager = chatLayoutManager
             adapter = messagesAdapter
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
                 .apply {
@@ -50,7 +50,7 @@ class ChatView(context: Context, initialState: ChatVS) : BaseMviView<ChatVIA, Ch
         btnSend.clicks().map { ChatVIA.SendAction(edit_message.text.toString()) },
         img_avatar.clicks().map { ChatVIA.ProfileClickedAction },
         edit_message.textChanges().map { ChatVIA.TextChanged(it.toString()) },
-        chat_recyclerview.scrollsToEnd(layoutManager).map { ChatVIA.LoadNext }
+        chat_recyclerview.scrollsToEnd(chatLayoutManager).map { ChatVIA.LoadNext }
     )
 
     override fun outputActions(): List<Observable<out ChatVOA>> = listOf(

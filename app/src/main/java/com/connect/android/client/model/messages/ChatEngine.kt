@@ -23,8 +23,6 @@ class ChatEngineImpl(private val chatApi: ChatApi, private val messageDao: Messa
 
     private var disposable: CompositeDisposable = CompositeDisposable()
 
-    private var isConnectedOpened: Boolean = false
-
     override fun startObservingMessages() {
         chatApi.observeMessages()
             .filter { it.type == MESSAGE_CREATE_TYPE }
@@ -37,13 +35,11 @@ class ChatEngineImpl(private val chatApi: ChatApi, private val messageDao: Messa
             .publish {
                 Flowable.merge(
                     it.filter { it.event is Event.OnConnectionOpened<*> }
-                        .doOnNext { isConnectedOpened = true }
                         .switchMap {
                             Flowable.interval(PING_TIMEOUT, TimeUnit.SECONDS)
                                 .doOnNext { sendMessage(PING) }
                         },
                     it.filter { it.event !is Event.OnConnectionOpened<*> && it.event !is Event.OnMessageReceived }
-                        .doOnNext { isConnectedOpened = false }
                 )
             }
             .subscribe().addTo(disposable)
@@ -52,12 +48,9 @@ class ChatEngineImpl(private val chatApi: ChatApi, private val messageDao: Messa
     override fun stopObservingMessages() {
         sendMessage(STOP)
         disposable.clear()
-        isConnectedOpened = false
     }
 
     private fun sendMessage(text: String) {
-        if (isConnectedOpened) {
-            chatApi.sendMessage(MessageToSend(text))
-        }
+        chatApi.sendMessage(MessageToSend(text))
     }
 }

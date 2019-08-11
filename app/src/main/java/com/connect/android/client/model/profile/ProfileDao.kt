@@ -14,8 +14,5 @@ interface ProfileDao {
     fun deleteUser(user: Me): Completable
 
     @Query("SELECT * FROM user LIMIT 1")
-    fun getUserEntity(): Me
-
-    @Query("SELECT * FROM user LIMIT 1")
     fun getUser(): Flowable<Me>
 }

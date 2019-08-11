@@ -5,16 +5,14 @@ import com.connect.android.client.model.profile.User
 import com.connect.android.client.modules.base.*
 import kotlinx.android.parcel.Parcelize
 import org.joda.time.DateTime
+import java.io.Serializable
 
 sealed class ChatVIA : ViewInputAction() {
     object Init : ChatVIA()
     object ProfileClickedAction : ChatVIA()
     object MessageSend : ChatVIA()
     object SendProgress : ChatVIA()
-    object StartObserve : ChatVIA()
     object ObserveStarted : ChatVIA()
-    object StopObserve : ChatVIA()
-    object ObserveStopped : ChatVIA()
     object LoadNext : ChatVIA()
     object NextLoaded : ChatVIA()
     object NextLoadProgress : ChatVIA()
@@ -44,4 +42,4 @@ data class ChatVS(
 ) :
     ViewState()
 
-data class DisplayableMessage(val id: String, val text: String, val time: DateTime, val isMine: Boolean)
+data class DisplayableMessage(val id: String, val text: String, val time: DateTime, val isMine: Boolean): Serializable

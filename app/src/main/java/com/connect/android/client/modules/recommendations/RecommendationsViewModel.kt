@@ -5,6 +5,7 @@ import com.connect.android.client.extensions.onLoggableError
 import com.connect.android.client.extensions.safeMessage
 import com.connect.android.client.model.chats.ChatsRepository
 import com.connect.android.client.model.location.LocationRepository
+import com.connect.android.client.model.recommendations.ConnectState.*
 import com.connect.android.client.model.recommendations.RecommendationsRepository
 import com.connect.android.client.modules.base.BaseMviViewModel
 import com.connect.android.client.modules.base.withUpdate
@@ -65,7 +66,13 @@ class RecommendationsViewModel(
             .switchMap { action ->
                 recommendationsRepository.connectUser(action.user.id)
                     .toObservable()
-                    .map { RecommendationsVIA.Connected(action.user) as RecommendationsVIA }
+                    .map {
+                        when (it) {
+                            CONNECTED -> RecommendationsVIA.Disconnected as RecommendationsVIA
+                            CONNECTING -> RecommendationsVIA.Connecting
+                            DECLINED -> RecommendationsVIA.Disconnected
+                        }
+                    }
                     .onLoggableError { t -> RecommendationsVIA.Error(t.safeMessage()) }
             }
     }

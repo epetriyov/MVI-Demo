@@ -13,6 +13,6 @@ interface ChatApi {
     @Send
     fun sendMessage(message: MessageToSend)
 
-    @Send
+    @Receive
     fun observeMessages(): Flowable<Message>
 }

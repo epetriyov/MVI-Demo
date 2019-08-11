@@ -79,8 +79,8 @@ val viewModelsModule = module {
 }
 
 val viewModule = module {
-    single { (context: Context) -> LayoutInflater.from(context) }
-    single { (context: FragmentActivity) -> RxPermissions(context) }
+    factory { (context: Context) -> LayoutInflater.from(context) }
+    factory { (context: FragmentActivity) -> RxPermissions(context) }
     factory<SocialHelper> { (context: Activity) -> SocialHelperImpl(context) }
     factory { (context: Context) -> LinearLayoutManager(context) }
 }

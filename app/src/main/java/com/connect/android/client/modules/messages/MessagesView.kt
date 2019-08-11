@@ -34,6 +34,8 @@ class MessagesView(context: Context, initialState: MessagesVS) :
         recyclerView.adapter = chatsAdapterAdapter
     }
 
+    override fun loadAction() = MessagesVIA.Init
+
     override fun inputActions() = listOf(
         edit_search.textChanges().throttleLast(SEARCH_THROTTLE_DELAY, TimeUnit.SECONDS)
             .map { MessagesVIA.LoadRequest(it.toString()) })

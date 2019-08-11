@@ -45,7 +45,7 @@ class ProfileFormController(bundle: Bundle? = null) :
         context, ProfileFormVS(
             (args.getSerializable(EXTRA_PROFILE_ITEM) as? ProfileItem)?.withUpdate(),
             args.getSerializable(EXTRA_FIELD) as Field,
-            args.getString(EXTRA_ID)!!
+            args.getString(EXTRA_ID)
         )
     )
 

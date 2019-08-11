@@ -34,6 +34,7 @@ def versions = [:]
     versions.scarlet = '0.1.9'
     versions.cardStackView = '2.3.4'
     versions.conductor = '2.1.5'
+    versions.leakCanary = '2.0-beta-2'
 
 def deps = [:]
     deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.gradle"
@@ -129,6 +130,7 @@ deps.vksdk = "com.vk:androidsdk:$versions.vk"
 deps.facebooksdk = "com.facebook.android:facebook-android-sdk:$versions.facebook"
 deps.card_stack_view = "com.yuyakaido.android:card-stack-view:$versions.cardStackView"
 deps.conductor = "com.bluelinelabs:conductor:$versions.conductor"
+deps.leakCanary = "com.squareup.leakcanary:leakcanary-android:$versions.leakCanary"
 
 static def addRepos(RepositoryHandler handler) {
     handler.google()

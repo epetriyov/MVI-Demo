@@ -37,6 +37,8 @@ class MyProfileView(context: Context, initialState: MyProfileVS) :
 
     override fun viewModel() = myProfileViewModel
 
+    override fun loadAction() = MyProfileVIA.Load
+
     override fun initView(savedViewState: Bundle?) {
         aims_block.findViewById<TextView>(R.id.title_block).apply {
             setText(R.string.title_profile_goals)

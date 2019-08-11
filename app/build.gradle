@@ -120,6 +120,7 @@ dependencies {
     implementation deps.vksdk
     implementation deps.facebooksdk
     implementation deps.card_stack_view
+    debugImplementation deps.leakCanary
 }
 
 apply plugin: 'com.google.gms.google-services'

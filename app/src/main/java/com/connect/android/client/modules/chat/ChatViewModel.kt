@@ -44,6 +44,10 @@ class ChatViewModel(
         }
     }
 
+    private val initialRefresh: ChatSideEffect = { actions, viewState ->
+        actions.ofType<ChatVIA.Init>().map { ChatVIA.LoadNext }
+    }
+
     private val loadNext: ChatSideEffect = { actions, viewState ->
         actions.ofType<ChatVIA.LoadNext>().flatMap {
             messagesRepository.loadChatMessages(
@@ -58,15 +62,10 @@ class ChatViewModel(
     }
 
     private val connectMessages: ChatSideEffect = { actions, _ ->
-        actions.ofType<ChatVIA.StartObserve>().doOnNext {
+        actions.ofType<ChatVIA.Init>().doOnNext {
             chatEngine.startObservingMessages()
         }.map { ChatVIA.ObserveStarted }
-    }
-
-    private val disconnectMessages: ChatSideEffect = { actions, _ ->
-        actions.ofType<ChatVIA.StopObserve>().doOnNext {
-            chatEngine.stopObservingMessages()
-        }.map { ChatVIA.ObserveStopped }
+            .doOnDispose { chatEngine.stopObservingMessages() }
     }
 
     private val sendMessage: ChatSideEffect = { actions, viewState ->
@@ -107,6 +106,6 @@ class ChatViewModel(
     }
 
     override fun sideEffects(): List<SideEffect<ChatVS, ChatVIA>> = listOf(
-        loadMessages, loadNext, connectMessages, disconnectMessages, sendMessage
+        loadMessages, initialRefresh, loadNext, connectMessages, sendMessage
     )
 }
