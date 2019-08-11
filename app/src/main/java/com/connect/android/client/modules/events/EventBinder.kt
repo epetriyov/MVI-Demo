@@ -10,7 +10,7 @@ import org.joda.time.format.DateTimeFormat
 
 object EventBinder {
 
-    private val dayFormat = DateTimeFormat.forPattern("ddMMMMyyyy")
+    private val dayFormat = DateTimeFormat.forPattern("dd MMMM yyyy")
     private val timeFormat = DateTimeFormat.forPattern("HH:mm")
 
     fun bindEvent(view: View, item: Event) {
@@ -32,7 +32,7 @@ object EventBinder {
             timeFormat.print(item.startDate),
             timeFormat.print(item.finishDate)
         )
-        view.findViewById<View>(R.id.view_address).findViewById<ImageView>(R.id.left_icon)
+        view.findViewById<View>(R.id.view_time).findViewById<ImageView>(R.id.left_icon)
             .setImageResource(R.drawable.ic_clock_blue)
         view.findViewById<TextView>(R.id.btn_participants).text = item.accepted.toString()
     }

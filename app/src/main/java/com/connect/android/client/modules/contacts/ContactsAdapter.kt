@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import com.bumptech.glide.request.RequestOptions
 import com.connect.android.client.R
 import com.connect.android.client.model.profile.User
 import com.connect.android.client.modules.base.BaseViewHolder
@@ -57,8 +58,8 @@ class ContactsViewHolder(view: View) : BaseViewHolder(view) {
     fun bindView(item: User) {
         GlideApp.with(containerView)
             .load(item.avatar)
-            .centerCrop()
             .error(R.drawable.ic_placeholder)
+            .apply(RequestOptions.circleCropTransform())
             .into(img_avatar)
         label_name.text = item.name
         label_location.text =

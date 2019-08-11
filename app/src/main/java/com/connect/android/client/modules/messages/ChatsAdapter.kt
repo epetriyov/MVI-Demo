@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import com.bumptech.glide.request.RequestOptions
 import com.connect.android.client.R
 import com.connect.android.client.model.chats.Chat
 import com.connect.android.client.modules.base.BaseViewHolder
@@ -53,8 +54,8 @@ class ChatsViewHolder(view: View) : BaseViewHolder(view) {
     fun bindView(item: Chat) {
         GlideApp.with(containerView)
             .load(item.user.avatar)
-            .centerCrop()
             .error(R.drawable.ic_placeholder)
+            .apply(RequestOptions.circleCropTransform())
             .into(img_avatar)
         label_name.text = item.user.name
         label_time.text = timeFormat.print(item.lastActiveDate)

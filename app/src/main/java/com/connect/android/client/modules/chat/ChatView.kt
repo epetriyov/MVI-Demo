@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.request.RequestOptions
 import com.connect.android.client.R
 import com.connect.android.client.extensions.scrollsToEnd
 import com.connect.android.client.extensions.showSnackbar
@@ -66,8 +67,8 @@ class ChatView(context: Context, initialState: ChatVS) : BaseMviView<ChatVIA, Ch
                 label_work.text = it.user.getWorkInfo()
                 GlideApp.with(context)
                     .load(it.user.avatar)
-                    .centerCrop()
                     .error(R.drawable.ic_placeholder)
+                    .apply(RequestOptions.circleCropTransform())
                     .into(img_avatar)
             }
             messages.bind {

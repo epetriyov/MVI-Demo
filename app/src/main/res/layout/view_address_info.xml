@@ -34,6 +34,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/label_place"
         app:layout_constraintTop_toTopOf="@id/label_place"
+        app:layout_constraintBottom_toBottomOf="@id/label_place"
         tools:src="@drawable/ic_pin_blue" />
 </androidx.constraintlayout.widget.ConstraintLayout>

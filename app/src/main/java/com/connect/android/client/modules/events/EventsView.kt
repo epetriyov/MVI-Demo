@@ -3,7 +3,9 @@ package com.connect.android.client.modules.events
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.connect.android.client.Constants.SEARCH_THROTTLE_DELAY
 import com.connect.android.client.R
@@ -32,8 +34,16 @@ class EventsView(context: Context, initialState: EventsVS) :
     override fun viewModel() = eventsViewModel
 
     override fun initView(savedViewState: Bundle?) {
-        recycler_events.layoutManager = eventsLayoutManager
-        recycler_events.adapter = eventsAdapter
+        with(recycler_events)
+        {
+            layoutManager = eventsLayoutManager
+            adapter = eventsAdapter
+            addItemDecoration(
+                DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+                    .apply {
+                        setDrawable(ContextCompat.getDrawable(context, R.drawable.space_divider)!!)
+                    })
+        }
     }
 
     override fun loadAction() = EventsVIA.Init

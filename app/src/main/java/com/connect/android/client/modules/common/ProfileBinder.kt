@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
+import com.bumptech.glide.request.RequestOptions
 import com.connect.android.client.R
 import com.connect.android.client.extensions.dp
 import com.connect.android.client.model.common.ProfileItem
@@ -27,8 +28,8 @@ object ProfileBinder {
     ) {
         GlideApp.with(containerView)
             .load(user.avatar)
-            .centerCrop()
             .error(R.drawable.ic_placeholder)
+            .apply(RequestOptions.circleCropTransform())
             .into(containerView.findViewById(R.id.img_avatar))
         containerView.findViewById<TextView>(R.id.label_name).text = user.name
         containerView.findViewById<TextView>(R.id.value_skills).text = user.about
