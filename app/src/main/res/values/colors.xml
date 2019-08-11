@@ -25,4 +25,6 @@
     <color name="colorOneMoreBrown">#6F6F6F</color>
     <color name="colorBgEdit">#EEF6FF</color>
     <color name="colorBgChip">#F6F7FB</color>
+    <color name="colorItemNotSelected">#686868</color>
+    <color name="colorShadow">#01000000</color>
 </resources>

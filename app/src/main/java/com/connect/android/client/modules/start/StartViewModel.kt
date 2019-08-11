@@ -5,6 +5,7 @@ import com.connect.android.client.modules.base.BaseMviViewModel
 import com.connect.android.client.modules.base.withUpdate
 import com.freeletics.rxredux.SideEffect
 import io.reactivex.rxkotlin.ofType
+import io.reactivex.schedulers.Schedulers
 
 typealias StartSideEffect = SideEffect<StartVS, StartVIA>
 
@@ -12,7 +13,9 @@ class StartViewModel(private val authRepository: AuthRepository, initialState: S
     BaseMviViewModel<StartVIA, StartVS>(initialState) {
 
     private val init: StartSideEffect = { actions, _ ->
-        actions.ofType<StartVIA.Init>().map { authRepository.isAuthorized() }
+        actions.ofType<StartVIA.Init>()
+            .observeOn(Schedulers.io())
+            .map { authRepository.isAuthorized() }
             .map { StartVIA.Route(it) }
     }
 

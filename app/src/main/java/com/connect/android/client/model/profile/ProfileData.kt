@@ -26,6 +26,7 @@ open class User @JvmOverloads constructor(
     val id: String,
     val gender: String? = null,
     val about: String? = null,
+    val looking: String? = null,
     val skills: List<String>? = null,
     val goals: List<String>? = null,
     val fields: List<String>? = null,
@@ -42,6 +43,7 @@ open class User @JvmOverloads constructor(
     fun copy(
         name: String = this.name, avatarMedium: String? = this.avatarMedium,
         id: String = this.id, gender: String? = this.gender, about: String? = this.about,
+        looking: String? = this.looking,
         skills: List<String> = this.skills?.let { ArrayList(it) } ?: emptyList(),
         goals: List<String> = this.goals?.let { ArrayList(it) } ?: emptyList(),
         fields: List<String> = this.fields?.let { ArrayList(it) } ?: emptyList(),
@@ -52,7 +54,7 @@ open class User @JvmOverloads constructor(
         obj: String = this.obj,
         connectionType: ConnectionType? = this.connectionType
     ) = User(
-        name, avatarMedium, id, gender, about, skills, goals, fields, avatar, avatarBig,
+        name, avatarMedium, id, gender, about, looking, skills, goals, fields, avatar, avatarBig,
         works, educations, distance, obj, connectionType
     )
 
@@ -80,6 +82,7 @@ class Me @JvmOverloads constructor(
     id: String,
     gender: String? = null,
     about: String? = null,
+    looking: String? = null,
     skills: List<String>? = null,
     goals: List<String>? = null,
     fields: List<String>? = null,
@@ -93,13 +96,14 @@ class Me @JvmOverloads constructor(
     connectionType: ConnectionType? = null,
     val settings: Settings? = null
 ) : User(
-    name, avatarMedium, id, gender, about,
+    name, avatarMedium, id, gender, about, looking,
     skills, goals, fields, avatar, avatarBig, works,
     educations, distance, obj, connectionType
 ) {
     fun copyMe(
         name: String = this.name, avatarMedium: String? = this.avatarMedium,
         id: String = this.id, gender: String? = this.gender, about: String? = this.about,
+        looking: String? = this.looking,
         skills: List<String> = this.skills?.let { ArrayList(it) } ?: emptyList(),
         goals: List<String> = this.goals?.let { ArrayList(it) } ?: emptyList(),
         fields: List<String> = this.fields?.let { ArrayList(it) } ?: emptyList(),
@@ -111,7 +115,7 @@ class Me @JvmOverloads constructor(
         connectionType: ConnectionType? = this.connectionType,
         settings: Settings? = this.settings
     ) = Me(
-        name, avatarMedium, id, gender, about, skills, goals, fields, avatar, avatarBig,
+        name, avatarMedium, id, gender, about, looking, skills, goals, fields, avatar, avatarBig,
         works, educations, distance, obj, connectionType, settings
     )
 }

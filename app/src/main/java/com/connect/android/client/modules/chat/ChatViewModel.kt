@@ -11,6 +11,7 @@ import com.connect.android.client.modules.base.withUpdate
 import com.freeletics.rxredux.SideEffect
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.ofType
+import io.reactivex.schedulers.Schedulers
 import kotlin.reflect.KClass
 
 typealias ChatSideEffect = SideEffect<ChatVS, ChatVIA>
@@ -27,7 +28,9 @@ class ChatViewModel(
     }
 
     private val loadMessages: ChatSideEffect = { actions, viewState ->
-        actions.ofType<ChatVIA.Init>().flatMap {
+        actions.ofType<ChatVIA.Init>()
+            .observeOn(Schedulers.io())
+            .flatMap {
             messagesRepository.getMessages(viewState().chat.peekContent()!!.id)
                 .map {
                     it.map {
@@ -54,7 +57,7 @@ class ChatViewModel(
                 viewState().chat.peekContent()!!.id,
                 viewState().messages.peekContent()?.size ?: 0, MESSAGE_LIMIT
             )
-                .andThen(Observable.just(Unit))
+                .andThen(Observable.fromCallable { Unit })
                 .map { ChatVIA.NextLoaded as ChatVIA }
                 .onLoggableError { t -> ChatVIA.NextLoadError(t.safeMessage()) }
                 .startWith(ChatVIA.NextLoadProgress)
@@ -69,9 +72,11 @@ class ChatViewModel(
     }
 
     private val sendMessage: ChatSideEffect = { actions, viewState ->
-        actions.ofType<ChatVIA.SendAction>().flatMap { action ->
+        actions.ofType<ChatVIA.SendAction>()
+            .observeOn(Schedulers.io())
+            .flatMap { action ->
             messagesRepository.sendMessage(viewState().chat.peekContent()!!.id, action.message)
-                .andThen(Observable.just(Unit))
+                .andThen(Observable.fromCallable { Unit })
                 .map { ChatVIA.MessageSend as ChatVIA }
                 .onLoggableError { t -> ChatVIA.SendError(t.safeMessage()) }
                 .startWith(ChatVIA.SendProgress)

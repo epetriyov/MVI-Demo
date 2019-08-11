@@ -29,9 +29,7 @@ class RecommendationsViewModel(
 
     private val init: RecommendationsSideEffect = { actions, _ ->
         actions.ofType<RecommendationsVIA.Init>()
-            .observeOn(AndroidSchedulers.mainThread())
             .flatMap { rxPermissions.request(Manifest.permission.ACCESS_FINE_LOCATION) }
-            .observeOn(Schedulers.io())
             .publish {
                 Observable.merge(
                     it.filter { it }.map { RecommendationsVIA.SendLocation },
@@ -42,9 +40,10 @@ class RecommendationsViewModel(
 
     private val sendLocation: RecommendationsSideEffect = { actions, _ ->
         actions.ofType<RecommendationsVIA.SendLocation>()
+            .observeOn(Schedulers.io())
             .switchMap {
                 locationRepository.updateCurrentLocation()
-                    .andThen(Observable.just(Unit))
+                    .andThen(Observable.fromCallable { Unit })
                     .map { RecommendationsVIA.GetRecommendations as RecommendationsVIA }
                     .onLoggableError { t -> RecommendationsVIA.Error(t.safeMessage()) }
                     .startWith(RecommendationsVIA.Progress)
@@ -52,7 +51,8 @@ class RecommendationsViewModel(
     }
 
     private val getRecommendations: RecommendationsSideEffect = { actions, _ ->
-        actions.ofType<RecommendationsVIA.SendLocation>()
+        actions.ofType<RecommendationsVIA.GetRecommendations>()
+            .observeOn(Schedulers.io())
             .switchMap {
                 recommendationsRepository.getRecommendations()
                     .toObservable()
@@ -63,6 +63,7 @@ class RecommendationsViewModel(
 
     private val connectUser: RecommendationsSideEffect = { actions, _ ->
         actions.ofType<RecommendationsVIA.UserConnect>()
+            .observeOn(Schedulers.io())
             .switchMap { action ->
                 recommendationsRepository.connectUser(action.user.id)
                     .toObservable()
@@ -79,6 +80,7 @@ class RecommendationsViewModel(
 
     private val disconnectUser: RecommendationsSideEffect = { actions, _ ->
         actions.ofType<RecommendationsVIA.UserDisconnect>()
+            .observeOn(Schedulers.io())
             .switchMap { action ->
                 recommendationsRepository.declineUser(action.userId)
                     .toObservable()
@@ -89,6 +91,7 @@ class RecommendationsViewModel(
 
     private val startChat: RecommendationsSideEffect = { actions, _ ->
         actions.ofType<RecommendationsVIA.StartChat>()
+            .observeOn(Schedulers.io())
             .switchMap { action ->
                 chatsRepository.createChat(action.user)
                     .toObservable()

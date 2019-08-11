@@ -3,8 +3,6 @@ package com.connect.android.client.modules.base
 import com.freeletics.rxredux.SideEffect
 import com.freeletics.rxredux.reduxStore
 import io.reactivex.ObservableTransformer
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import kotlin.reflect.KClass
 
@@ -21,7 +19,6 @@ abstract class BaseMviViewModel<VIA : ViewInputAction, VS : ViewState>(private v
         ObservableTransformer { action ->
             var lastAction: VIA? = null
             action
-                .observeOn(Schedulers.io())
                 .reduxStore(
                     initialState = state,
                     sideEffects = sideEffects(),
@@ -32,7 +29,6 @@ abstract class BaseMviViewModel<VIA : ViewInputAction, VS : ViewState>(private v
                 .doOnNext { _state.onNext(it) }
                 .filter { lastAction == null || filterActions().contains(lastAction!!::class) }
                 .distinctUntilChanged()
-                .observeOn(AndroidSchedulers.mainThread())
         }
 
     protected abstract fun filterActions(): List<KClass<out VIA>>

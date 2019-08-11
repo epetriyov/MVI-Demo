@@ -8,6 +8,7 @@ import com.connect.android.client.modules.base.withUpdate
 import com.freeletics.rxredux.SideEffect
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.ofType
+import io.reactivex.schedulers.Schedulers
 
 typealias EventsSideEffect = SideEffect<EventsVS, EventsVIA>
 
@@ -28,9 +29,10 @@ class EventsViewModel(private val eventsRepository: EventsRepository, initialSta
 
     private val refreshEvents: EventsSideEffect = { actions, _ ->
         actions.ofType<EventsVIA.RefreshEvents>()
+            .observeOn(Schedulers.io())
             .flatMap {
                 eventsRepository.updateEvents()
-                    .andThen(Observable.just(Unit))
+                    .andThen(Observable.fromCallable { Unit })
                     .map { EventsVIA.EventsUpdated as EventsVIA }
                     .onLoggableError { t -> EventsVIA.Error(t.safeMessage()) }
                     .startWith(EventsVIA.UpdateProgress)
@@ -47,13 +49,15 @@ class EventsViewModel(private val eventsRepository: EventsRepository, initialSta
     }
 
     private val acceptEvent: EventsSideEffect = { actions, _ ->
-        actions.ofType<EventsVIA.EventAction>().flatMap {
+        actions.ofType<EventsVIA.EventAction>()
+            .observeOn(Schedulers.io())
+            .flatMap {
             (if (it.event.accept) {
                 eventsRepository.declineEvent(it.event.id)
             } else {
                 eventsRepository.approveEvent(it.event.id)
             })
-                .andThen(Observable.just(Unit))
+                .andThen(Observable.fromCallable { Unit })
                 .map { EventsVIA.RefreshEvents as EventsVIA }
                 .onLoggableError { t -> EventsVIA.Error(t.safeMessage()) }
                 .startWith(EventsVIA.UpdateProgress)

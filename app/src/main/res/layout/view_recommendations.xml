@@ -20,23 +20,25 @@
         android:id="@+id/btn_deny"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="37dp"
         android:background="@null"
         android:elevation="4dp"
         android:src="@drawable/btn_deny"
         app:layout_constraintBottom_toBottomOf="@id/btn_connect"
+        app:layout_constraintEnd_toStartOf="@id/btn_connect"
+        app:layout_constraintHorizontal_bias="0.33"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/btn_chat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="37dp"
         android:background="@null"
         android:elevation="4dp"
         android:src="@drawable/btn_chat"
         app:layout_constraintBottom_toBottomOf="@id/btn_connect"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.67"
+        app:layout_constraintStart_toEndOf="@id/btn_connect" />
 
     <ImageButton
         android:id="@+id/btn_revert"
@@ -48,7 +50,7 @@
         android:elevation="4dp"
         android:src="@drawable/btn_revert"
         app:layout_constraintBottom_toBottomOf="@id/btn_connect"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/btn_connect" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/btns_group"
@@ -56,17 +58,19 @@
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="btn_connect,btn_deny,btn_chat,btn_revert,card_stack_view" />
 
-    <com.yuyakaido.android.cardstackview.CardStackView
-        android:id="@+id/card_stack_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="70dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <com.yuyakaido.android.cardstackview.CardStackView
+            android:id="@+id/card_stack_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingStart="16dp"
+            android:paddingTop="26dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="116dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

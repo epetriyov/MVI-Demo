@@ -8,6 +8,7 @@ import com.connect.android.client.modules.base.withUpdate
 import com.freeletics.rxredux.SideEffect
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.ofType
+import io.reactivex.schedulers.Schedulers
 
 typealias MessagesSideEffect = SideEffect<MessagesVS, MessagesVIA>
 
@@ -25,9 +26,10 @@ class MessagesViewModel(private val chatsRepository: ChatsRepository, initialSta
 
     private val fetchChats: MessagesSideEffect = { actions, _ ->
         actions.ofType<MessagesVIA.FetchData>()
+            .observeOn(Schedulers.io())
             .switchMap {
                 chatsRepository.updateChats()
-                    .andThen(Observable.just(Unit))
+                    .andThen(Observable.fromCallable { Unit })
                     .map { MessagesVIA.FetchSuccess as MessagesVIA }
                     .onLoggableError { t -> MessagesVIA.FetchError(t.safeMessage()) }
                     .startWith(MessagesVIA.FetchProgress)

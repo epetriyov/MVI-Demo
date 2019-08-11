@@ -122,5 +122,8 @@ class MyProfileView(context: Context, initialState: MyProfileVS) :
         viewState.editSpheres.bind {
             outcomingAction(MyProfileVOA.EditProfile(viewState.user.peekContent()!!, Field.SPHERES))
         }
+        viewState.logoutAction.bind {
+            outcomingAction(MyProfileVOA.Logout)
+        }
     }
 }

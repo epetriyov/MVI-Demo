@@ -10,6 +10,7 @@ import androidx.annotation.LayoutRes
 import com.connect.android.client.extensions.getWithClassNameKey
 import com.connect.android.client.extensions.putWithClassNameKey
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.subjects.BehaviorSubject
@@ -104,6 +105,7 @@ abstract class BaseMviView<VIA : ViewInputAction, VEA : ViewOutputAction, VS : V
             Observable.merge(inputActions() + incomingActions +
                     (loadAction()?.let { Observable.just(it) } ?: Observable.never<VIA>()))
                 .compose(it.uiActionComposer)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(::bindState)
                 .addTo(compositeDisposable)
         }

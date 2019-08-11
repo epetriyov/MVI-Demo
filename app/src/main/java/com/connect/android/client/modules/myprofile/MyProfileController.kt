@@ -15,7 +15,14 @@ class MyProfileController(bundle: Bundle? = null) :
     override fun handleViewEvents(action: MyProfileVOA) {
         val transaction = Do exhaustive when (action) {
             is MyProfileVOA.EditProfile -> ProfileEditController.newInstance(action.me, action.field)
-            is MyProfileVOA.EditProfileItem -> ProfileFormController.newInstance(action.profileItem, action.field, action.id)
+            is MyProfileVOA.EditProfileItem -> ProfileFormController.newInstance(
+                action.profileItem,
+                action.field,
+                action.id
+            )
+            MyProfileVOA.Logout ->
+                //TODO logout
+                targetController!!
         }.buildRouterTransaction()
         router.pushController(transaction!!)
     }

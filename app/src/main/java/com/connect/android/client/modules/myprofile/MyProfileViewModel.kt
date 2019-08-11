@@ -12,6 +12,7 @@ import com.connect.android.client.modules.base.withUpdate
 import com.freeletics.rxredux.SideEffect
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.ofType
+import io.reactivex.schedulers.Schedulers
 
 typealias MyProfileSideEffect = SideEffect<MyProfileVS, MyProfileVIA>
 
@@ -34,9 +35,10 @@ class MyProfileViewModel(
 
     private val fetchProfile: MyProfileSideEffect = { actions, _ ->
         actions.ofType<MyProfileVIA.Load>()
+            .observeOn(Schedulers.io())
             .flatMap {
                 profileRepository.fetchProfile()
-                    .andThen(Observable.just(Unit))
+                    .andThen(Observable.fromCallable { Unit })
                     .map { MyProfileVIA.ProfileUpdated as MyProfileVIA }
                     .onLoggableError { t -> MyProfileVIA.Error(t.safeMessage()) }
                     .startWith(MyProfileVIA.UpdateProgress)
@@ -45,16 +47,18 @@ class MyProfileViewModel(
 
     private val logout: MyProfileSideEffect = { actions, _ ->
         actions.ofType<MyProfileVIA.Logout>()
+            .observeOn(Schedulers.io())
             .doOnNext { authRepository.logout() }
             .map { MyProfileVIA.LogoutFinished }
     }
 
     private val deleteJob: MyProfileSideEffect = { actions, _ ->
         actions.ofType<MyProfileVIA.DeleteJob>()
+            .observeOn(Schedulers.io())
             .flatMap {
                 worksRepository.removeWork(it.jobId)
                     .andThen(profileRepository.fetchProfile())
-                    .andThen(Observable.just(Unit))
+                    .andThen(Observable.fromCallable { Unit })
                     .map { MyProfileVIA.ProfileUpdated as MyProfileVIA }
                     .onLoggableError { t -> MyProfileVIA.Error(t.safeMessage()) }
                     .startWith(MyProfileVIA.UpdateProgress)
@@ -63,10 +67,11 @@ class MyProfileViewModel(
 
     private val deleteEducation: MyProfileSideEffect = { actions, _ ->
         actions.ofType<MyProfileVIA.DeleteEducation>()
+            .observeOn(Schedulers.io())
             .flatMap {
                 educationsRepository.removeEducation(it.jobId)
                     .andThen(profileRepository.fetchProfile())
-                    .andThen(Observable.just(Unit))
+                    .andThen(Observable.fromCallable { Unit })
                     .map { MyProfileVIA.ProfileUpdated as MyProfileVIA }
                     .onLoggableError { t -> MyProfileVIA.Error(t.safeMessage()) }
                     .startWith(MyProfileVIA.UpdateProgress)

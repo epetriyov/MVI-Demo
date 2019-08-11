@@ -31,17 +31,7 @@ class RecommendationsHelper(private val adapter: RecommendationsAdapter, private
         this.cardStackView = cardStackView
         with(manager)
         {
-            setStackFrom(StackFrom.None)
-            setVisibleCount(3)
-            setTranslationInterval(8.0f)
-            setScaleInterval(0.95f)
-            setSwipeThreshold(0.3f)
-            setMaxDegree(20.0f)
-            setDirections(Direction.HORIZONTAL)
-            setCanScrollHorizontal(true)
-            setCanScrollVertical(true)
-            setSwipeableMethod(SwipeableMethod.AutomaticAndManual)
-            setOverlayInterpolator(LinearInterpolator())
+            setStackFrom(StackFrom.Top)
             with(cardStackListener as RecommendationsDelegate)
             {
                 swipes().subscribe {
@@ -50,20 +40,14 @@ class RecommendationsHelper(private val adapter: RecommendationsAdapter, private
                     }
                     when (it) {
                         Direction.Left -> {
-                            connectSubject.onNext(adapter.getItemByPosition(manager.topPosition))
+                            connectSubject.onNext(adapter.getItemByPosition(manager.topPosition - 1))
                         }
                         Direction.Right -> {
-                            disconnectSubject.onNext(adapter.getItemByPosition(manager.topPosition).id)
+                            disconnectSubject.onNext(adapter.getItemByPosition(manager.topPosition - 1).id)
                         }
                         else -> {
 
                         }
-                    }
-                    drags().subscribe {
-                        val rightAlpha = if (it < 0) -it else 0f
-                        val leftAlpha = if (it > 0) it else 0f
-                        manager.topView.findViewById<View>(R.id.item_swipe_right_indicator).alpha = rightAlpha
-                        manager.topView.findViewById<View>(R.id.item_swipe_left_indicator).alpha = leftAlpha
                     }
                     cardAppeared().map { adapter.getItemByPosition(it) }.subscribeWith(appearSubject)
                 }
@@ -81,7 +65,7 @@ class RecommendationsHelper(private val adapter: RecommendationsAdapter, private
     }
 
     fun getCurrentItem(): User {
-        return adapter.getItemByPosition(manager.topPosition)
+        return adapter.getItemByPosition(manager.topPosition - 1)
     }
 
     fun disconnect() {
@@ -89,7 +73,7 @@ class RecommendationsHelper(private val adapter: RecommendationsAdapter, private
             throw IllegalStateException("call init fun previously")
         }
         val setting = SwipeAnimationSetting.Builder()
-            .setDirection(Direction.Left)
+            .setDirection(Direction.Right)
             .setDuration(Duration.Normal.duration)
             .setInterpolator(AccelerateInterpolator())
             .build()
@@ -115,7 +99,7 @@ class RecommendationsHelper(private val adapter: RecommendationsAdapter, private
             throw IllegalStateException("call init fun previously")
         }
         val setting = SwipeAnimationSetting.Builder()
-            .setDirection(Direction.Right)
+            .setDirection(Direction.Left)
             .setDuration(Duration.Normal.duration)
             .setInterpolator(AccelerateInterpolator())
             .build()

@@ -3,10 +3,13 @@ package com.connect.android.client.modules.auth
 import com.connect.android.client.extensions.onLoggableError
 import com.connect.android.client.extensions.safeMessage
 import com.connect.android.client.model.auth.AuthRepository
-import com.connect.android.client.modules.base.*
+import com.connect.android.client.modules.base.BaseMviViewModel
+import com.connect.android.client.modules.base.ESO
+import com.connect.android.client.modules.base.withUpdate
 import com.freeletics.rxredux.SideEffect
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.ofType
+import io.reactivex.schedulers.Schedulers
 
 typealias AuthSideEffect = SideEffect<AuthVS, AuthVIA>
 
@@ -53,9 +56,11 @@ class AuthViewModel(
     }
 
     private val fbAuth: AuthSideEffect = { actions, _ ->
-        actions.ofType<AuthVIA.ProceedFb>().switchMap {
+        actions.ofType<AuthVIA.ProceedFb>()
+            .observeOn(Schedulers.io())
+            .switchMap {
             authRepository.authFb(it.token)
-                .andThen(Observable.just(Unit))
+                .andThen(Observable.fromCallable { Unit })
                 .map { AuthVIA.Success as AuthVIA }
                 .onLoggableError { t -> AuthVIA.Error(t.safeMessage()) }
                 .startWith(AuthVIA.Progress)
@@ -63,9 +68,11 @@ class AuthViewModel(
     }
 
     private val vkAuth: AuthSideEffect = { actions, _ ->
-        actions.ofType<AuthVIA.ProceedVk>().switchMap {
+        actions.ofType<AuthVIA.ProceedVk>()
+            .observeOn(Schedulers.io())
+            .switchMap {
             authRepository.authVk(it.token)
-                .andThen(Observable.just(Unit))
+                .andThen(Observable.fromCallable { Unit })
                 .map { AuthVIA.Success as AuthVIA }
                 .onLoggableError { t -> AuthVIA.Error(t.safeMessage()) }
                 .startWith(AuthVIA.Progress)

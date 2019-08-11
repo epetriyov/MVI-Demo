@@ -10,6 +10,7 @@ import com.connect.android.client.modules.common.Field.*
 import com.freeletics.rxredux.SideEffect
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.ofType
+import io.reactivex.schedulers.Schedulers
 
 typealias ProfileEditSideEffect = SideEffect<ProfileEditVS, ProfileEditVIA>
 
@@ -29,10 +30,11 @@ class ProfileEditViewModel(
                     else -> viewState().profile.peekContent()!!
                 }
             }
+            .observeOn(Schedulers.io())
             .flatMap {
                 profileRepository.updateProfile(it)
                     .andThen(profileRepository.fetchProfile())
-                    .andThen(Observable.just(Unit))
+                    .andThen(Observable.fromCallable { Unit })
                     .map { ProfileEditVIA.ProfileUpdated as ProfileEditVIA }
                     .onLoggableError { t ->
                         ProfileEditVIA.ProfileError(

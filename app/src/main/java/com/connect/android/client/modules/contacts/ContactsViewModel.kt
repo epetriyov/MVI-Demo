@@ -10,6 +10,7 @@ import com.connect.android.client.modules.base.withUpdate
 import com.freeletics.rxredux.SideEffect
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.ofType
+import io.reactivex.schedulers.Schedulers
 
 typealias ContactSideEffect = SideEffect<ContactsVS, ContactsVIA>
 
@@ -35,13 +36,14 @@ class ContactsViewModel(
 
     private val fetchUsers: ContactSideEffect = { actions, viewState ->
         actions.ofType<ContactsVIA.FetchUsers>()
+            .observeOn(Schedulers.io())
             .switchMap {
                 (if (viewState().eventId == null) {
                     contactsRepository.updateContacts()
                 } else {
                     eventsRepository.fetchEventMembers(viewState().eventId!!)
                 })
-                    .andThen(Observable.just(Unit))
+                    .andThen(Observable.fromCallable { Unit })
                     .map { ContactsVIA.LoadSuccess as ContactsVIA }
                     .onLoggableError { t -> ContactsVIA.LoadError(t.safeMessage()) }
                     .startWith(ContactsVIA.LoadProgress)
@@ -58,7 +60,9 @@ class ContactsViewModel(
     }
 
     private val createChat: ContactSideEffect = { actions, _ ->
-        actions.ofType<ContactsVIA.ChatRequest>().flatMap {
+        actions.ofType<ContactsVIA.ChatRequest>()
+            .observeOn(Schedulers.io())
+            .flatMap {
             chatRepository.createChat(it.user)
                 .toObservable()
                 .map { ContactsVIA.ChatCreated(it) as ContactsVIA }

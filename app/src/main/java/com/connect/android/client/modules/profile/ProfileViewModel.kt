@@ -8,6 +8,7 @@ import com.connect.android.client.modules.base.BaseMviViewModel
 import com.connect.android.client.modules.base.withUpdate
 import com.freeletics.rxredux.SideEffect
 import io.reactivex.rxkotlin.ofType
+import io.reactivex.schedulers.Schedulers
 import kotlin.reflect.KClass
 
 typealias ProfileSideEffect = SideEffect<ProfileVS, ProfileVIA>
@@ -20,6 +21,7 @@ class ProfileViewModel(
 
     private val createChat: ProfileSideEffect = { actions, viewState ->
         actions.ofType<ProfileVIA.Chat>()
+            .observeOn(Schedulers.io())
             .flatMap {
                 chatsRepository.createChat(viewState().user.peekContent()!!)
                     .toObservable()

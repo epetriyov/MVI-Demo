@@ -9,6 +9,7 @@ import com.connect.android.client.modules.base.withoutUpdate
 import com.freeletics.rxredux.SideEffect
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.ofType
+import io.reactivex.schedulers.Schedulers
 
 typealias MainSideEffect = SideEffect<MainVS, MainVIA>
 
@@ -21,9 +22,11 @@ class MainViewModel(
     private val init: MainSideEffect = { actions, viewState ->
         actions.ofType<MainVIA.Init>().publish {
             Observable.merge(
-                it.flatMap {
+                it
+                    .observeOn(Schedulers.io())
+                    .flatMap {
                     authRepository.updateNotificationToken()
-                        .onErrorComplete().andThen(Observable.just(MainVIA.TokenUpdated))
+                        .onErrorComplete().andThen(Observable.fromCallable { MainVIA.TokenUpdated })
                 },
                 it.filter { viewState().selectedTabId.isEmpty() }
                     .map { MainVIA.FirstTabSelect },

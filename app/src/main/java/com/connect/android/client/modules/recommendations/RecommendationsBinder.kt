@@ -14,8 +14,8 @@ object RecommendationsBinder {
             .centerCrop()
             .error(R.drawable.ic_placeholder)
             .into(containerView.findViewById(R.id.img_avatar))
-        containerView.findViewById<TextView>(R.id.value_skills).text = item.skills?.joinToString()
-        containerView.findViewById<TextView>(R.id.value_goals).text = item.goals?.joinToString()
+        containerView.findViewById<TextView>(R.id.value_skills).text = item.about
+        containerView.findViewById<TextView>(R.id.value_goals).text = item.looking
         containerView.findViewById<TextView>(R.id.label_location).text =
             String.format(containerView.context.getString(R.string.distance), item.distance)
         containerView.findViewById<TextView>(R.id.label_work).text = item.getWorkInfo()

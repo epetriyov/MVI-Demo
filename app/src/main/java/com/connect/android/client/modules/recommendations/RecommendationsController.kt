@@ -16,7 +16,9 @@ class RecommendationsController(bundle: Bundle? = null) :
             is RecommendationsVOA.OpenProfile -> {
                 router.pushController(ProfileController.newInstance(action.user).buildRouterTransaction())
             }
-            is RecommendationsVOA.OpenChat -> targetController
+            is RecommendationsVOA.OpenChat ->
+                //TODO open chat
+                targetController
         }
     }
 }

@@ -27,6 +27,7 @@ sealed class MyProfileVIA : ViewInputAction() {
 }
 
 sealed class MyProfileVOA : ViewOutputAction() {
+    object Logout: MyProfileVOA()
     data class EditProfile(val me: Me, val field: Field) : MyProfileVOA()
     data class EditProfileItem(val profileItem: ProfileItem? = null, val field: Field, val id: String? = null) : MyProfileVOA()
 }

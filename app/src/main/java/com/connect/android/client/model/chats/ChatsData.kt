@@ -24,4 +24,5 @@ data class Chat @JvmOverloads constructor(
     val lastActiveDate: DateTime
 ): Serializable
 
-data class ChatRequest(@Json(name = "object") val obj: String = "directChat", val user: User)
+@JsonClass(generateAdapter = true)
+data class ChatRequest(@Json(name = "object") val obj: String = "directChat", val user: User) : Serializable

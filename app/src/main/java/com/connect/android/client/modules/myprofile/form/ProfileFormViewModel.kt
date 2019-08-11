@@ -15,6 +15,7 @@ import com.freeletics.rxredux.SideEffect
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.rxkotlin.ofType
+import io.reactivex.schedulers.Schedulers
 
 typealias ProfileFormSideEffect = SideEffect<ProfileFormVS, ProfileFormVIA>
 
@@ -26,9 +27,11 @@ class ProfileFormViewModel(
 ) : BaseMviViewModel<ProfileFormVIA, ProfileFormVS>(initialState) {
 
     private val updateProfileTransformer = ObservableTransformer<Unit, ProfileFormVIA> {
-        it.flatMap {
+        it
+            .observeOn(Schedulers.io())
+            .flatMap {
             profileRepository.fetchProfile()
-                .andThen(Observable.just(Unit))
+                .andThen(Observable.fromCallable { Unit })
         }
             .map { ProfileFormVIA.ProfileUpdated as ProfileFormVIA }
             .onLoggableError { t -> ProfileFormVIA.ProfileError(t.safeMessage()) }
@@ -47,9 +50,10 @@ class ProfileFormViewModel(
                     yearTill = it.endYear.toInt()
                 )
             }
+            .observeOn(Schedulers.io())
             .flatMap {
                 worksRepository.updateWork(viewState().id!!, it)
-                    .andThen(Observable.just(Unit))
+                    .andThen(Observable.fromCallable { Unit })
                     .compose(updateProfileTransformer)
             }
     }
@@ -66,9 +70,10 @@ class ProfileFormViewModel(
                     yearTill = it.endYear.toInt()
                 )
             }
+            .observeOn(Schedulers.io())
             .flatMap {
                 worksRepository.addWork(it)
-                    .andThen(Observable.just(Unit))
+                    .andThen(Observable.fromCallable { Unit })
                     .compose(updateProfileTransformer)
             }
     }
@@ -85,9 +90,10 @@ class ProfileFormViewModel(
                     yearTill = it.endYear.toInt()
                 )
             }
+            .observeOn(Schedulers.io())
             .flatMap {
                 educationsRepository.updateEducation(viewState().id!!, it)
-                    .andThen(Observable.just(Unit))
+                    .andThen(Observable.fromCallable { Unit })
                     .compose(updateProfileTransformer)
             }
     }
@@ -104,9 +110,10 @@ class ProfileFormViewModel(
                     yearTill = it.endYear.toInt()
                 )
             }
+            .observeOn(Schedulers.io())
             .flatMap {
                 educationsRepository.addEducation(it)
-                    .andThen(Observable.just(Unit))
+                    .andThen(Observable.fromCallable { Unit })
                     .compose(updateProfileTransformer)
             }
     }
