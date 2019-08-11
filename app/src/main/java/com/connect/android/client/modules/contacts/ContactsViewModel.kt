@@ -49,8 +49,8 @@ class ContactsViewModel(
     private val initialLoad: ContactSideEffect = { actions, _ ->
         actions.ofType<ContactsVIA.Init>().publish {
             Observable.merge(
-                Observable.just(ContactsVIA.LoadRequest()),
-                Observable.just(ContactsVIA.FetchUsers)
+                it.map { ContactsVIA.LoadRequest() },
+                it.map { ContactsVIA.FetchUsers }
             )
         }
     }

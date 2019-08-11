@@ -9,7 +9,9 @@ import com.connect.android.client.modules.base.withUpdate
 import com.freeletics.rxredux.SideEffect
 import com.tbruyelle.rxpermissions2.RxPermissions
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.ofType
+import io.reactivex.schedulers.Schedulers
 import kotlin.reflect.KClass
 
 typealias RecommendationsSideEffect = SideEffect<RecommendationsVS, RecommendationsVIA>
@@ -24,7 +26,9 @@ class RecommendationsViewModel(
 
     private val init: RecommendationsSideEffect = { actions, _ ->
         actions.ofType<RecommendationsVIA.Init>()
+            .observeOn(AndroidSchedulers.mainThread())
             .flatMap { rxPermissions.request(Manifest.permission.ACCESS_FINE_LOCATION) }
+            .observeOn(Schedulers.io())
             .publish {
                 Observable.merge(
                     it.filter { it }.map { RecommendationsVIA.SendLocation },

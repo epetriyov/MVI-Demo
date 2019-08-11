@@ -20,14 +20,15 @@ class MainViewModel(
     private val init: MainSideEffect = { actions, viewState ->
         actions.ofType<MainVIA.Init>().publish {
             Observable.merge(
-                authRepository.updateNotificationToken()
-                    .onErrorComplete().andThen(Observable.just(MainVIA.TokenUpdated)),
+                it.flatMap {
+                    authRepository.updateNotificationToken()
+                        .onErrorComplete().andThen(Observable.just(MainVIA.TokenUpdated))
+                },
                 it.filter { viewState().selectedTabId.isEmpty() }
                     .map { MainVIA.FirstTabSelect },
                 it.filter { !viewState().selectedTabId.isEmpty() }
                     .map { MainVIA.TabSelect(viewState().selectedTabId.peekContent()!!) })
         }
-
     }
 
     override fun filterActions() =

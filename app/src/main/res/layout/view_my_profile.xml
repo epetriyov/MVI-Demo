@@ -19,6 +19,7 @@
         android:id="@+id/scroll_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_menu">
@@ -210,12 +211,12 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="30dp"
                 android:drawableStart="@drawable/ic_exit"
+                android:drawableEnd="@drawable/ic_arrow_right"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical"
                 android:text="@string/exit"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
-                android:drawableEnd="@drawable/ic_arrow_right"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/img_avatar"
                 app:layout_constraintTop_toBottomOf="@id/education_block" />
@@ -229,4 +230,14 @@
                 app:layout_constraintTop_toBottomOf="@id/btn_exit" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

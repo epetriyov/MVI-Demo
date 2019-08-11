@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.connect.android.client.R
@@ -77,6 +78,7 @@ class MyProfileView(context: Context, initialState: MyProfileVS) :
 
     override fun bindState(viewState: MyProfileVS) {
         viewState.user.bind {
+            scroll_view.isVisible = true
             ProfileBinder.bindProfile(this@MyProfileView, it, workAdapter, educationAdapter)
         }
         viewState.error.bind {

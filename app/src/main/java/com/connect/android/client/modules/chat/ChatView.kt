@@ -18,13 +18,14 @@ import io.reactivex.Observable
 import kotlinx.android.synthetic.main.view_chat.view.*
 import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
+import org.koin.core.qualifier.named
 
 @SuppressLint("ViewConstructor")
 class ChatView(context: Context, initialState: ChatVS) : BaseMviView<ChatVIA, ChatVOA, ChatVS>(context, initialState) {
 
     val chatViewModel: ChatViewModel by inject { parametersOf(initialState) }
 
-    val layoutManager: LinearLayoutManager by inject { parametersOf(context) }
+    val layoutManager: LinearLayoutManager by inject(named("reversed")) { parametersOf(context) }
 
     val messagesAdapter: MessagesAdapter by inject { parametersOf(context) }
 

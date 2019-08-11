@@ -37,6 +37,8 @@ class MainView(context: Context, initialState: MainVS) :
 
     override fun outputActions(): List<Observable<out MainVOA>> = emptyList()
 
+    override fun loadAction() = MainVIA.Init
+
     override fun bindState(viewState: MainVS) {
         viewState.selectedTabId.bind {
             bottom_navigation.selectedItemId = it

@@ -35,8 +35,8 @@ class MessagesViewModel(private val chatsRepository: ChatsRepository, initialSta
     private val initialLoad: MessagesSideEffect = { actions, _ ->
         actions.ofType<MessagesVIA.Init>().publish {
             Observable.merge(
-                Observable.just(MessagesVIA.LoadRequest()),
-                Observable.just(MessagesVIA.FetchData)
+                it.map { MessagesVIA.LoadRequest() },
+                it.map { MessagesVIA.FetchData }
             )
         }
     }

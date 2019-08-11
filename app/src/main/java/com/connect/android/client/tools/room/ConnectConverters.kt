@@ -7,6 +7,8 @@ import com.connect.android.client.model.profile.ConnectionType
 import com.connect.android.client.model.profile.Settings
 import com.connect.android.client.model.profile.User
 import com.connect.android.client.model.works.WorkData
+import com.connect.android.client.tools.moshi.LENIENT_FACTORY
+import com.connect.android.client.tools.moshi.MoshiDateTimeConverter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import org.joda.time.DateTime
@@ -14,13 +16,13 @@ import org.joda.time.DateTime
 
 class ConnectConverters {
 
-    val moshi = Moshi.Builder().build()
+    val moshi = Moshi.Builder().add(MoshiDateTimeConverter()).add(LENIENT_FACTORY).build()
 
     val listStringAdapter =
         moshi.adapter<List<String>>(Types.newParameterizedType(List::class.java, String::class.java))
 
     val listDoubleAdapter =
-        moshi.adapter<List<Double>>(Types.newParameterizedType(List::class.java, Double::class.java))
+        moshi.adapter<List<Double>>(Types.newParameterizedType(List::class.java, Double::class.javaObjectType))
 
     val listWorksAdapter =
         moshi.adapter<List<WorkData>>(Types.newParameterizedType(List::class.java, WorkData::class.java))

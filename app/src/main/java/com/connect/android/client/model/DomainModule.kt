@@ -34,6 +34,9 @@ val authModule = module {
         val retrofit: Retrofit = get()
         retrofit.create(AuthApi::class.java)
     }
+    factory<ProfileStore> {
+        SharedProfileStore(get())
+    }
     factory<AuthRepository> { AuthRepoImpl(get(), get(), get(), get(), get()) }
 }
 
@@ -142,8 +145,9 @@ val profileModule = module {
         val retrofit: Retrofit = get()
         retrofit.create(ProfileApi::class.java)
     }
-    factory<ProfileStore> {
-        SharedProfileStore(get())
+    factory {
+        val db: ConnectDatabase = get()
+        db.profileDao()
     }
     factory<ProfileRepository> {
         ProfileRepoImpl(get(), get())

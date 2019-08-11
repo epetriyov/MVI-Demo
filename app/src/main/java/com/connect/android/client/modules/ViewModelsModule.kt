@@ -36,7 +36,9 @@ import com.connect.android.client.modules.start.StartVS
 import com.connect.android.client.modules.start.StartViewModel
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
+import com.yuyakaido.android.cardstackview.CardStackListener
 import org.koin.core.parameter.parametersOf
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val viewModelsModule = module {
@@ -68,13 +70,15 @@ val viewModelsModule = module {
 }
 
 val viewModule = module {
-    factory<SocialHelper> { (context: Activity) -> SocialHelperImpl(context) }
     single { (context: Context) -> LayoutInflater.from(context) }
     single { (context: FragmentActivity) -> RxPermissions(context) }
+    factory<SocialHelper> { (context: Activity) -> SocialHelperImpl(context) }
+    factory { (context: Context) -> LinearLayoutManager(context) }
 }
 
 val recommendationsView = module {
-    factory { RecommendationsDelegate() }
+    factory<CardStackListener> { RecommendationsDelegate() }
+    factory { (context: Context) -> CardStackLayoutManager(context, get()) }
     factory { (context: Context) -> RecommendationsAdapter(get(parameters = { parametersOf(context) })) }
     factory { (context: Context) ->
         RecommendationsHelper(
@@ -82,13 +86,11 @@ val recommendationsView = module {
             get(parameters = { parametersOf(context) })
         )
     }
-    factory { (context: Context) -> CardStackLayoutManager(context, get()) }
 }
-
 
 val messagesView = module {
     factory { (context: Context) -> MessagesAdapter(get(parameters = { parametersOf(context) })) }
-    factory { (context: Context) ->
+    factory(named("reversed")) { (context: Context) ->
         LinearLayoutManager(context).apply {
             reverseLayout = true
             stackFromEnd = true
@@ -102,7 +104,6 @@ val profileView = module {
             get(parameters = { parametersOf(context) })
         )
     }
-    factory { (context: Context) -> LinearLayoutManager(context) }
 }
 
 val myProfileView = module {
@@ -111,7 +112,6 @@ val myProfileView = module {
             get(parameters = { parametersOf(context) })
         )
     }
-    factory { (context: Context) -> LinearLayoutManager(context) }
 }
 
 val eventsView = module {
@@ -120,7 +120,6 @@ val eventsView = module {
             get(parameters = { parametersOf(context) })
         )
     }
-    factory { (context: Context) -> LinearLayoutManager(context) }
 }
 
 val contactsView = module {
@@ -129,9 +128,7 @@ val contactsView = module {
             get(parameters = { parametersOf(context) })
         )
     }
-    factory { (context: Context) -> LinearLayoutManager(context) }
 }
-
 
 val chatsView = module {
     factory { (context: Context) ->
@@ -139,5 +136,4 @@ val chatsView = module {
             get(parameters = { parametersOf(context) })
         )
     }
-    factory { (context: Context) -> LinearLayoutManager(context) }
 }

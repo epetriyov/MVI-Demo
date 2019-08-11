@@ -25,7 +25,7 @@ sealed class ProfileEditVOA : ViewOutputAction() {
 
 @Parcelize
 data class ProfileEditVS(
-    val profile: ORField<Me> = ORField.empty(), val field: Field,
+    val profile: ORField<Me>, val field: Field,
     val error: ORField<String> = ORField.empty(), val progress: Boolean = false,
     val saved: ORField<Unit> = ORField.empty()
 ) : ViewState()

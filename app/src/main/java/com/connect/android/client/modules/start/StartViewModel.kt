@@ -2,6 +2,7 @@ package com.connect.android.client.modules.start
 
 import com.connect.android.client.model.auth.AuthRepository
 import com.connect.android.client.modules.base.BaseMviViewModel
+import com.connect.android.client.modules.base.withUpdate
 import com.freeletics.rxredux.SideEffect
 import io.reactivex.rxkotlin.ofType
 
@@ -17,7 +18,7 @@ class StartViewModel(private val authRepository: AuthRepository, initialState: S
 
     override fun reducer(state: StartVS, action: StartVIA): StartVS {
         return when (action) {
-            is StartVIA.Route -> state.copy(isAuthorized = action.isAuthorized)
+            is StartVIA.Route -> state.copy(isAuthorized = action.isAuthorized.withUpdate())
             else -> state
         }
     }
