@@ -1,5 +1,7 @@
 package com.connect.android.client.modules.events
 
+import com.connect.android.client.extensions.onLoggableError
+import com.connect.android.client.extensions.safeMessage
 import com.connect.android.client.model.events.EventsRepository
 import com.connect.android.client.modules.base.BaseMviViewModel
 import com.connect.android.client.modules.base.withUpdate
@@ -30,7 +32,7 @@ class EventsViewModel(private val eventsRepository: EventsRepository, initialSta
                 eventsRepository.updateEvents()
                     .andThen(Observable.just(Unit))
                     .map { EventsVIA.EventsUpdated as EventsVIA }
-                    .onErrorReturn { t -> EventsVIA.Error(t.localizedMessage) }
+                    .onLoggableError { t -> EventsVIA.Error(t.safeMessage()) }
                     .startWith(EventsVIA.UpdateProgress)
             }
     }
@@ -53,7 +55,7 @@ class EventsViewModel(private val eventsRepository: EventsRepository, initialSta
             })
                 .andThen(Observable.just(Unit))
                 .map { EventsVIA.RefreshEvents as EventsVIA }
-                .onErrorReturn { t -> EventsVIA.Error(t.localizedMessage) }
+                .onLoggableError { t -> EventsVIA.Error(t.safeMessage()) }
                 .startWith(EventsVIA.UpdateProgress)
         }
     }

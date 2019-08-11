@@ -15,8 +15,8 @@ class ProfileController(bundle: Bundle? = null) : BaseMviController<ProfileView,
     companion object {
         private const val EXTRA_USER = "extra_user"
 
-        fun newInstance(user: User): ChatController {
-            return ChatController(
+        fun newInstance(user: User): ProfileController {
+            return ProfileController(
                 BundleBuilder(Bundle())
                     .putSerializable(EXTRA_USER, user)
                     .build()

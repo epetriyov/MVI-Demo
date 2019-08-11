@@ -1,10 +1,7 @@
 package com.connect.android.client.modules.events.info
 
 import com.connect.android.client.model.events.Event
-import com.connect.android.client.modules.base.ORField
-import com.connect.android.client.modules.base.ViewInputAction
-import com.connect.android.client.modules.base.ViewOutputAction
-import com.connect.android.client.modules.base.ViewState
+import com.connect.android.client.modules.base.*
 import kotlinx.android.parcel.Parcelize
 
 sealed class EventInfoVIA : ViewInputAction() {
@@ -26,5 +23,5 @@ data class EventInfoVS(
     val event: ORField<Event> = ORField.empty(),
     val progress: Boolean = false,
     val error: ORField<String> = ORField.empty(),
-    val participantsAction: ORField<Unit> = ORField.empty()
+    val participantsAction: ORField<ESO> = ORField.empty()
 ) : ViewState()

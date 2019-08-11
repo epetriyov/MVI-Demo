@@ -1,5 +1,7 @@
 package com.connect.android.client.modules.contacts
 
+import com.connect.android.client.extensions.onLoggableError
+import com.connect.android.client.extensions.safeMessage
 import com.connect.android.client.model.chats.ChatsRepository
 import com.connect.android.client.model.contacts.ContactsRepository
 import com.connect.android.client.model.events.EventsRepository
@@ -41,7 +43,7 @@ class ContactsViewModel(
                 })
                     .andThen(Observable.just(Unit))
                     .map { ContactsVIA.LoadSuccess as ContactsVIA }
-                    .onErrorReturn { t -> ContactsVIA.LoadError(t.localizedMessage) }
+                    .onLoggableError { t -> ContactsVIA.LoadError(t.safeMessage()) }
                     .startWith(ContactsVIA.LoadProgress)
             }
     }
@@ -60,7 +62,7 @@ class ContactsViewModel(
             chatRepository.createChat(it.user)
                 .toObservable()
                 .map { ContactsVIA.ChatCreated(it) as ContactsVIA }
-                .onErrorReturn { t -> ContactsVIA.LoadError(t.localizedMessage) }
+                .onLoggableError { t -> ContactsVIA.LoadError(t.safeMessage()) }
                 .startWith(ContactsVIA.LoadProgress)
         }
     }

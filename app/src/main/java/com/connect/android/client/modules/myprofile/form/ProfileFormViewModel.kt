@@ -1,11 +1,14 @@
 package com.connect.android.client.modules.myprofile.form
 
+import com.connect.android.client.extensions.onLoggableError
+import com.connect.android.client.extensions.safeMessage
 import com.connect.android.client.model.educations.EducationData
 import com.connect.android.client.model.educations.EducationsRepository
 import com.connect.android.client.model.profile.ProfileRepository
 import com.connect.android.client.model.works.WorkData
 import com.connect.android.client.model.works.WorksRepository
 import com.connect.android.client.modules.base.BaseMviViewModel
+import com.connect.android.client.modules.base.ESO
 import com.connect.android.client.modules.base.withUpdate
 import com.connect.android.client.modules.common.Field
 import com.freeletics.rxredux.SideEffect
@@ -28,7 +31,7 @@ class ProfileFormViewModel(
                 .andThen(Observable.just(Unit))
         }
             .map { ProfileFormVIA.ProfileUpdated as ProfileFormVIA }
-            .onErrorReturn { t -> ProfileFormVIA.ProfileError(t.localizedMessage) }
+            .onLoggableError { t -> ProfileFormVIA.ProfileError(t.safeMessage()) }
             .startWith(ProfileFormVIA.ProfileProgress)
     }
 
@@ -118,7 +121,7 @@ class ProfileFormViewModel(
     override fun reducer(state: ProfileFormVS, action: ProfileFormVIA): ProfileFormVS {
         return when (action) {
             is ProfileFormVIA.ProfileError -> state.copy(progress = false, error = action.error.withUpdate())
-            ProfileFormVIA.ProfileUpdated -> state.copy(progress = false, saved = Unit.withUpdate())
+            ProfileFormVIA.ProfileUpdated -> state.copy(progress = false, saved = ESO.withUpdate())
             ProfileFormVIA.ProfileProgress -> state.copy(progress = true)
             else -> state
         }

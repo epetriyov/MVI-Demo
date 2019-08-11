@@ -1,9 +1,12 @@
 package com.connect.android.client.modules.chat
 
+import com.connect.android.client.extensions.onLoggableError
+import com.connect.android.client.extensions.safeMessage
 import com.connect.android.client.model.auth.AuthRepository
 import com.connect.android.client.model.messages.ChatEngine
 import com.connect.android.client.model.messages.MessagesRepository
 import com.connect.android.client.modules.base.BaseMviViewModel
+import com.connect.android.client.modules.base.ESO
 import com.connect.android.client.modules.base.withUpdate
 import com.freeletics.rxredux.SideEffect
 import io.reactivex.Observable
@@ -49,7 +52,7 @@ class ChatViewModel(
             )
                 .andThen(Observable.just(Unit))
                 .map { ChatVIA.NextLoaded as ChatVIA }
-                .onErrorReturn { t -> ChatVIA.NextLoadError(t.localizedMessage) }
+                .onLoggableError { t -> ChatVIA.NextLoadError(t.safeMessage()) }
                 .startWith(ChatVIA.NextLoadProgress)
         }
     }
@@ -71,7 +74,7 @@ class ChatViewModel(
             messagesRepository.sendMessage(viewState().chat.peekContent()!!.id, action.message)
                 .andThen(Observable.just(Unit))
                 .map { ChatVIA.MessageSend as ChatVIA }
-                .onErrorReturn { t -> ChatVIA.SendError(t.localizedMessage) }
+                .onLoggableError { t -> ChatVIA.SendError(t.safeMessage()) }
                 .startWith(ChatVIA.SendProgress)
         }
     }
@@ -90,10 +93,10 @@ class ChatViewModel(
 
     override fun reducer(state: ChatVS, action: ChatVIA): ChatVS {
         return when (action) {
-            ChatVIA.ProfileClickedAction -> state.copy(profileCLicked = Unit.withUpdate())
+            ChatVIA.ProfileClickedAction -> state.copy(profileCLicked = ESO.withUpdate())
             ChatVIA.SendProgress -> state.copy(isSending = true)
             is ChatVIA.SendError -> state.copy(sendError = action.error.withUpdate())
-            ChatVIA.MessageSend -> state.copy(isSending = false, messageSent = Unit.withUpdate())
+            ChatVIA.MessageSend -> state.copy(isSending = false, messageSent = ESO.withUpdate())
             ChatVIA.NextLoadProgress -> state.copy(isLoadingNext = true)
             is ChatVIA.NextLoadError -> state.copy(nextLoadError = action.error.withUpdate())
             ChatVIA.NextLoaded -> state.copy(isLoadingNext = false)

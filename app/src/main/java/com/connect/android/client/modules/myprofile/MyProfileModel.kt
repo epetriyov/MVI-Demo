@@ -2,10 +2,7 @@ package com.connect.android.client.modules.myprofile
 
 import com.connect.android.client.model.common.ProfileItem
 import com.connect.android.client.model.profile.Me
-import com.connect.android.client.modules.base.ORField
-import com.connect.android.client.modules.base.ViewInputAction
-import com.connect.android.client.modules.base.ViewOutputAction
-import com.connect.android.client.modules.base.ViewState
+import com.connect.android.client.modules.base.*
 import com.connect.android.client.modules.common.Field
 import kotlinx.android.parcel.Parcelize
 
@@ -39,13 +36,13 @@ data class MyProfileVS(
     val user: ORField<Me> = ORField.empty(),
     val error: ORField<String> = ORField.empty(),
     val loadProgress: Boolean = false,
-    val logoutAction: ORField<Unit> = ORField.empty(),
-    val editSkills: ORField<Unit> = ORField.empty(),
-    val editGoals: ORField<Unit> = ORField.empty(),
-    val editAims: ORField<Unit> = ORField.empty(),
-    val editSpheres: ORField<Unit> = ORField.empty(),
-    val addWorks: ORField<Unit> = ORField.empty(),
-    val addEducations: ORField<Unit> = ORField.empty(),
+    val logoutAction: ORField<ESO> = ORField.empty(),
+    val editSkills: ORField<ESO> = ORField.empty(),
+    val editGoals: ORField<ESO> = ORField.empty(),
+    val editAims: ORField<ESO> = ORField.empty(),
+    val editSpheres: ORField<ESO> = ORField.empty(),
+    val addWorks: ORField<ESO> = ORField.empty(),
+    val addEducations: ORField<ESO> = ORField.empty(),
     val editWorks: ORField<String> = ORField.empty(),
     val editEducations: ORField<String> = ORField.empty()
 ) : ViewState()

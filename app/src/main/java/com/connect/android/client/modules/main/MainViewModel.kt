@@ -3,6 +3,7 @@ package com.connect.android.client.modules.main
 import com.connect.android.client.model.auth.AuthRepository
 import com.connect.android.client.model.profile.ProfileRepository
 import com.connect.android.client.modules.base.BaseMviViewModel
+import com.connect.android.client.modules.base.ESO
 import com.connect.android.client.modules.base.withUpdate
 import com.connect.android.client.modules.base.withoutUpdate
 import com.freeletics.rxredux.SideEffect
@@ -38,10 +39,10 @@ class MainViewModel(
         return when (action) {
             is MainVIA.TabClicked -> state.copy(
                 selectedTabId = action.tabId.withoutUpdate(),
-                navigateToTab = Unit.withUpdate()
+                navigateToTab = ESO.withUpdate()
             )
             is MainVIA.TabSelect -> state.copy(selectedTabId = action.tabId.withUpdate())
-            MainVIA.FirstTabSelect -> state.copy(selectFirstTab = Unit.withUpdate())
+            MainVIA.FirstTabSelect -> state.copy(selectFirstTab = ESO.withUpdate())
             else -> state
         }
     }

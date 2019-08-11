@@ -1,7 +1,10 @@
 package com.connect.android.client.modules.myprofile.edit
 
+import com.connect.android.client.extensions.onLoggableError
+import com.connect.android.client.extensions.safeMessage
 import com.connect.android.client.model.profile.ProfileRepository
 import com.connect.android.client.modules.base.BaseMviViewModel
+import com.connect.android.client.modules.base.ESO
 import com.connect.android.client.modules.base.withUpdate
 import com.connect.android.client.modules.common.Field.*
 import com.freeletics.rxredux.SideEffect
@@ -31,9 +34,9 @@ class ProfileEditViewModel(
                     .andThen(profileRepository.fetchProfile())
                     .andThen(Observable.just(Unit))
                     .map { ProfileEditVIA.ProfileUpdated as ProfileEditVIA }
-                    .onErrorReturn { t ->
+                    .onLoggableError { t ->
                         ProfileEditVIA.ProfileError(
-                            t.localizedMessage
+                            t.safeMessage()
                         )
                     }
                     .startWith(ProfileEditVIA.ProfileProgress)
@@ -50,7 +53,7 @@ class ProfileEditViewModel(
     override fun reducer(state: ProfileEditVS, action: ProfileEditVIA): ProfileEditVS {
         return when (action) {
             is ProfileEditVIA.ProfileError -> state.copy(progress = false, error = action.error.withUpdate())
-            ProfileEditVIA.ProfileUpdated -> state.copy(progress = false, saved = Unit.withUpdate())
+            ProfileEditVIA.ProfileUpdated -> state.copy(progress = false, saved = ESO.withUpdate())
             ProfileEditVIA.ProfileProgress -> state.copy(progress = true)
             else -> state
         }

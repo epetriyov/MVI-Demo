@@ -1,10 +1,7 @@
 package com.connect.android.client.modules.myprofile.edit
 
 import com.connect.android.client.model.profile.Me
-import com.connect.android.client.modules.base.ORField
-import com.connect.android.client.modules.base.ViewInputAction
-import com.connect.android.client.modules.base.ViewOutputAction
-import com.connect.android.client.modules.base.ViewState
+import com.connect.android.client.modules.base.*
 import com.connect.android.client.modules.common.Field
 import kotlinx.android.parcel.Parcelize
 
@@ -27,5 +24,5 @@ sealed class ProfileEditVOA : ViewOutputAction() {
 data class ProfileEditVS(
     val profile: ORField<Me>, val field: Field,
     val error: ORField<String> = ORField.empty(), val progress: Boolean = false,
-    val saved: ORField<Unit> = ORField.empty()
+    val saved: ORField<ESO> = ORField.empty()
 ) : ViewState()

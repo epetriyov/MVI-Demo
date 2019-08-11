@@ -1,6 +1,8 @@
 package com.connect.android.client.modules.recommendations
 
 import android.Manifest
+import com.connect.android.client.extensions.onLoggableError
+import com.connect.android.client.extensions.safeMessage
 import com.connect.android.client.model.chats.ChatsRepository
 import com.connect.android.client.model.location.LocationRepository
 import com.connect.android.client.model.recommendations.RecommendationsRepository
@@ -43,7 +45,7 @@ class RecommendationsViewModel(
                 locationRepository.updateCurrentLocation()
                     .andThen(Observable.just(Unit))
                     .map { RecommendationsVIA.GetRecommendations as RecommendationsVIA }
-                    .onErrorReturn { t -> RecommendationsVIA.Error(t.localizedMessage) }
+                    .onLoggableError { t -> RecommendationsVIA.Error(t.safeMessage()) }
                     .startWith(RecommendationsVIA.Progress)
             }
     }
@@ -54,7 +56,7 @@ class RecommendationsViewModel(
                 recommendationsRepository.getRecommendations()
                     .toObservable()
                     .map { RecommendationsVIA.Recommendations(it) as RecommendationsVIA }
-                    .onErrorReturn { t -> RecommendationsVIA.Error(t.localizedMessage) }
+                    .onLoggableError { t -> RecommendationsVIA.Error(t.safeMessage()) }
             }
     }
 
@@ -64,7 +66,7 @@ class RecommendationsViewModel(
                 recommendationsRepository.connectUser(action.user.id)
                     .toObservable()
                     .map { RecommendationsVIA.Connected(action.user) as RecommendationsVIA }
-                    .onErrorReturn { t -> RecommendationsVIA.Error(t.localizedMessage) }
+                    .onLoggableError { t -> RecommendationsVIA.Error(t.safeMessage()) }
             }
     }
 
@@ -74,7 +76,7 @@ class RecommendationsViewModel(
                 recommendationsRepository.declineUser(action.userId)
                     .toObservable()
                     .map { RecommendationsVIA.Disconnected as RecommendationsVIA }
-                    .onErrorReturn { t -> RecommendationsVIA.Error(t.localizedMessage) }
+                    .onLoggableError { t -> RecommendationsVIA.Error(t.safeMessage()) }
             }
     }
 
@@ -84,7 +86,7 @@ class RecommendationsViewModel(
                 chatsRepository.createChat(action.user)
                     .toObservable()
                     .map { RecommendationsVIA.ChatCreated(it) as RecommendationsVIA }
-                    .onErrorReturn { t -> RecommendationsVIA.Error(t.localizedMessage) }
+                    .onLoggableError { t -> RecommendationsVIA.Error(t.safeMessage()) }
             }
     }
 

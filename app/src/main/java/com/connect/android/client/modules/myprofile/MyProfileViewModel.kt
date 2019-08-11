@@ -1,10 +1,13 @@
 package com.connect.android.client.modules.myprofile
 
+import com.connect.android.client.extensions.onLoggableError
+import com.connect.android.client.extensions.safeMessage
 import com.connect.android.client.model.auth.AuthRepository
 import com.connect.android.client.model.educations.EducationsRepository
 import com.connect.android.client.model.profile.ProfileRepository
 import com.connect.android.client.model.works.WorksRepository
 import com.connect.android.client.modules.base.BaseMviViewModel
+import com.connect.android.client.modules.base.ESO
 import com.connect.android.client.modules.base.withUpdate
 import com.freeletics.rxredux.SideEffect
 import io.reactivex.Observable
@@ -35,7 +38,7 @@ class MyProfileViewModel(
                 profileRepository.fetchProfile()
                     .andThen(Observable.just(Unit))
                     .map { MyProfileVIA.ProfileUpdated as MyProfileVIA }
-                    .onErrorReturn { t -> MyProfileVIA.Error(t.localizedMessage) }
+                    .onLoggableError { t -> MyProfileVIA.Error(t.safeMessage()) }
                     .startWith(MyProfileVIA.UpdateProgress)
             }
     }
@@ -53,7 +56,7 @@ class MyProfileViewModel(
                     .andThen(profileRepository.fetchProfile())
                     .andThen(Observable.just(Unit))
                     .map { MyProfileVIA.ProfileUpdated as MyProfileVIA }
-                    .onErrorReturn { t -> MyProfileVIA.Error(t.localizedMessage) }
+                    .onLoggableError { t -> MyProfileVIA.Error(t.safeMessage()) }
                     .startWith(MyProfileVIA.UpdateProgress)
             }
     }
@@ -65,7 +68,7 @@ class MyProfileViewModel(
                     .andThen(profileRepository.fetchProfile())
                     .andThen(Observable.just(Unit))
                     .map { MyProfileVIA.ProfileUpdated as MyProfileVIA }
-                    .onErrorReturn { t -> MyProfileVIA.Error(t.localizedMessage) }
+                    .onLoggableError { t -> MyProfileVIA.Error(t.safeMessage()) }
                     .startWith(MyProfileVIA.UpdateProgress)
             }
     }
@@ -93,14 +96,14 @@ class MyProfileViewModel(
             is MyProfileVIA.Error -> state.copy(loadProgress = false, error = action.message.withUpdate())
             is MyProfileVIA.ProfileLoaded -> state.copy(user = action.user.withUpdate())
             MyProfileVIA.ProfileUpdated -> state.copy(loadProgress = false)
-            MyProfileVIA.LogoutFinished -> state.copy(logoutAction = Unit.withUpdate())
+            MyProfileVIA.LogoutFinished -> state.copy(logoutAction = ESO.withUpdate())
             MyProfileVIA.UpdateProgress -> state.copy(loadProgress = true)
-            MyProfileVIA.EditGoals -> state.copy(editGoals = Unit.withUpdate())
-            MyProfileVIA.EditSkills -> state.copy(editSkills = Unit.withUpdate())
-            MyProfileVIA.AddJob -> state.copy(addWorks = Unit.withUpdate())
-            MyProfileVIA.AddEducation -> state.copy(addEducations = Unit.withUpdate())
-            MyProfileVIA.EditAims -> state.copy(editAims = Unit.withUpdate())
-            MyProfileVIA.EditSpheres -> state.copy(editSpheres = Unit.withUpdate())
+            MyProfileVIA.EditGoals -> state.copy(editGoals = ESO.withUpdate())
+            MyProfileVIA.EditSkills -> state.copy(editSkills = ESO.withUpdate())
+            MyProfileVIA.AddJob -> state.copy(addWorks = ESO.withUpdate())
+            MyProfileVIA.AddEducation -> state.copy(addEducations = ESO.withUpdate())
+            MyProfileVIA.EditAims -> state.copy(editAims = ESO.withUpdate())
+            MyProfileVIA.EditSpheres -> state.copy(editSpheres = ESO.withUpdate())
             is MyProfileVIA.EditJob -> state.copy(editWorks = action.jobId.withUpdate())
             is MyProfileVIA.EditEducation -> state.copy(editEducations = action.jobId.withUpdate())
             else -> state

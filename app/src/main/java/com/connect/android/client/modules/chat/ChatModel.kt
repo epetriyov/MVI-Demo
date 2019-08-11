@@ -2,10 +2,7 @@ package com.connect.android.client.modules.chat
 
 import com.connect.android.client.model.chats.Chat
 import com.connect.android.client.model.profile.User
-import com.connect.android.client.modules.base.ORField
-import com.connect.android.client.modules.base.ViewInputAction
-import com.connect.android.client.modules.base.ViewOutputAction
-import com.connect.android.client.modules.base.ViewState
+import com.connect.android.client.modules.base.*
 import kotlinx.android.parcel.Parcelize
 import org.joda.time.DateTime
 
@@ -40,10 +37,10 @@ data class ChatVS(
     val sendError: ORField<String> = ORField.empty(),
     val nextLoadError: ORField<String> = ORField.empty(),
     val isSending: Boolean = false,
-    val messageSent: ORField<Unit> = ORField.empty(),
+    val messageSent: ORField<ESO> = ORField.empty(),
     val isLoadingNext: Boolean = false,
     val buttonEnabled: Boolean = false,
-    val profileCLicked: ORField<Unit> = ORField.empty()
+    val profileCLicked: ORField<ESO> = ORField.empty()
 ) :
     ViewState()
 

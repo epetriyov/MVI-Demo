@@ -23,7 +23,7 @@ class RamEventsMembersStorage : EventMembersStorage {
                         it.about?.contains(query!!, ignoreCase = true) == true ||
                                 it.skills?.firstOrNull { it.contains(query!!, ignoreCase = true) } != null ||
                                 it.name.contains(query!!, ignoreCase = true) ||
-                                it.works?.firstOrNull { it.company.contains(query, ignoreCase = true) } != null
+                                it.works?.firstOrNull { it.company?.contains(query, ignoreCase = true) ?: false } != null
                     }
                 }
             )

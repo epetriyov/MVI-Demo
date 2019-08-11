@@ -40,15 +40,13 @@ class ProfileEditView(context: Context, initialState: ProfileEditVS) :
         with(viewState)
         {
             profile.bind {
-                action_bar.setText(
-                    when (field) {
-                        SKILLS -> R.string.skills_title
-                        GOALS -> R.string.goals_title
-                        AIMS -> R.string.title_profile_aims
-                        SPHERES -> R.string.title_profile_spheres
-                        else -> -1
-                    }
-                )
+                action_bar.text = when (field) {
+                    SKILLS -> resources.getString(R.string.skills_title)
+                    GOALS -> resources.getString(R.string.goals_title)
+                    AIMS -> resources.getString(R.string.title_profile_aims)
+                    SPHERES -> resources.getString(R.string.title_profile_spheres)
+                    else -> ""
+                }
                 if (field in arrayOf(GOALS, AIMS, SPHERES)) {
                     edit_text.setHint(R.string.hint_tags)
                 }

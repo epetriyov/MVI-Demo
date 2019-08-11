@@ -1,8 +1,9 @@
 package com.connect.android.client.modules.auth
 
+import com.connect.android.client.extensions.onLoggableError
+import com.connect.android.client.extensions.safeMessage
 import com.connect.android.client.model.auth.AuthRepository
-import com.connect.android.client.modules.base.BaseMviViewModel
-import com.connect.android.client.modules.base.withUpdate
+import com.connect.android.client.modules.base.*
 import com.freeletics.rxredux.SideEffect
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.ofType
@@ -56,7 +57,7 @@ class AuthViewModel(
             authRepository.authFb(it.token)
                 .andThen(Observable.just(Unit))
                 .map { AuthVIA.Success as AuthVIA }
-                .onErrorReturn { t -> AuthVIA.Error(t.localizedMessage) }
+                .onLoggableError { t -> AuthVIA.Error(t.safeMessage()) }
                 .startWith(AuthVIA.Progress)
         }
     }
@@ -66,7 +67,7 @@ class AuthViewModel(
             authRepository.authVk(it.token)
                 .andThen(Observable.just(Unit))
                 .map { AuthVIA.Success as AuthVIA }
-                .onErrorReturn { t -> AuthVIA.Error(t.localizedMessage) }
+                .onLoggableError { t -> AuthVIA.Error(t.safeMessage()) }
                 .startWith(AuthVIA.Progress)
         }
     }
@@ -74,7 +75,7 @@ class AuthViewModel(
     override fun reducer(state: AuthVS, action: AuthVIA): AuthVS {
         return when (action) {
             is AuthVIA.Error -> state.copy(error = action.error.withUpdate(), progress = false)
-            is AuthVIA.Success -> state.copy(progress = false, success = Unit.withUpdate())
+            is AuthVIA.Success -> state.copy(progress = false, success = ESO.withUpdate())
             AuthVIA.Progress -> state.copy(progress = true)
             else -> state
         }

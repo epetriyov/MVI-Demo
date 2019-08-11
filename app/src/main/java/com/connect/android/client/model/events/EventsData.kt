@@ -15,7 +15,7 @@ import java.io.Serializable
 data class Event @JvmOverloads constructor(
     @PrimaryKey val id: String,
     val point: List<Double>,
-    val cost: Float,
+    val cost: Float?,
     val closed: Boolean,
     val startDate: DateTime,
     val finishDate: DateTime,

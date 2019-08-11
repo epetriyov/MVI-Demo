@@ -1,7 +1,10 @@
 package com.connect.android.client.modules.events.info
 
+import com.connect.android.client.extensions.onLoggableError
+import com.connect.android.client.extensions.safeMessage
 import com.connect.android.client.model.events.EventsRepository
 import com.connect.android.client.modules.base.BaseMviViewModel
+import com.connect.android.client.modules.base.ESO
 import com.connect.android.client.modules.base.withUpdate
 import com.freeletics.rxredux.SideEffect
 import io.reactivex.Observable
@@ -21,7 +24,7 @@ class EventInfoViewModel(private val eventsRepository: EventsRepository, initial
             })
                 .andThen(Observable.just(Unit))
                 .map { EventInfoVIA.ActionDone as EventInfoVIA }
-                .onErrorReturn { t -> EventInfoVIA.Error(t.localizedMessage) }
+                .onLoggableError { t -> EventInfoVIA.Error(t.safeMessage()) }
                 .startWith(EventInfoVIA.ActionProgress)
         }
     }
@@ -36,7 +39,7 @@ class EventInfoViewModel(private val eventsRepository: EventsRepository, initial
 
     override fun reducer(state: EventInfoVS, action: EventInfoVIA): EventInfoVS {
         return when (action) {
-            EventInfoVIA.Participants -> state.copy(participantsAction = Unit.withUpdate())
+            EventInfoVIA.Participants -> state.copy(participantsAction = ESO.withUpdate())
             EventInfoVIA.ActionDone -> state.copy(
                 progress = false, event = state.event.peekContent()!!
                     .copy(accept = !state.event.peekContent()!!.accept).withUpdate()

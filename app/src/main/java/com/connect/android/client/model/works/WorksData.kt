@@ -10,10 +10,10 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class WorkData(
     var id: String? = null,
-    var company: String,
+    var company: String? = null,
     var position: String? = null,
     var city: String? = null,
-    var description: String,
+    var description: String? = null,
     var yearTill: Int = 0,
     var yearFrom: Int = 0,
     @Json(name = "object")

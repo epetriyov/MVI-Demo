@@ -11,7 +11,7 @@ import com.squareup.moshi.JsonClass
 data class EducationData(
     var id: String? = null,
     var name: String,
-    var faculty: String,
+    var faculty: String? = null,
     var description: String? = null,
     var yearFrom: Int = 0,
     var yearTill: Int = 0,

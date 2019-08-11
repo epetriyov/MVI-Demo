@@ -59,8 +59,8 @@ open class User @JvmOverloads constructor(
     fun getWorkInfo(): String? {
         val work = works?.let {
             if (it.isNotEmpty()) {
-                it[0].company +
-                        (if (it[0].company.isNotEmpty()
+                it[0].company.orEmpty() +
+                        (if (!it[0].company.isNullOrEmpty()
                             && !it[0].position.isNullOrEmpty()
                         ) ", " else "") +
                         it[0].position

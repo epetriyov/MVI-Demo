@@ -1,5 +1,7 @@
 package com.connect.android.client.modules.messages
 
+import com.connect.android.client.extensions.onLoggableError
+import com.connect.android.client.extensions.safeMessage
 import com.connect.android.client.model.chats.ChatsRepository
 import com.connect.android.client.modules.base.BaseMviViewModel
 import com.connect.android.client.modules.base.withUpdate
@@ -27,7 +29,7 @@ class MessagesViewModel(private val chatsRepository: ChatsRepository, initialSta
                 chatsRepository.updateChats()
                     .andThen(Observable.just(Unit))
                     .map { MessagesVIA.FetchSuccess as MessagesVIA }
-                    .onErrorReturn { t -> MessagesVIA.FetchError(t.localizedMessage) }
+                    .onLoggableError { t -> MessagesVIA.FetchError(t.safeMessage()) }
                     .startWith(MessagesVIA.FetchProgress)
             }
     }

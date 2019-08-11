@@ -1,5 +1,7 @@
 package com.connect.android.client.modules.profile
 
+import com.connect.android.client.extensions.onLoggableError
+import com.connect.android.client.extensions.safeMessage
 import com.connect.android.client.model.chats.ChatsRepository
 import com.connect.android.client.model.recommendations.RecommendationsRepository
 import com.connect.android.client.modules.base.BaseMviViewModel
@@ -22,7 +24,7 @@ class ProfileViewModel(
                 chatsRepository.createChat(viewState().user.peekContent()!!)
                     .toObservable()
                     .map { ProfileVIA.ChatCreated(it) as ProfileVIA }
-                    .onErrorReturn { t -> ProfileVIA.ChatCreateError(t.localizedMessage) }
+                    .onLoggableError { t -> ProfileVIA.ChatCreateError(t.safeMessage()) }
                     .startWith(ProfileVIA.ChatCreateProgress)
             }
     }

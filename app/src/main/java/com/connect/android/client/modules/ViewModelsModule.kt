@@ -18,6 +18,8 @@ import com.connect.android.client.modules.contacts.ContactsViewModel
 import com.connect.android.client.modules.events.EventsAdapter
 import com.connect.android.client.modules.events.EventsVS
 import com.connect.android.client.modules.events.EventsViewModel
+import com.connect.android.client.modules.events.info.EventInfoVS
+import com.connect.android.client.modules.events.info.EventInfoViewModel
 import com.connect.android.client.modules.main.MainVS
 import com.connect.android.client.modules.main.MainViewModel
 import com.connect.android.client.modules.messages.ChatsAdapter
@@ -26,6 +28,10 @@ import com.connect.android.client.modules.messages.MessagesViewModel
 import com.connect.android.client.modules.myprofile.MyProfileItemAdapter
 import com.connect.android.client.modules.myprofile.MyProfileVS
 import com.connect.android.client.modules.myprofile.MyProfileViewModel
+import com.connect.android.client.modules.myprofile.edit.ProfileEditVS
+import com.connect.android.client.modules.myprofile.edit.ProfileEditViewModel
+import com.connect.android.client.modules.myprofile.form.ProfileFormVS
+import com.connect.android.client.modules.myprofile.form.ProfileFormViewModel
 import com.connect.android.client.modules.profile.ProfileItemAdapter
 import com.connect.android.client.modules.profile.ProfileVS
 import com.connect.android.client.modules.profile.ProfileViewModel
@@ -63,10 +69,13 @@ val viewModelsModule = module {
     factory { (initialState: MainVS) -> MainViewModel(get(), get(), initialState) }
     factory { (initialState: MessagesVS) -> MessagesViewModel(get(), initialState) }
     factory { (initialState: MyProfileVS) -> MyProfileViewModel(get(), get(), get(), get(), initialState) }
+    factory { (initialState: ProfileFormVS) -> ProfileFormViewModel(get(), get(), get(), initialState) }
+    factory { (initialState: ProfileEditVS) -> ProfileEditViewModel(get(), initialState) }
     factory { (initialState: ProfileVS) -> ProfileViewModel(get(), get(), initialState) }
     factory { (initialState: SettingsVS) -> SettingsViewModel(get(), get(), initialState) }
     factory { (initialState: StartVS) -> StartViewModel(get(), initialState) }
     factory { (initialState: EventsVS) -> EventsViewModel(get(), initialState) }
+    factory { (initialState: EventInfoVS) -> EventInfoViewModel(get(), initialState) }
 }
 
 val viewModule = module {
