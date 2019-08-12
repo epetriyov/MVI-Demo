@@ -28,9 +28,11 @@ class EventsRepoImpl(
 ) : EventsRepository {
 
     override fun loadEvents(query: String?, accepted: Boolean?): Flowable<List<Event>> {
-        val sql = "SELECT * FROM events" + (query?.let { " WHERE name GLOB '*' || :query|| '*'" }
-            ?: "") + (accepted?.let { if (query == null) " WHERE accepted = 1" else " AND accepted = 1" } ?: "")
-        val args = if (!query.isNullOrEmpty()) arrayOf(query) else emptyArray()
+        val sql = "SELECT * FROM events" + (if (!query.isNullOrEmpty()) " WHERE UPPER(name) GLOB UPPER('*$query*')" else "") +
+                (accepted?.let { if (query.isNullOrEmpty()) " WHERE accepted = 1" else " AND accepted = 1" } ?: "") + ""
+        val args =
+//            if (!query.isNullOrEmpty()) arrayOf(query) else
+            emptyArray<Any>()
         val sqlLiteQuery = SimpleSQLiteQuery(sql, args)
         return eventDao.getEvents(sqlLiteQuery)
     }

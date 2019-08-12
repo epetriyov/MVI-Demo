@@ -27,8 +27,11 @@ class ChatsRepoImpl(private val chatsApi: ChatsApi, private val chatDao: ChatDao
 
     override fun getChats(searchText: String?): Flowable<List<Chat>> {
         val sql = "SELECT * FROM chats" + if (searchText.isNullOrEmpty()) ""
-        else " WHERE msg_text GLOB '*' || :query|| '*' OR usr_name  GLOB '*' || :query|| '*'"
-        val args = if (searchText.isNullOrEmpty()) emptyArray() else arrayOf(searchText)
+        else " WHERE UPPER(msg_text) GLOB UPPER('*$searchText*') OR UPPER(usr_name)  GLOB UPPER('*$searchText*')"
+        val args =
+//            if (searchText.isNullOrEmpty())
+                emptyArray<Any>()
+//            else arrayOf(searchText)
         val sqlLiteQuery = SimpleSQLiteQuery(sql, args)
         return chatDao.getChats(sqlLiteQuery)
     }

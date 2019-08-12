@@ -3,7 +3,9 @@ package com.connect.android.client.modules.contacts
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.connect.android.client.Constants.SEARCH_THROTTLE_DELAY
 import com.connect.android.client.R
@@ -31,8 +33,16 @@ class ContactsView(context: Context, initialState: ContactsVS) :
     override fun viewModel() = contactsViewModel
 
     override fun initView(savedViewState: Bundle?) {
-        recyclerView.layoutManager = contactsLayoutManager
-        recyclerView.adapter = contactsAdapter
+        with(recyclerView)
+        {
+            layoutManager = contactsLayoutManager
+            adapter = contactsAdapter
+            addItemDecoration(
+                DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+                    .apply {
+                        setDrawable(ContextCompat.getDrawable(context, R.drawable.space_divider)!!)
+                    })
+        }
     }
 
     override fun inputActions() = listOf(
@@ -50,6 +60,8 @@ class ContactsView(context: Context, initialState: ContactsVS) :
 
     override fun bindState(viewState: ContactsVS) {
         with(viewState) {
+            title_contacts.text =
+                if (eventId != null) resources.getString(R.string.members) else resources.getString(R.string.title_contacts)
             btn_back.isVisible = eventId != null
             chatCreated.bind {
                 outcomingAction(ContactsVOA.ChatCreate(it))

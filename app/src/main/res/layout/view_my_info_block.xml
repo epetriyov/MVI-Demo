@@ -40,6 +40,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
+        app:chipSpacing="10dp"
         app:layout_constraintEnd_toEndOf="@id/btn_edit_info"
         app:layout_constraintStart_toStartOf="@id/title_block"
         app:layout_constraintTop_toBottomOf="@id/title_info_description"

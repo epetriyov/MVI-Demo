@@ -62,6 +62,7 @@ class ContactsViewHolder(view: View) : BaseViewHolder(view) {
             .apply(RequestOptions.circleCropTransform())
             .into(img_avatar)
         label_name.text = item.name
+        label_work.text = item.getWorkInfo()
         label_location.text =
             String.format(containerView.context.getString(R.string.distance), item.distance)
         value_skills.text = item.about

@@ -67,9 +67,9 @@ open class User @JvmOverloads constructor(
                         ) ", " else "") +
                         it[0].position
             } else {
-                ""
+                "-"
             }
-        }
+        } ?: "-"
         return work
     }
 }

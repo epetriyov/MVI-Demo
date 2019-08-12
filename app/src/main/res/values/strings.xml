@@ -45,4 +45,5 @@
     <string name="work_end">Год окончания работы *</string>
     <string name="hint_tags">Введите тэги через запятую</string>
     <string name="dates_format">c %1$s до %2$s</string>
+    <string name="members">Участники</string>
 </resources>

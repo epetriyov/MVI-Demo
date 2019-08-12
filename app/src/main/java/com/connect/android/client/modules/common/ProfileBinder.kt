@@ -54,9 +54,6 @@ object ProfileBinder {
                 ChipGroup.LayoutParams.WRAP_CONTENT,
                 ChipGroup.LayoutParams.WRAP_CONTENT
             )
-                .apply {
-                    marginEnd = 10.dp
-                }
         }
     }
 }

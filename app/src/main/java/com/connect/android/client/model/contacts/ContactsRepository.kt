@@ -25,8 +25,12 @@ class ContactsRepoImpl(private val contactsApi: ContactsApi, private val contact
     override fun loadContacts(searchText: String?): Flowable<List<User>> {
         val sql =
             "SELECT * FROM contacts" + (if (searchText.isNullOrEmpty()) ""
-            else " WHERE name GLOB '*' || :query|| '*' OR about GLOB '*' || :query|| '*' OR skills GLOB '*' || :query|| '*' OR works GLOB '*' || :query|| '*'")
-        val args = if (searchText.isNullOrEmpty()) emptyArray() else arrayOf(searchText)
+            else " WHERE UPPER(name) GLOB UPPER('*$searchText*') OR UPPER(about) GLOB UPPER('*$searchText*') " +
+                    "OR UPPER(skills) GLOB UPPER('*$searchText*') OR UPPER(works) GLOB UPPER('*$searchText*')")
+        val args =
+//            if (searchText.isNullOrEmpty())
+                emptyArray<Any>()
+//            else arrayOf(searchText)
         val sqlLiteQuery = SimpleSQLiteQuery(sql, args)
         return contactsDao.getContacts(sqlLiteQuery)
     }

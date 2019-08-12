@@ -3,7 +3,9 @@ package com.connect.android.client.modules.messages
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.connect.android.client.Constants.SEARCH_THROTTLE_DELAY
 import com.connect.android.client.R
@@ -30,8 +32,17 @@ class MessagesView(context: Context, initialState: MessagesVS) :
     override fun viewModel() = messagesViewModel
 
     override fun initView(savedViewState: Bundle?) {
-        recyclerView.layoutManager = chatsLayoutManager
-        recyclerView.adapter = chatsAdapterAdapter
+        title_contacts.text = resources.getString(R.string.chats)
+        with(recyclerView)
+        {
+            layoutManager = chatsLayoutManager
+            adapter = chatsAdapterAdapter
+            addItemDecoration(
+                DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+                    .apply {
+                        setDrawable(ContextCompat.getDrawable(context, R.drawable.space_mini_divider)!!)
+                    })
+        }
     }
 
     override fun loadAction() = MessagesVIA.Init
