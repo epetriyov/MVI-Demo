@@ -1,5 +1,7 @@
 package com.connect.android.client.extensions
 
+import android.app.Activity
+import android.graphics.Point
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
@@ -47,4 +49,10 @@ fun TextView.setTextOrGone(value: String?) {
         isVisible = true
         text = value
     }
+}
+
+fun Activity.getScreenWidth(): Int {
+    val point = Point()
+    windowManager.defaultDisplay.getSize(point)
+    return point.x
 }

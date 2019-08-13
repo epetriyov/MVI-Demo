@@ -1,5 +1,6 @@
 package com.connect.android.client.modules.chat
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.connect.android.client.R
+import com.connect.android.client.extensions.getScreenWidth
 import com.connect.android.client.modules.base.BaseViewHolder
 import org.joda.time.format.DateTimeFormat
 
@@ -50,6 +52,12 @@ class MessageViewHolder(itemView: View) : BaseViewHolder(itemView) {
 
     companion object {
         private val timeFormatter = DateTimeFormat.forPattern("HH:mm")
+    }
+
+    init {
+        // ugly hack to limit max width of user message TextView
+        itemView.findViewById<TextView>(R.id.label_message).maxWidth =
+            (containerView.context as Activity).getScreenWidth() * 2 / 3
     }
 
     fun bindView(item: DisplayableMessage) {

@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/label_message"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
@@ -17,7 +17,8 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.67"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         android:paddingBottom="20dp"
         tools:text="Извините, Адель, я отвечу вам чуть позже. Сейчас я работаю над экранами коннекта." />
 

@@ -1,15 +1,19 @@
 package com.connect.android.client.modules.chat
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.request.RequestOptions
 import com.connect.android.client.R
 import com.connect.android.client.extensions.scrollsToEnd
 import com.connect.android.client.extensions.showSnackbar
+import com.connect.android.client.keyboard.KeyboardHeightObserver
+import com.connect.android.client.keyboard.KeyboardHeightProvider
 import com.connect.android.client.modules.base.BaseMviView
 import com.connect.android.client.modules.base.BaseMviViewModel
 import com.connect.android.client.tools.glide.GlideApp
@@ -30,11 +34,14 @@ class ChatView(context: Context, initialState: ChatVS) : BaseMviView<ChatVIA, Ch
 
     val messagesAdapter: MessagesAdapter by inject { parametersOf(context) }
 
+    private lateinit var keyboardHeightProvider: KeyboardHeightProvider
+
     override fun layoutId() = R.layout.view_chat
 
     override fun viewModel(): BaseMviViewModel<ChatVIA, ChatVS>? = chatViewModel
 
     override fun initView(savedViewState: Bundle?) {
+        keyboardHeightProvider = KeyboardHeightProvider(context as Activity)
         with(chat_recyclerview) {
             layoutManager = chatLayoutManager
             adapter = messagesAdapter
@@ -43,9 +50,34 @@ class ChatView(context: Context, initialState: ChatVS) : BaseMviView<ChatVIA, Ch
                     setDrawable(ContextCompat.getDrawable(context, R.drawable.space_divider)!!)
                 })
         }
+        messagesAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                super.onItemRangeInserted(positionStart, itemCount)
+                chat_recyclerview.scrollToPosition(0)
+            }
+        })
     }
 
     override fun loadAction() = ChatVIA.Init
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        keyboardHeightProvider.setKeyboardHeightObserver(object : KeyboardHeightObserver {
+            override fun onKeyboardHeightChanged(height: Int, orientation: Int) {
+                if (height > 0) {
+                    chat_recyclerview.scrollToPosition(0)
+                }
+            }
+        })
+        handler.post {
+            keyboardHeightProvider.start()
+        }
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        keyboardHeightProvider.close()
+    }
 
     override fun inputActions(): List<Observable<out ChatVIA>> = listOf(
         btnSend.clicks().map { ChatVIA.SendAction(edit_message.text.toString()) },
@@ -64,7 +96,6 @@ class ChatView(context: Context, initialState: ChatVS) : BaseMviView<ChatVIA, Ch
             btnSend.isEnabled = buttonEnabled
             chat.bind {
                 label_name.text = it.user.name
-                label_work.text = it.user.getWorkInfo()
                 GlideApp.with(context)
                     .load(it.user.avatar)
                     .error(R.drawable.ic_placeholder)

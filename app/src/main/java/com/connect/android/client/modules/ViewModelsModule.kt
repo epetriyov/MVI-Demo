@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.connect.android.client.modules.auth.AuthVS
 import com.connect.android.client.modules.auth.AuthViewModel
 import com.connect.android.client.modules.auth.SocialHelper
@@ -101,6 +102,7 @@ val messagesView = module {
     factory { (context: Context) -> MessagesAdapter(get(parameters = { parametersOf(context) })) }
     factory(named("reversed")) { (context: Context) ->
         LinearLayoutManager(context).apply {
+            orientation = RecyclerView.VERTICAL
             reverseLayout = true
             stackFromEnd = true
         }
