@@ -1,10 +1,7 @@
 package com.connect.android.client.modules.auth
 
 import android.content.Intent
-import com.connect.android.client.modules.base.ORField
-import com.connect.android.client.modules.base.ViewInputAction
-import com.connect.android.client.modules.base.ViewOutputAction
-import com.connect.android.client.modules.base.ViewState
+import com.connect.android.client.modules.base.*
 import kotlinx.android.parcel.Parcelize
 
 sealed class AuthVIA : ViewInputAction() {
@@ -30,5 +27,5 @@ sealed class AuthVOA : ViewOutputAction() {
 data class AuthVS(
     val error: ORField<String> = ORField.empty(),
     val progress: Boolean = false,
-    val success: ORField<Unit> = ORField.empty()
+    val success: ORField<ESO> = ORField.empty()
 ) : ViewState()

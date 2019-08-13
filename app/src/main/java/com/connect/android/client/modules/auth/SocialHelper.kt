@@ -2,17 +2,18 @@ package com.connect.android.client.modules.auth
 
 import android.app.Activity
 import android.content.Intent
+import com.connect.android.client.extensions.safeMessage
 import com.facebook.CallbackManager
 import com.facebook.FacebookException
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
-import com.vk.sdk.VKAccessToken
-import com.vk.sdk.VKCallback
-import com.vk.sdk.VKSdk
-import com.vk.sdk.api.VKError
-import com.vk.sdk.api.model.VKScopes
+import com.vk.api.sdk.VK
+import com.vk.api.sdk.auth.VKAccessToken
+import com.vk.api.sdk.auth.VKAuthCallback
+import com.vk.api.sdk.auth.VKScope
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
+import timber.log.Timber
 import java.util.*
 
 enum class SocialType {
@@ -37,13 +38,13 @@ class SocialHelperImpl(private val context: Activity) : SocialHelper {
 
     private val callbackManager: CallbackManager = CallbackManager.Factory.create()
 
-    private val vkCallback = object : VKCallback<VKAccessToken> {
-        override fun onResult(res: VKAccessToken) {
-            socialResults.onNext(SocialResult(socialType = SocialType.VK, token = res.accessToken))
+    private val vkCallback = object : VKAuthCallback {
+        override fun onLogin(token: VKAccessToken) {
+                        socialResults.onNext(SocialResult(socialType = SocialType.VK, token = token.accessToken))
         }
 
-        override fun onError(error: VKError) {
-            socialResults.onNext(SocialResult(socialType = SocialType.VK, error = error.errorMessage))
+        override fun onLoginFailed(errorCode: Int) {
+                        socialResults.onNext(SocialResult(socialType = SocialType.VK, error = errorCode.toString()))
         }
     }
 
@@ -51,7 +52,8 @@ class SocialHelperImpl(private val context: Activity) : SocialHelper {
         LoginManager.getInstance().registerCallback(callbackManager,
             object : com.facebook.FacebookCallback<LoginResult> {
                 override fun onError(error: FacebookException) {
-                    socialResults.onNext(SocialResult(socialType = SocialType.FB, error = error.message))
+                    Timber.e(error)
+                    socialResults.onNext(SocialResult(socialType = SocialType.FB, error = error.safeMessage()))
                 }
 
                 override fun onSuccess(result: LoginResult) {
@@ -65,7 +67,7 @@ class SocialHelperImpl(private val context: Activity) : SocialHelper {
     }
 
     override fun loginViaVk() {
-        VKSdk.login(context, VKScopes.EMAIL)
+        VK.login(context, arrayListOf(VKScope.EMAIL))
     }
 
     override fun loginViaFb() {
@@ -76,7 +78,7 @@ class SocialHelperImpl(private val context: Activity) : SocialHelper {
     override fun loginResult() = socialResults
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (!VKSdk.onActivityResult(requestCode, resultCode, data, vkCallback)) {
+        if (!VK.onActivityResult(requestCode, resultCode, data, vkCallback)) {
             callbackManager.onActivityResult(requestCode, resultCode, data)
         }
     }

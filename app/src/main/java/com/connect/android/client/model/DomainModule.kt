@@ -1,9 +1,6 @@
 package com.connect.android.client.model
 
 import com.connect.android.client.model.auth.*
-import com.connect.android.client.model.chat.ChatApi
-import com.connect.android.client.model.chat.ChatRepoImpl
-import com.connect.android.client.model.chat.ChatRepository
 import com.connect.android.client.model.chats.ChatsApi
 import com.connect.android.client.model.chats.ChatsRepoImpl
 import com.connect.android.client.model.chats.ChatsRepository
@@ -14,14 +11,12 @@ import com.connect.android.client.model.contacts.ContactsRepository
 import com.connect.android.client.model.educations.EducationsApi
 import com.connect.android.client.model.educations.EducationsRepoImpl
 import com.connect.android.client.model.educations.EducationsRepository
-import com.connect.android.client.model.events.EventsApi
-import com.connect.android.client.model.events.EventsRepoImpl
-import com.connect.android.client.model.events.EventsRepository
+import com.connect.android.client.model.events.*
 import com.connect.android.client.model.location.*
-import com.connect.android.client.model.messages.MessagesApi
-import com.connect.android.client.model.messages.MessagesRepoImpl
-import com.connect.android.client.model.messages.MessagesRepository
-import com.connect.android.client.model.profile.*
+import com.connect.android.client.model.messages.*
+import com.connect.android.client.model.profile.ProfileApi
+import com.connect.android.client.model.profile.ProfileRepoImpl
+import com.connect.android.client.model.profile.ProfileRepository
 import com.connect.android.client.model.recommendations.RecommendationsApi
 import com.connect.android.client.model.recommendations.RecommendationsRepoImpl
 import com.connect.android.client.model.recommendations.RecommendationsRepository
@@ -39,16 +34,10 @@ val authModule = module {
         val retrofit: Retrofit = get()
         retrofit.create(AuthApi::class.java)
     }
-    factory<TokenStore> { SharedTokenStore(get()) }
-    factory<AuthRepository> { AuthRepoImpl(get(), get(), get(), get()) }
-}
-
-val chatModule = module {
-    factory {
-        val scarlet: Scarlet = get()
-        scarlet.create(ChatApi::class.java)
+    factory<ProfileStore> {
+        SharedProfileStore(get())
     }
-    factory<ChatRepository> { ChatRepoImpl(get()) }
+    factory<AuthRepository> { AuthRepoImpl(get(), get(), get(), get(), get()) }
 }
 
 val chatsModule = module {
@@ -111,8 +100,9 @@ val eventsModule = module {
         val db: ConnectDatabase = get()
         db.eventDao()
     }
+    factory<EventMembersStorage> { RamEventsMembersStorage() }
     factory<EventsRepository> {
-        EventsRepoImpl(get(), get())
+        EventsRepoImpl(get(), get(), get())
     }
 }
 
@@ -131,6 +121,10 @@ val locationModule = module {
 
 val messagesModule = module {
     factory {
+        val scarlet: Scarlet = get()
+        scarlet.create(ChatApi::class.java)
+    }
+    factory {
         val retrofit: Retrofit = get()
         retrofit.create(MessagesApi::class.java)
     }
@@ -141,6 +135,9 @@ val messagesModule = module {
     factory<MessagesRepository> {
         MessagesRepoImpl(get(), get())
     }
+    factory<ChatEngine> {
+        ChatEngineImpl(get(), get())
+    }
 }
 
 val profileModule = module {
@@ -148,8 +145,9 @@ val profileModule = module {
         val retrofit: Retrofit = get()
         retrofit.create(ProfileApi::class.java)
     }
-    factory<ProfileStore> {
-        SharedProfileStore(get())
+    factory {
+        val db: ConnectDatabase = get()
+        db.profileDao()
     }
     factory<ProfileRepository> {
         ProfileRepoImpl(get(), get())

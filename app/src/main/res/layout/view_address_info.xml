@@ -18,7 +18,7 @@
         tools:text="Парк-отель Barvikha Luxury Village" />
 
     <TextView
-        android:id="@+id/label_address"
+        android:id="@+id/label_top"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
@@ -30,10 +30,12 @@
         tools:text="8-й км Рублево-Успенского шоссе" />
 
     <ImageView
-        android:id="@+id/ic_place"
+        android:id="@+id/left_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/label_place"
         app:layout_constraintTop_toTopOf="@id/label_place"
+        app:layout_constraintBottom_toBottomOf="@id/label_place"
         tools:src="@drawable/ic_pin_blue" />
 </androidx.constraintlayout.widget.ConstraintLayout>

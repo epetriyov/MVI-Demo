@@ -7,6 +7,7 @@ import com.google.firebase.iid.FirebaseInstanceId
 import io.reactivex.Completable
 import io.reactivex.Emitter
 import io.reactivex.Observable
+import io.reactivex.SingleTransformer
 import timber.log.Timber
 
 interface AuthRepository {
@@ -22,14 +23,25 @@ interface AuthRepository {
     fun authVk(token: String): Completable
 
     fun authFb(token: String): Completable
+
+    fun getUserId(): String?
 }
 
 class AuthRepoImpl(
     private val authApi: AuthApi,
     private val tokenStore: TokenStore,
+    private val profileStore: ProfileStore,
     private val database: ConnectDatabase,
     private val firebaseInstanceId: FirebaseInstanceId
 ) : AuthRepository {
+
+    private val authTransformer = SingleTransformer<LoginResponse, LoginResponse> { single ->
+        single.doOnSuccess {
+            tokenStore.saveToken(it.token)
+            profileStore.saveUserId(it.userId)
+        }
+    }
+
     override fun pushNotificationToken(token: String): Completable {
         return authApi.sendToken(
             TokenRequest(
@@ -64,15 +76,20 @@ class AuthRepoImpl(
 
     override fun logout() {
         tokenStore.removeToken()
+        profileStore.removeUserId()
         database.clearAllTables()
     }
 
     override fun authVk(token: String): Completable {
-        return authApi.authVk(AccessTokenRequest(token)).doOnSuccess { tokenStore.saveToken(it.token) }.ignoreElement()
+        return authApi.authVk(AccessTokenRequest(token)).compose(authTransformer).ignoreElement()
     }
 
     override fun authFb(token: String): Completable {
-        return authApi.authFb(AccessTokenRequest(token)).doOnSuccess { tokenStore.saveToken(it.token) }.ignoreElement()
+        return authApi.authFb(AccessTokenRequest(token)).compose(authTransformer).ignoreElement()
+    }
+
+    override fun getUserId(): String? {
+        return profileStore.getUserId()
     }
 
 }

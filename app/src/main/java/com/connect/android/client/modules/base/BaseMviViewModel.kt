@@ -1,15 +1,12 @@
 package com.connect.android.client.modules.base
 
-import androidx.lifecycle.ViewModel
 import com.freeletics.rxredux.SideEffect
 import com.freeletics.rxredux.reduxStore
 import io.reactivex.ObservableTransformer
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import kotlin.reflect.KClass
 
-abstract class BaseMviViewModel<VIA : ViewInputAction, VS : ViewState>(private val initialState: VS) : ViewModel() {
+abstract class BaseMviViewModel<VIA : ViewInputAction, VS : ViewState>(private val initialState: VS) {
 
     private val _state = BehaviorSubject.create<VS>()
 
@@ -19,22 +16,20 @@ abstract class BaseMviViewModel<VIA : ViewInputAction, VS : ViewState>(private v
         get() = _state.value ?: restoreState ?: initialState
 
     val uiActionComposer: ObservableTransformer<VIA, VS> =
-            ObservableTransformer { action ->
-                var lastAction: VIA? = null
-                action
-                        .observeOn(Schedulers.io())
-                        .reduxStore(
-                                initialState = state,
-                                sideEffects = sideEffects(),
-                                reducer = { vs, via ->
-                                    lastAction = via
-                                    reducer(vs, via)
-                                })
-                        .doOnNext { _state.onNext(it) }
-                        .filter { lastAction == null || filterActions().contains(lastAction!!::class) }
-                        .distinctUntilChanged()
-                        .observeOn(AndroidSchedulers.mainThread())
-            }
+        ObservableTransformer { action ->
+            var lastAction: VIA? = null
+            action
+                .reduxStore(
+                    initialState = state,
+                    sideEffects = sideEffects(),
+                    reducer = { vs, via ->
+                        lastAction = via
+                        reducer(vs, via)
+                    })
+                .doOnNext { _state.onNext(it) }
+                .filter { lastAction == null || filterActions().contains(lastAction!!::class) }
+                .distinctUntilChanged()
+        }
 
     protected abstract fun filterActions(): List<KClass<out VIA>>
 

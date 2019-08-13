@@ -16,7 +16,7 @@ def versionBuild = 0 // bump for dogfood builds, public betas, etc.
 android {
     compileSdkVersion build_versions.compileSdk
     defaultConfig {
-        applicationId "com.connect.android.client"
+        applicationId "com.connect.client.android"
         minSdkVersion build_versions.minSdk
         targetSdkVersion build_versions.targetSdk
         versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
@@ -56,6 +56,8 @@ dependencies {
 
     implementation deps.firebase.core
     implementation deps.firebase.messaging
+    implementation deps.firebase.analytics
+    implementation deps.firebase.crashlytics
 
     implementation deps.rx.java
     implementation deps.rx.kotlin
@@ -97,4 +99,7 @@ dependencies {
     implementation deps.vksdk
     implementation deps.facebooksdk
     implementation deps.card_stack_view
+    debugImplementation deps.leakCanary
 }
+
+apply plugin: 'com.google.gms.google-services'

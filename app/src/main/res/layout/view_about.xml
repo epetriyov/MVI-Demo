@@ -13,19 +13,19 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="7dp"
         android:text="@string/skills_title"
-        android:textColor="@color/colorBlue"
+        android:textColor="@android:color/white"
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/label_skills"
+        android:id="@+id/value_skills"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="11dp"
         android:gravity="start"
-        android:lines="3"
-        android:textColor="@android:color/black"
+        android:maxLines="3"
+        android:textColor="@android:color/white"
         android:textSize="16sp"
         tools:text="Разрабатываем модуль анализа при помощи экспертных систем и программируемых нейроннок (Connect)" />
 
@@ -36,18 +36,18 @@
         android:layout_marginStart="20dp"
         android:layout_marginBottom="7dp"
         android:text="@string/goals_title"
-        android:textColor="@color/colorBlue"
+        android:textColor="@android:color/white"
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/label_goals"
+        android:id="@+id/value_goals"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:gravity="start"
-        android:lines="3"
-        android:textColor="@android:color/black"
+        android:maxLines="3"
+        android:textColor="@android:color/white"
         android:textSize="16sp"
         tools:text="Инвестиции для научной передачи обьясняющей квантовую теорию поля, формат для детей" />
 </LinearLayout>

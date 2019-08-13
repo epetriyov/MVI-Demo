@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.connect.android.client.controls.PulsatorLayout
+    <com.connect.android.client.widgets.PulsatorLayout
         android:id="@+id/pulsator"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
             android:layout_centerInParent="true"
             tools:src="@drawable/userpic" />
 
-    </com.connect.android.client.controls.PulsatorLayout>
+    </com.connect.android.client.widgets.PulsatorLayout>
 
     <TextView
         android:id="@+id/label_searching"

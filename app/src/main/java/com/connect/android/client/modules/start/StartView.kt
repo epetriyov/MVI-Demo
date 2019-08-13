@@ -30,7 +30,9 @@ class StartView(context: Context, initialState: StartVS) :
     override fun outputActions(): List<Observable<out StartVOA>> = emptyList()
 
     override fun bindState(viewState: StartVS) {
-        outcomingAction(if (viewState.isAuthorized) StartVOA.MainAction else StartVOA.LoginAction)
+        viewState.isAuthorized.bind {
+            outcomingAction(if (it) StartVOA.MainAction else StartVOA.LoginAction)
+        }
     }
 
 }

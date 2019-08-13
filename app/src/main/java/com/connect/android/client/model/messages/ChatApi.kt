@@ -1,6 +1,5 @@
-package com.connect.android.client.model.chat
+package com.connect.android.client.model.messages
 
-import com.connect.android.client.model.messages.Message
 import com.tinder.scarlet.Event
 import com.tinder.scarlet.ws.Receive
 import com.tinder.scarlet.ws.Send
@@ -12,8 +11,8 @@ interface ChatApi {
     fun observeWebSocketEvent(): Flowable<Event>
 
     @Send
-    fun sendMessage(message: Message)
+    fun sendMessage(message: MessageToSend)
 
-    @Send
+    @Receive
     fun observeMessages(): Flowable<Message>
 }

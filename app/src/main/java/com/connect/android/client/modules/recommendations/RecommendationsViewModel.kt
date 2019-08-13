@@ -1,15 +1,20 @@
 package com.connect.android.client.modules.recommendations
 
 import android.Manifest
+import com.connect.android.client.extensions.onLoggableError
+import com.connect.android.client.extensions.safeMessage
 import com.connect.android.client.model.chats.ChatsRepository
 import com.connect.android.client.model.location.LocationRepository
+import com.connect.android.client.model.recommendations.ConnectState.*
 import com.connect.android.client.model.recommendations.RecommendationsRepository
 import com.connect.android.client.modules.base.BaseMviViewModel
 import com.connect.android.client.modules.base.withUpdate
 import com.freeletics.rxredux.SideEffect
 import com.tbruyelle.rxpermissions2.RxPermissions
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.ofType
+import io.reactivex.schedulers.Schedulers
 import kotlin.reflect.KClass
 
 typealias RecommendationsSideEffect = SideEffect<RecommendationsVS, RecommendationsVIA>
@@ -35,52 +40,63 @@ class RecommendationsViewModel(
 
     private val sendLocation: RecommendationsSideEffect = { actions, _ ->
         actions.ofType<RecommendationsVIA.SendLocation>()
+            .observeOn(Schedulers.io())
             .switchMap {
                 locationRepository.updateCurrentLocation()
-                    .andThen(Observable.just(Unit))
+                    .andThen(Observable.fromCallable { Unit })
                     .map { RecommendationsVIA.GetRecommendations as RecommendationsVIA }
-                    .onErrorReturn { t -> RecommendationsVIA.Error(t.localizedMessage) }
+                    .onLoggableError { t -> RecommendationsVIA.Error(t.safeMessage()) }
                     .startWith(RecommendationsVIA.Progress)
             }
     }
 
     private val getRecommendations: RecommendationsSideEffect = { actions, _ ->
-        actions.ofType<RecommendationsVIA.SendLocation>()
+        actions.ofType<RecommendationsVIA.GetRecommendations>()
+            .observeOn(Schedulers.io())
             .switchMap {
                 recommendationsRepository.getRecommendations()
                     .toObservable()
                     .map { RecommendationsVIA.Recommendations(it) as RecommendationsVIA }
-                    .onErrorReturn { t -> RecommendationsVIA.Error(t.localizedMessage) }
+                    .onLoggableError { t -> RecommendationsVIA.Error(t.safeMessage()) }
             }
     }
 
     private val connectUser: RecommendationsSideEffect = { actions, _ ->
         actions.ofType<RecommendationsVIA.UserConnect>()
+            .observeOn(Schedulers.io())
             .switchMap { action ->
                 recommendationsRepository.connectUser(action.user.id)
                     .toObservable()
-                    .map { RecommendationsVIA.Connected(action.user) as RecommendationsVIA }
-                    .onErrorReturn { t -> RecommendationsVIA.Error(t.localizedMessage) }
+                    .map {
+                        when (it) {
+                            CONNECTED -> RecommendationsVIA.Disconnected as RecommendationsVIA
+                            CONNECTING -> RecommendationsVIA.Connecting
+                            DECLINED -> RecommendationsVIA.Disconnected
+                        }
+                    }
+                    .onLoggableError { t -> RecommendationsVIA.Error(t.safeMessage()) }
             }
     }
 
     private val disconnectUser: RecommendationsSideEffect = { actions, _ ->
         actions.ofType<RecommendationsVIA.UserDisconnect>()
+            .observeOn(Schedulers.io())
             .switchMap { action ->
                 recommendationsRepository.declineUser(action.userId)
                     .toObservable()
                     .map { RecommendationsVIA.Disconnected as RecommendationsVIA }
-                    .onErrorReturn { t -> RecommendationsVIA.Error(t.localizedMessage) }
+                    .onLoggableError { t -> RecommendationsVIA.Error(t.safeMessage()) }
             }
     }
 
     private val startChat: RecommendationsSideEffect = { actions, _ ->
         actions.ofType<RecommendationsVIA.StartChat>()
+            .observeOn(Schedulers.io())
             .switchMap { action ->
                 chatsRepository.createChat(action.user)
                     .toObservable()
                     .map { RecommendationsVIA.ChatCreated(it) as RecommendationsVIA }
-                    .onErrorReturn { t -> RecommendationsVIA.Error(t.localizedMessage) }
+                    .onLoggableError { t -> RecommendationsVIA.Error(t.safeMessage()) }
             }
     }
 

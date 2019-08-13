@@ -48,7 +48,7 @@ class RecommendationsView(context: Context, initialState: RecommendationsVS) :
     }
 
     override fun inputActions() = listOf(
-        btn_open_permission.clicks().map { RecommendationsVIA.OpenLocationPermission },
+        btn_open_permission.clicks().map { RecommendationsVIA.Init },
         btn_chat.clicks().map { recommendationsHelper.getCurrentItem() }.map { RecommendationsVIA.StartChat(it) },
         btn_chat_connected.clicks().map { RecommendationsVIA.StartChatConnected },
         recommendationsHelper.connectToUser().map { RecommendationsVIA.UserConnect(it) },
@@ -69,6 +69,7 @@ class RecommendationsView(context: Context, initialState: RecommendationsVS) :
         {
             searching_panel.isVisible = progress
             location_permissions.isVisible = showLocationPermission
+            list_recommendations.isVisible = !progress && !showLocationPermission
             if (progress) {
                 pulsator.start()
             } else {
@@ -88,7 +89,7 @@ class RecommendationsView(context: Context, initialState: RecommendationsVS) :
             }
             connected.bind { user ->
                 card_connected.isVisible = true
-                ViewHolder(card_connected).bindView(user)
+                RecommendationsBinder.bindRecommendation(card_connected, user)
             }
         }
 

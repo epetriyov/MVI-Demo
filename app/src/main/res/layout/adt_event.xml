@@ -13,9 +13,11 @@
         <ImageView
             android:id="@+id/img_event"
             android:layout_width="0dp"
-            android:layout_height="140dp"
+            android:layout_height="0dp"
             android:scaleType="centerCrop"
+            app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.35"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/header" />
@@ -90,18 +92,18 @@
             app:layout_constraintStart_toStartOf="@id/top_divider"
             app:layout_constraintTop_toBottomOf="@id/view_time" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_participants"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="48dp"
             android:layout_marginTop="23dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/btn_common"
             android:backgroundTint="@color/colorBlue"
-            android:drawableStart="@drawable/ic_members"
+            app:icon="@drawable/ic_members"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="16sp"
+            app:cornerRadius="34dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/bottom_divider"
             app:layout_constraintTop_toBottomOf="@id/bottom_divider"
@@ -110,7 +112,7 @@
         <Button
             android:id="@+id/btn_apply"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="48dp"
             android:layout_marginTop="23dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/btn_common"
@@ -119,6 +121,7 @@
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="16sp"
+            app:cornerRadius="34dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/bottom_divider"
             app:layout_constraintTop_toBottomOf="@id/bottom_divider" />

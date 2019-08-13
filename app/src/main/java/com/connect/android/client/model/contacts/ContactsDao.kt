@@ -1,6 +1,7 @@
 package com.connect.android.client.model.contacts
 
 import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteQuery
 import com.connect.android.client.model.profile.User
 import io.reactivex.Completable
 import io.reactivex.Flowable
@@ -14,9 +15,9 @@ interface ContactsDao {
     @Delete
     fun deleteContacts(items: List<User>): Completable
 
-    @Query("SELECT * FROM contacts")
-    fun getContacts(): Flowable<List<User>>
+    @Query("SELECT * FROM user")
+    fun getAllContacts(): List<User>
 
-    @Query("SELECT * FROM contacts WHERE name GLOB '*' || :query|| '*'")
-    fun getContacts(query: String): List<User>
+    @RawQuery(observedEntities = [User::class])
+    fun getContacts(query: SupportSQLiteQuery): Flowable<List<User>>
 }

@@ -16,16 +16,18 @@ interface ProfileRepository {
 
     fun updateProfile(user: Me): Completable
 
-    fun removeProfile(): Completable
+    fun fetchProfile(): Completable
 }
 
 class ProfileRepoImpl(private val profileApi: ProfileApi, private val profileDao: ProfileDao) : ProfileRepository {
-    override fun removeProfile(): Completable {
-        return loadProfile().flatMapCompletable { profileDao.deleteUser(it) }
+    override fun fetchProfile(): Completable {
+        return profileApi.getProfile().flatMapCompletable {
+            profileDao.saveUser(it)
+        }
     }
 
     override fun loadProfile(): Flowable<Me> {
-        return profileDao.getUser().filter { it.isNotEmpty() }.map { it[0] }
+        return profileDao.getUser()
     }
 
     override fun uploadAvatar(avatarUrl: String): Single<AvatarResponse> {

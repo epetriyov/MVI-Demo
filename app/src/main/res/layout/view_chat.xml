@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,49 +28,35 @@
         android:id="@+id/img_avatar"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="30dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_back"
-        app:layout_constraintStart_toEndOf="@id/btn_back"
-        app:layout_constraintTop_toTopOf="@id/btn_back"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/actionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/actionBar"
         tools:src="@drawable/userpic" />
 
     <TextView
         android:id="@+id/label_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@android:color/black"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/label_work"
-        app:layout_constraintEnd_toEndOf="@id/actionBar"
-        app:layout_constraintStart_toEndOf="@id/img_avatar"
+        app:layout_constraintBottom_toBottomOf="@id/actionBar"
+        app:layout_constraintEnd_toStartOf="@id/img_avatar"
+        app:layout_constraintStart_toEndOf="@id/btn_back"
         app:layout_constraintTop_toTopOf="@id/actionBar"
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="Adele Laurie Blue" />
-
-    <TextView
-        android:id="@+id/label_work"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textColor="@color/colorBrown3"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@id/actionBar"
-        app:layout_constraintEnd_toEndOf="@id/label_name"
-        app:layout_constraintStart_toStartOf="@id/label_name"
-        app:layout_constraintTop_toBottomOf="@id/label_name"
-        tools:text="Columbia Records. Singer." />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chat_recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/bgRecyclerView"
+        android:background="@color/colorBgRecyclerView"
         app:layout_constraintBottom_toTopOf="@id/bottom_panel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +75,8 @@
         android:id="@+id/edit_message"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/bg_edit_message"
         android:hint="@string/message"
         android:imeOptions="actionSend"
@@ -102,14 +89,14 @@
         app:layout_constraintStart_toStartOf="@id/bottom_panel"
         app:layout_constraintTop_toTopOf="@id/bottom_panel" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/btnSend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="10dp"
         android:src="@drawable/btn_send"
-        app:layout_constraintBottom_toBottomOf="@id/bottom_panel"
+        app:layout_constraintBottom_toBottomOf="@id/edit_message"
         app:layout_constraintEnd_toEndOf="@id/bottom_panel"
-        app:layout_constraintTop_toTopOf="@id/bottom_panel" />
+        app:layout_constraintTop_toTopOf="@id/edit_message" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

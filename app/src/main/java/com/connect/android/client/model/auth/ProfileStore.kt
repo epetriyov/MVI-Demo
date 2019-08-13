@@ -1,4 +1,4 @@
-package com.connect.android.client.model.profile
+package com.connect.android.client.model.auth
 
 import android.content.SharedPreferences
 

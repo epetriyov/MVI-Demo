@@ -14,5 +14,5 @@ interface MessagesApi {
     ): Maybe<ListData<Message>>
 
     @POST("/chats/{chatID}/messages")
-    fun sendMessage(@Path("chatID") chatId: String, @Body message: Message): Completable
+    fun sendMessage(@Path("chatID") chatId: String, @Body message: MessageToSend): Completable
 }

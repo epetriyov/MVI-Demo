@@ -3,11 +3,13 @@ package com.connect.android.client.modules.main
 import com.connect.android.client.model.auth.AuthRepository
 import com.connect.android.client.model.profile.ProfileRepository
 import com.connect.android.client.modules.base.BaseMviViewModel
+import com.connect.android.client.modules.base.ESO
 import com.connect.android.client.modules.base.withUpdate
 import com.connect.android.client.modules.base.withoutUpdate
 import com.freeletics.rxredux.SideEffect
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.ofType
+import io.reactivex.schedulers.Schedulers
 
 typealias MainSideEffect = SideEffect<MainVS, MainVIA>
 
@@ -20,14 +22,17 @@ class MainViewModel(
     private val init: MainSideEffect = { actions, viewState ->
         actions.ofType<MainVIA.Init>().publish {
             Observable.merge(
-                authRepository.updateNotificationToken()
-                    .onErrorComplete().andThen(Observable.just(MainVIA.TokenUpdated)),
+                it
+                    .observeOn(Schedulers.io())
+                    .flatMap {
+                    authRepository.updateNotificationToken()
+                        .onErrorComplete().andThen(Observable.fromCallable { MainVIA.TokenUpdated })
+                },
                 it.filter { viewState().selectedTabId.isEmpty() }
                     .map { MainVIA.FirstTabSelect },
                 it.filter { !viewState().selectedTabId.isEmpty() }
                     .map { MainVIA.TabSelect(viewState().selectedTabId.peekContent()!!) })
         }
-
     }
 
     override fun filterActions() =
@@ -37,10 +42,10 @@ class MainViewModel(
         return when (action) {
             is MainVIA.TabClicked -> state.copy(
                 selectedTabId = action.tabId.withoutUpdate(),
-                navigateToTab = Unit.withUpdate()
+                navigateToTab = ESO.withUpdate()
             )
             is MainVIA.TabSelect -> state.copy(selectedTabId = action.tabId.withUpdate())
-            MainVIA.FirstTabSelect -> state.copy(selectFirstTab = Unit.withUpdate())
+            MainVIA.FirstTabSelect -> state.copy(selectFirstTab = ESO.withUpdate())
             else -> state
         }
     }

@@ -1,9 +1,6 @@
 package com.connect.android.client.modules.main
 
-import com.connect.android.client.modules.base.ORField
-import com.connect.android.client.modules.base.ViewInputAction
-import com.connect.android.client.modules.base.ViewOutputAction
-import com.connect.android.client.modules.base.ViewState
+import com.connect.android.client.modules.base.*
 import kotlinx.android.parcel.Parcelize
 
 sealed class MainVIA : ViewInputAction() {
@@ -24,7 +21,7 @@ sealed class MainVOA : ViewOutputAction(){
 
 @Parcelize
 data class MainVS(
-    val selectFirstTab: ORField<Unit> = ORField.empty(),
+    val selectFirstTab: ORField<ESO> = ORField.empty(),
     val selectedTabId: ORField<Int> = ORField.empty(),
-    val navigateToTab: ORField<Unit> = ORField.empty()
+    val navigateToTab: ORField<ESO> = ORField.empty()
 ) : ViewState()

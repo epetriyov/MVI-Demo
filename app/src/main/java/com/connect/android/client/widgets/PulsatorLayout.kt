@@ -1,4 +1,4 @@
-package com.connect.android.client.controls
+package com.connect.android.client.widgets
 
 import android.animation.Animator
 import android.animation.AnimatorSet
