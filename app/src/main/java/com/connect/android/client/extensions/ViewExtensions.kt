@@ -2,7 +2,9 @@ package com.connect.android.client.extensions
 
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import androidx.core.view.forEach
+import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
 
 fun View.showSnackbar(message: Int, actionName: Int? = null, actionListener: View.OnClickListener? = null) {
@@ -11,9 +13,9 @@ fun View.showSnackbar(message: Int, actionName: Int? = null, actionListener: Vie
 
 fun View.showSnackbar(message: String, actionName: String? = null, actionListener: View.OnClickListener? = null) {
     Snackbar.make(this, message, Snackbar.LENGTH_LONG)
-            .apply {
-                actionListener?.let { setAction(actionName, actionListener) }
-            }.show()
+        .apply {
+            actionListener?.let { setAction(actionName, actionListener) }
+        }.show()
 }
 
 fun View.showSnackbar(view: View) {
@@ -35,5 +37,14 @@ fun View.hideKeyboard(inputMethodManager: InputMethodManager) {
 fun View.showKeyboard(inputMethodManager: InputMethodManager) {
     if (this.requestFocus()) {
         inputMethodManager.showSoftInput(this, InputMethodManager.SHOW_FORCED)
+    }
+}
+
+fun TextView.setTextOrGone(value: String?) {
+    if (value.isNullOrEmpty()) {
+        isVisible = false
+    } else {
+        isVisible = true
+        text = value
     }
 }

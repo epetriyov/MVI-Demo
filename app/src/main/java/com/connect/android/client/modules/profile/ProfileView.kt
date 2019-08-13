@@ -39,15 +39,15 @@ class ProfileView(context: Context, initialState: ProfileVS) :
 
     override fun initView(savedViewState: Bundle?) {
         aims_block.findViewById<TextView>(R.id.title_block).apply {
-            setCompoundDrawables(ContextCompat.getDrawable(context, R.drawable.ic_aims), null, null, null)
+            setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context, R.drawable.ic_aims), null, null, null)
             setText(R.string.title_profile_aims)
         }
         skills_block.findViewById<TextView>(R.id.title_block).apply {
-            setCompoundDrawables(ContextCompat.getDrawable(context, R.drawable.ic_sphere), null, null, null)
+            setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context, R.drawable.ic_sphere), null, null, null)
             setText(R.string.title_profile_spheres)
         }
         jobs_block.findViewById<TextView>(R.id.title_list_block).apply {
-            setCompoundDrawables(ContextCompat.getDrawable(context, R.drawable.ic_work), null, null, null)
+            setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context, R.drawable.ic_work), null, null, null)
             setText(R.string.work)
         }
         jobs_block.findViewById<RecyclerView>(R.id.recycler_list).apply {
@@ -55,7 +55,7 @@ class ProfileView(context: Context, initialState: ProfileVS) :
             adapter = workAdapter
         }
         education_block.findViewById<TextView>(R.id.title_list_block).apply {
-            setCompoundDrawables(ContextCompat.getDrawable(context, R.drawable.ic_education), null, null, null)
+            setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context, R.drawable.ic_education), null, null, null)
             setText(R.string.education)
         }
         education_block.findViewById<RecyclerView>(R.id.recycler_list).apply {

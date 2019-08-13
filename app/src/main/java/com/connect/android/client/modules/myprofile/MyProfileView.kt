@@ -41,10 +41,16 @@ class MyProfileView(context: Context, initialState: MyProfileVS) :
 
     override fun initView(savedViewState: Bundle?) {
         aims_block.findViewById<TextView>(R.id.title_block).apply {
-            setText(R.string.title_profile_goals)
+            setText(R.string.title_profile_aims)
+        }
+        aims_block.findViewById<TextView>(R.id.title_info_description).apply {
+            setText(R.string.aims_description)
         }
         skills_block.findViewById<TextView>(R.id.title_block).apply {
-            setText(R.string.title_profile_skills)
+            setText(R.string.title_profile_spheres)
+        }
+        skills_block.findViewById<TextView>(R.id.title_info_description).apply {
+            setText(R.string.spheres_description)
         }
         jobs_block.findViewById<TextView>(R.id.title_list_block).apply {
             setText(R.string.work)
@@ -64,16 +70,16 @@ class MyProfileView(context: Context, initialState: MyProfileVS) :
 
     override fun inputActions() = listOf(
         btn_exit.clicks().map { MyProfileVIA.Logout },
-        btn_edit_skills.clicks().map { MyProfileVIA.EditSkills },
-        btn_edit_goals.clicks().map { MyProfileVIA.EditGoals },
-        jobs_block.findViewById<View>(R.id.btn_add_info).clicks().map { MyProfileVIA.AddJob },
-        education_block.findViewById<View>(R.id.btn_add_info).clicks().map { MyProfileVIA.AddEducation },
-        aims_block.findViewById<View>(R.id.btn_edit_info).clicks().map { MyProfileVIA.EditAims },
-        skills_block.findViewById<View>(R.id.btn_edit_info).clicks().map { MyProfileVIA.EditSpheres },
+        Observable.merge(title_skills.clicks(), value_skills.clicks())
+            .map { MyProfileVIA.EditSkills },
+        Observable.merge(title_goals.clicks(), value_goals.clicks())
+            .map { MyProfileVIA.EditGoals },
+        jobs_block.findViewById<View>(R.id.title_list_block).clicks().map { MyProfileVIA.AddJob },
+        education_block.findViewById<View>(R.id.title_list_block).clicks().map { MyProfileVIA.AddEducation },
+        aims_block.clicks().map { MyProfileVIA.EditAims },
+        skills_block.clicks().map { MyProfileVIA.EditSpheres },
         workAdapter.itemDeletes().map { MyProfileVIA.DeleteJob(it) },
-        educationAdapter.itemDeletes().map { MyProfileVIA.DeleteEducation(it) },
-        workAdapter.itemEdits().map { MyProfileVIA.EditJob(it) },
-        educationAdapter.itemEdits().map { MyProfileVIA.EditEducation(it) }
+        educationAdapter.itemDeletes().map { MyProfileVIA.DeleteEducation(it) }
     )
 
     override fun outputActions(): List<Observable<out MyProfileVOA>> = emptyList()
@@ -81,6 +87,8 @@ class MyProfileView(context: Context, initialState: MyProfileVS) :
     override fun bindState(viewState: MyProfileVS) {
         viewState.user.bind {
             scroll_view.isVisible = true
+            jobs_block.findViewById<RecyclerView>(R.id.recycler_list).isVisible = !it.works.isNullOrEmpty()
+            education_block.findViewById<RecyclerView>(R.id.recycler_list).isVisible = !it.educations.isNullOrEmpty()
             ProfileBinder.bindProfile(this@MyProfileView, it, workAdapter, educationAdapter)
         }
         viewState.error.bind {

@@ -31,20 +31,20 @@ class ChatViewModel(
         actions.ofType<ChatVIA.Init>()
             .observeOn(Schedulers.io())
             .flatMap {
-            messagesRepository.getMessages(viewState().chat.peekContent()!!.id)
-                .map {
-                    it.map {
-                        DisplayableMessage(
-                            it.id,
-                            it.text,
-                            it.creationDate,
-                            authRepository.getUserId() == it.userId
-                        )
+                messagesRepository.getMessages(viewState().chat.peekContent()!!.id)
+                    .map {
+                        it.map {
+                            DisplayableMessage(
+                                it.id,
+                                it.text,
+                                it.creationDate,
+                                authRepository.getUserId() == it.userId
+                            )
+                        }
                     }
-                }
-                .toObservable()
-                .map { ChatVIA.MessagesLoaded(it) }
-        }
+                    .toObservable()
+                    .map { ChatVIA.MessagesLoaded(it) }
+            }
     }
 
     private val initialRefresh: ChatSideEffect = { actions, viewState ->
@@ -52,16 +52,18 @@ class ChatViewModel(
     }
 
     private val loadNext: ChatSideEffect = { actions, viewState ->
-        actions.ofType<ChatVIA.LoadNext>().flatMap {
-            messagesRepository.loadChatMessages(
-                viewState().chat.peekContent()!!.id,
-                viewState().messages.peekContent()?.size ?: 0, MESSAGE_LIMIT
-            )
-                .andThen(Observable.fromCallable { Unit })
-                .map { ChatVIA.NextLoaded as ChatVIA }
-                .onLoggableError { t -> ChatVIA.NextLoadError(t.safeMessage()) }
-                .startWith(ChatVIA.NextLoadProgress)
-        }
+        actions.ofType<ChatVIA.LoadNext>()
+            .observeOn(Schedulers.io())
+            .flatMap {
+                messagesRepository.loadChatMessages(
+                    viewState().chat.peekContent()!!.id,
+                    viewState().messages.peekContent()?.size ?: 0, MESSAGE_LIMIT
+                )
+                    .andThen(Observable.fromCallable { Unit })
+                    .map { ChatVIA.NextLoaded as ChatVIA }
+                    .onLoggableError { t -> ChatVIA.NextLoadError(t.safeMessage()) }
+                    .startWith(ChatVIA.NextLoadProgress)
+            }
     }
 
     private val connectMessages: ChatSideEffect = { actions, _ ->
@@ -75,12 +77,12 @@ class ChatViewModel(
         actions.ofType<ChatVIA.SendAction>()
             .observeOn(Schedulers.io())
             .flatMap { action ->
-            messagesRepository.sendMessage(viewState().chat.peekContent()!!.id, action.message)
-                .andThen(Observable.fromCallable { Unit })
-                .map { ChatVIA.MessageSend as ChatVIA }
-                .onLoggableError { t -> ChatVIA.SendError(t.safeMessage()) }
-                .startWith(ChatVIA.SendProgress)
-        }
+                messagesRepository.sendMessage(viewState().chat.peekContent()!!.id, action.message)
+                    .andThen(Observable.fromCallable { Unit })
+                    .map { ChatVIA.MessageSend as ChatVIA }
+                    .onLoggableError { t -> ChatVIA.SendError(t.safeMessage()) }
+                    .startWith(ChatVIA.SendProgress)
+            }
     }
 
     override fun filterActions(): List<KClass<out ChatVIA>> = listOf(

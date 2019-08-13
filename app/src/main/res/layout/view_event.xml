@@ -40,12 +40,12 @@
             <Button
                 android:id="@+id/btn_participants"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/btn_common"
-                android:backgroundTint="@color/colorBlue"
-                android:drawableStart="@drawable/ic_members"
+                app:backgroundTint="@color/colorBlue"
+                app:cornerRadius="34dp"
+                app:icon="@drawable/ic_members"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
@@ -133,7 +133,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <ImageButton
+    <ImageView
         android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.connect.android.client.R
 import com.connect.android.client.model.common.ProfileItem
+import com.connect.android.client.modules.base.BaseViewHolder
 import com.connect.android.client.modules.common.ProfileBinder
 import com.jakewharton.rxbinding2.view.clicks
 import io.reactivex.Observable
@@ -28,11 +29,7 @@ open class MyProfileItemAdapter(
         }
     ) {
 
-    private val editSubject = PublishSubject.create<String>()
-
     private val deleteSubject = PublishSubject.create<String>()
-
-    fun itemEdits(): Observable<String> = editSubject
 
     fun itemDeletes(): Observable<String> = deleteSubject
 
@@ -45,8 +42,7 @@ open class MyProfileItemAdapter(
             )
         )
             .apply {
-                itemEdits().map { getItem(it).getIdentifier()!! }.subscribeWith(editSubject)
-                itemDeletes().map { getItem(it).getIdentifier()!! }.subscribeWith(deleteSubject)
+                itemClicks().map { getItem(it).getIdentifier()!! }.subscribeWith(deleteSubject)
             }
     }
 
@@ -55,15 +51,9 @@ open class MyProfileItemAdapter(
     }
 }
 
-class ProfileItemViewHolder(private val containerView: View) : RecyclerView.ViewHolder(containerView) {
+class ProfileItemViewHolder(containerView: View) : BaseViewHolder(containerView) {
 
     fun bindView(item: ProfileItem) {
         ProfileBinder.bindProfileItem(containerView, item)
     }
-
-    fun itemEdits(): Observable<Int> =
-        containerView.findViewById<View>(R.id.btn_edit).clicks().map { adapterPosition }
-
-    fun itemDeletes(): Observable<Int> =
-        containerView.findViewById<View>(R.id.btn_delete).clicks().map { adapterPosition }
 }
